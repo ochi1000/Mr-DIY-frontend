@@ -1,4 +1,4 @@
-export const RightArrowIcon = (props: any) => {
+export const RightArrowIcon = (props) => {
   return (
     <svg
       className="w-5 h-5"
@@ -19,7 +19,7 @@ export const RightArrowIcon = (props: any) => {
   );
 };
 
-export const MailIcon = (props: any) => {
+export const MailIcon = (props) => {
   return (
     <svg
       width="20"
@@ -40,7 +40,7 @@ export const MailIcon = (props: any) => {
   );
 };
 
-export const ErrorIcon = (props: any) => {
+export const ErrorIcon = (props) => {
   return (
     <svg
       width="16"
@@ -61,7 +61,7 @@ export const ErrorIcon = (props: any) => {
   );
 };
 
-export const HelpIcon = (props: any) => {
+export const HelpIcon = (props) => {
   return (
     <svg
       width="16"
@@ -89,7 +89,7 @@ export const HelpIcon = (props: any) => {
   );
 };
 
-export const EyeIcon = (props: any) => {
+export const EyeIcon = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ export const EyeIcon = (props: any) => {
   );
 };
 
-export const EyeSlashIcon = (props: any) => {
+export const EyeSlashIcon = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -172,31 +172,69 @@ export const CloseBadgeIcon = () => {
   );
 };
 
-export const AnalyticsIcon = (props: any) => {
+export const AnalyticsIcon = (props) => {
   return (
     <svg
-      width="24"
-      height="25"
-      viewBox="0 0 24 25"
-      {...props}
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
       fill="none"
+      {...props}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g id="bar-chart-01">
-        <path
-          id="Icon"
-          d="M18 20.3333V10.3333M12 20.3333V4.33334M6 20.3333V14.3333"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
+      <path
+        d="M11 1C12.3132 1 13.6136 1.25866 14.8268 1.76121C16.0401 2.26375 17.1425 3.00035 18.0711 3.92893C18.9997 4.85752 19.7363 5.95991 20.2388 7.17317C20.7413 8.38643 21 9.68679 21 11M11 1V11M11 1C5.47715 1 1 5.47715 1 11C1 16.5228 5.47715 21 11 21C16.5228 21 21 16.5229 21 11M11 1C16.5228 1 21 5.47716 21 11M21 11L11 11M21 11C21 12.5781 20.6265 14.1338 19.9101 15.5399C19.1936 16.946 18.1546 18.1626 16.8779 19.0902L11 11"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 };
 
-export const AuditTrailIcon = (props: any) => {
+export const UserGroupIcon = () => {
+  return (
+    <svg
+      width="22"
+      height="20"
+      viewBox="0 0 22 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M21 19V17C21 15.1362 19.7252 13.5701 18 13.126M14.5 1.29076C15.9659 1.88415 17 3.32131 17 5C17 6.67869 15.9659 8.11585 14.5 8.70924M16 19C16 17.1362 16 16.2044 15.6955 15.4693C15.2895 14.4892 14.5108 13.7105 13.5307 13.3045C12.7956 13 11.8638 13 10 13H7C5.13623 13 4.20435 13 3.46927 13.3045C2.48915 13.7105 1.71046 14.4892 1.30448 15.4693C1 16.2044 1 17.1362 1 19M12.5 5C12.5 7.20914 10.7091 9 8.5 9C6.29086 9 4.5 7.20914 4.5 5C4.5 2.79086 6.29086 1 8.5 1C10.7091 1 12.5 2.79086 12.5 5Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const SupportIcon = (props) => {
+  return (
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
+      fill="none"
+      {...props}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M8.13626 8.13628L3.92893 3.92896M3.92893 18.0711L8.16797 13.8321M13.8611 13.8638L18.0684 18.0711M18.0684 3.92896L13.8287 8.16862M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11ZM15 11C15 13.2091 13.2091 15 11 15C8.79086 15 7 13.2091 7 11C7 8.79086 8.79086 7 11 7C13.2091 7 15 8.79086 15 11Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const AuditTrailIcon = (props) => {
   return (
     <svg
       width="24"
@@ -220,7 +258,7 @@ export const AuditTrailIcon = (props: any) => {
   );
 };
 
-export const DatabaseIcon = (props: any) => {
+export const DatabaseIcon = (props) => {
   return (
     <svg
       width="24"
@@ -252,7 +290,7 @@ export const DatabaseIcon = (props: any) => {
   );
 };
 
-export const DispatchIcon = (props: any) => {
+export const DispatchIcon = (props) => {
   return (
     <svg
       width="24"
@@ -276,7 +314,7 @@ export const DispatchIcon = (props: any) => {
   );
 };
 
-export const DriverIcon = (props: any) => {
+export const DriverIcon = (props) => {
   return (
     <svg
       width="24"
@@ -300,31 +338,91 @@ export const DriverIcon = (props: any) => {
   );
 };
 
-export const HomeIcon = (props: any) => {
+export const HomeIcon = (props) => {
   return (
     <svg
       width="24"
-      height="25"
-      viewBox="0 0 24 25"
+      height="24"
       {...props}
+      viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g id="home-01">
-        <path
-          id="Icon"
-          d="M3 10.8984C3 10.3241 3 10.0369 3.07403 9.77243C3.1396 9.53816 3.24737 9.31782 3.39203 9.12223C3.55534 8.90143 3.78202 8.72512 4.23539 8.3725L11.0177 3.09737C11.369 2.82412 11.5447 2.68749 11.7387 2.63497C11.9098 2.58863 12.0902 2.58863 12.2613 2.63497C12.4553 2.68749 12.631 2.82412 12.9823 3.09737L19.7646 8.3725C20.218 8.72512 20.4447 8.90143 20.608 9.12223C20.7526 9.31782 20.8604 9.53816 20.926 9.77243C21 10.0369 21 10.3241 21 10.8984V18.1334C21 19.2535 21 19.8135 20.782 20.2413C20.5903 20.6177 20.2843 20.9236 19.908 21.1154C19.4802 21.3334 18.9201 21.3334 17.8 21.3334H6.2C5.07989 21.3334 4.51984 21.3334 4.09202 21.1154C3.71569 20.9236 3.40973 20.6177 3.21799 20.2413C3 19.8135 3 19.2535 3 18.1334V10.8984Z"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
+      <path
+        d="M8 16.9997H16M11.0177 2.76375L4.23539 8.03888C3.78202 8.3915 3.55534 8.56781 3.39203 8.78861C3.24737 8.9842 3.1396 9.20454 3.07403 9.43881C3 9.70327 3 9.99045 3 10.5648V17.7997C3 18.9198 3 19.4799 3.21799 19.9077C3.40973 20.284 3.71569 20.59 4.09202 20.7818C4.51984 20.9997 5.07989 20.9997 6.2 20.9997H17.8C18.9201 20.9997 19.4802 20.9997 19.908 20.7818C20.2843 20.59 20.5903 20.284 20.782 19.9077C21 19.4799 21 18.9198 21 17.7997V10.5648C21 9.99045 21 9.70327 20.926 9.43881C20.8604 9.20454 20.7526 8.9842 20.608 8.78861C20.4447 8.56781 20.218 8.3915 19.7646 8.03888L12.9823 2.76376C12.631 2.4905 12.4553 2.35388 12.2613 2.30136C12.0902 2.25502 11.9098 2.25502 11.7387 2.30136C11.5447 2.35388 11.369 2.4905 11.0177 2.76375Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 };
 
-export const InvoiceIcon = (props: any) => {
+export const CartIcon = (props) => {
+  return (
+    <svg
+      width="22"
+      height="21"
+      viewBox="0 0 22 21"
+      {...props}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5.50014 16H16.3294C17.2793 16 17.7543 16 18.1414 15.8284C18.4827 15.6771 18.7748 15.4333 18.9847 15.1246C19.2228 14.7744 19.3078 14.3071 19.4777 13.3724L20.8285 5.94311C20.8874 5.61918 20.9169 5.45721 20.8714 5.33074C20.8315 5.21979 20.7536 5.12651 20.6516 5.06739C20.5353 5 20.3707 5 20.0414 5H4.00014M1 1H2.3164C2.55909 1 2.68044 1 2.77858 1.04433C2.86507 1.0834 2.93867 1.14628 2.99075 1.22563C3.04984 1.31565 3.06876 1.43551 3.10662 1.67523L5.89338 19.3248C5.93124 19.5645 5.95016 19.6843 6.00925 19.7744C6.06133 19.8537 6.13493 19.9166 6.22142 19.9557C6.31956 20 6.44091 20 6.6836 20H18"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const CmsIcon = (props) => {
+  return (
+    <svg
+      width="20"
+      height="20"
+      {...props}
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 15L15 12L12 9M8 5L5 8L8 11M5.8 19H14.2C15.8802 19 16.7202 19 17.362 18.673C17.9265 18.3854 18.3854 17.9265 18.673 17.362C19 16.7202 19 15.8802 19 14.2V5.8C19 4.11984 19 3.27976 18.673 2.63803C18.3854 2.07354 17.9265 1.6146 17.362 1.32698C16.7202 1 15.8802 1 14.2 1H5.8C4.11984 1 3.27976 1 2.63803 1.32698C2.07354 1.6146 1.6146 2.07354 1.32698 2.63803C1 3.27976 1 4.11984 1 5.8V14.2C1 15.8802 1 16.7202 1.32698 17.362C1.6146 17.9265 2.07354 18.3854 2.63803 18.673C3.27976 19 4.11984 19 5.8 19Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const GlobeIcon = (props) => {
+  return (
+    <svg
+      width="24"
+      height="24"
+      {...props}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M2 12H22M2 12C2 17.5228 6.47715 22 12 22M2 12C2 6.47715 6.47715 2 12 2M22 12C22 17.5228 17.5228 22 12 22M22 12C22 6.47715 17.5228 2 12 2M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22M12 2C9.49872 4.73835 8.07725 8.29203 8 12C8.07725 15.708 9.49872 19.2616 12 22"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+};
+
+export const InvoiceIcon = (props) => {
   return (
     <svg
       width="24"
@@ -348,7 +446,7 @@ export const InvoiceIcon = (props: any) => {
   );
 };
 
-export const LogOutIcon = (props: any) => {
+export const LogOutIcon = (props) => {
   return (
     <svg
       width="20"
@@ -372,7 +470,7 @@ export const LogOutIcon = (props: any) => {
   );
 };
 
-export const OrderIcon = (props: any) => {
+export const OrderIcon = (props) => {
   return (
     <svg
       width="24"
@@ -396,7 +494,7 @@ export const OrderIcon = (props: any) => {
   );
 };
 
-export const SettingsIcon = (props: any) => {
+export const SettingsIcon = (props) => {
   return (
     <svg
       width="24"
@@ -428,7 +526,7 @@ export const SettingsIcon = (props: any) => {
   );
 };
 
-export const ShipmentIcon = (props: any) => {
+export const ShipmentIcon = (props) => {
   return (
     <svg
       width="24"
@@ -460,7 +558,7 @@ export const ShipmentIcon = (props: any) => {
   );
 };
 
-export const ShipmentCalculatorIcon = (props: any) => {
+export const ShipmentCalculatorIcon = (props) => {
   return (
     <svg
       width="24"
@@ -484,31 +582,7 @@ export const ShipmentCalculatorIcon = (props: any) => {
   );
 };
 
-export const SupportIcon = (props: any) => {
-  return (
-    <svg
-      width="24"
-      height="25"
-      {...props}
-      viewBox="0 0 24 25"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g id="ticket-02">
-        <path
-          id="Icon"
-          d="M8 8.33334V7.33334M8 12.8333V11.8333M8 17.3333V16.3333M6.8 20.3333H17.2C18.8802 20.3333 19.7202 20.3333 20.362 20.0064C20.9265 19.7187 21.3854 19.2598 21.673 18.6953C22 18.0536 22 17.2135 22 15.5333V9.13334C22 7.45319 22 6.61311 21.673 5.97137C21.3854 5.40689 20.9265 4.94794 20.362 4.66032C19.7202 4.33334 18.8802 4.33334 17.2 4.33334H6.8C5.11984 4.33334 4.27976 4.33334 3.63803 4.66032C3.07354 4.94794 2.6146 5.40689 2.32698 5.97137C2 6.61311 2 7.45319 2 9.13334V15.5333C2 17.2135 2 18.0536 2.32698 18.6953C2.6146 19.2598 3.07354 19.7187 3.63803 20.0064C4.27976 20.3333 5.11984 20.3333 6.8 20.3333Z"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </g>
-    </svg>
-  );
-};
-
-export const TransactionIcon = (props: any) => {
+export const TransactionIcon = (props) => {
   return (
     <svg
       width="24"
@@ -532,7 +606,7 @@ export const TransactionIcon = (props: any) => {
   );
 };
 
-export const MessageIcon = (props: any) => {
+export const MessageIcon = (props) => {
   return (
     <svg
       width="20"
@@ -556,7 +630,7 @@ export const MessageIcon = (props: any) => {
   );
 };
 
-export const NotificationIcon = (props: any) => {
+export const NotificationIcon = (props) => {
   return (
     <svg
       width="20"
@@ -580,7 +654,7 @@ export const NotificationIcon = (props: any) => {
   );
 };
 
-export const PlusIcon = (props: any) => {
+export const PlusIcon = (props) => {
   return (
     <svg
       width="20"
@@ -655,7 +729,7 @@ export const ClockIcon = () => {
   );
 };
 
-export const ExportIcon = (props: any) => {
+export const ExportIcon = (props) => {
   return (
     <svg
       width="20"
@@ -679,7 +753,7 @@ export const ExportIcon = (props: any) => {
   );
 };
 
-export const SearchIcon = (props: any) => {
+export const SearchIcon = (props) => {
   return (
     <svg
       width="18"
@@ -700,7 +774,7 @@ export const SearchIcon = (props: any) => {
   );
 };
 
-export const CheckSuccessIcon = (props: any) => {
+export const CheckSuccessIcon = (props) => {
   return (
     <svg
       width="12"
@@ -721,7 +795,7 @@ export const CheckSuccessIcon = (props: any) => {
   );
 };
 
-export const ClockWaitIcon = (props: any) => {
+export const ClockWaitIcon = (props) => {
   return (
     <svg
       width="12"
@@ -742,7 +816,7 @@ export const ClockWaitIcon = (props: any) => {
   );
 };
 
-export const XIcon = (props: any) => {
+export const XIcon = (props) => {
   return (
     <svg
       width="12"
@@ -763,7 +837,7 @@ export const XIcon = (props: any) => {
   );
 };
 
-export const HomeBaseIcon = (props: any) => {
+export const HomeBaseIcon = (props) => {
   return (
     <svg
       width="28"
@@ -804,7 +878,7 @@ export const ChevronRightIcon = () => {
   );
 };
 
-export const CheckIcon = (props: any) => {
+export const CheckIcon = (props) => {
   return (
     <svg
       width="12"
@@ -824,7 +898,7 @@ export const CheckIcon = (props: any) => {
   );
 };
 
-export const UsersIcon = (props: any) => {
+export const UsersIcon = (props) => {
   return (
     <svg
       width="20"
@@ -856,7 +930,7 @@ export const UsersIcon = (props: any) => {
   );
 };
 
-export const EditsIcon = (props: any) => {
+export const EditsIcon = (props) => {
   return (
     <svg
       width="20"
@@ -881,7 +955,7 @@ export const EditsIcon = (props: any) => {
   );
 };
 
-export const UserIcon = (props: any) => {
+export const UserIcon = (props) => {
   return (
     <svg
       width="20"
@@ -911,7 +985,7 @@ export const UserIcon = (props: any) => {
   );
 };
 
-export const CallIcon = (props: any) => {
+export const CallIcon = (props) => {
   return (
     <svg
       width="20"
@@ -934,7 +1008,7 @@ export const CallIcon = (props: any) => {
   );
 };
 
-export const ShieldIcon = (props: any) => {
+export const ShieldIcon = (props) => {
   return (
     <svg
       width="20"
@@ -958,7 +1032,7 @@ export const ShieldIcon = (props: any) => {
   );
 };
 
-export const CalendarAltIcon = (props: any) => {
+export const CalendarAltIcon = (props) => {
   return (
     <svg
       width="20"
@@ -990,7 +1064,7 @@ export const CalendarAltIcon = (props: any) => {
   );
 };
 
-export const MarkerPinIcon = (props: any) => {
+export const MarkerPinIcon = (props) => {
   return (
     <svg
       width="20"
@@ -1014,7 +1088,7 @@ export const MarkerPinIcon = (props: any) => {
   );
 };
 
-export const BigClockIcon = (props: any) => {
+export const BigClockIcon = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1042,7 +1116,7 @@ export const BigClockIcon = (props: any) => {
   );
 };
 
-export const ZipCodeIcon = (props: any) => {
+export const ZipCodeIcon = (props) => {
   return (
     <svg
       width="20"
@@ -1065,7 +1139,7 @@ export const ZipCodeIcon = (props: any) => {
   );
 };
 
-export const VirtualCardImage = (props: any) => {
+export const VirtualCardImage = (props) => {
   return (
     <svg
       width={350}
@@ -1427,7 +1501,7 @@ export const VirtualCardImage = (props: any) => {
   );
 };
 
-export const DeleteIcon = (props: any) => {
+export const DeleteIcon = (props) => {
   return (
     <svg
       width="18"
@@ -1459,7 +1533,7 @@ export const DeleteIcon = (props: any) => {
   );
 };
 
-export const DeactivateUserIcon = (props: any) => {
+export const DeactivateUserIcon = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1488,7 +1562,7 @@ export const DeactivateUserIcon = (props: any) => {
   );
 };
 
-export const ActivateUserIcon = (props: any) => {
+export const ActivateUserIcon = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1524,7 +1598,7 @@ export const ActivateUserIcon = (props: any) => {
   );
 };
 
-export const MoreInfoIcon = (props: any) => {
+export const MoreInfoIcon = (props) => {
   return (
     <svg
       width="20"
@@ -1559,7 +1633,7 @@ export const MoreInfoIcon = (props: any) => {
   );
 };
 
-export const CaretDownIcon = (props: any) => {
+export const CaretDownIcon = (props) => {
   return (
     <svg
       width="21"
@@ -1580,7 +1654,7 @@ export const CaretDownIcon = (props: any) => {
   );
 };
 
-export const ArrowUpIcon = (props: any) => {
+export const ArrowUpIcon = (props) => {
   return (
     <svg
       width="16"
@@ -1621,7 +1695,7 @@ export const SingleUserIcon = () => {
   );
 };
 
-export const CheckBoxIcon = (props: any) => {
+export const CheckBoxIcon = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1641,7 +1715,7 @@ export const CheckBoxIcon = (props: any) => {
   );
 };
 
-export const XIconSmall = (props: any) => {
+export const XIconSmall = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -1830,7 +1904,7 @@ export const PdfIcon = () => {
   );
 };
 
-export const EditsItemIcon = (props: any) => {
+export const EditsItemIcon = (props) => {
   return (
     <svg
       width="16"
@@ -1897,7 +1971,7 @@ export const VanIcon = () => {
   );
 };
 
-export const MessageIcon2 = (props: any) => {
+export const MessageIcon2 = (props) => {
   return (
     <svg
       width="20"
@@ -1945,7 +2019,7 @@ export const EyeIconBold = () => {
   );
 };
 
-export const EditIcon = (props: any) => {
+export const EditIcon = (props) => {
   return (
     <svg
       width="40"
@@ -1966,7 +2040,7 @@ export const EditIcon = (props: any) => {
   );
 };
 
-export const DotIcon = (props: any) => {
+export const DotIcon = (props) => {
   return (
     <svg
       width="8"
@@ -2008,7 +2082,7 @@ export const AmountIcon = () => {
   );
 };
 
-export const LeftArrowIcon = (props: any) => {
+export const LeftArrowIcon = (props) => {
   return (
     <svg
       width="7"
@@ -2107,7 +2181,7 @@ export const DestinationIcon = () => {
   );
 };
 
-export const ArrowDownIcon = (props: any) => {
+export const ArrowDownIcon = (props) => {
   return (
     <svg
       width="20"
@@ -2197,7 +2271,7 @@ export const AfroShipperLogo = () => {
   );
 };
 
-export const MoreInfoIcon2 = (props: any) => {
+export const MoreInfoIcon2 = (props) => {
   return (
     <svg
       width="20"
@@ -2232,7 +2306,7 @@ export const MoreInfoIcon2 = (props: any) => {
   );
 };
 
-export const NotificationBellIcon = (props: any) => {
+export const NotificationBellIcon = (props) => {
   return (
     <svg
       width="24"
@@ -2252,3 +2326,23 @@ export const NotificationBellIcon = (props: any) => {
     </svg>
   );
 };
+
+export function ChevronDown(props) {
+  return (
+    <svg
+      width="11"
+      height="6"
+      viewBox="0 0 11 6"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M10.6635 0.336517C10.9719 0.644826 10.9719 1.14469 10.6635 1.453L6.45302 5.66353C6.14471 5.97184 5.64484 5.97184 5.33653 5.66353L1.12601 1.453C0.817699 1.14469 0.817699 0.644826 1.12601 0.336517C1.43432 0.0282085 1.93418 0.0282085 2.24249 0.336517L5.89478 3.9888L9.54706 0.336517C9.85537 0.0282085 10.3552 0.0282085 10.6635 0.336517Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
