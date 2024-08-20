@@ -1,12 +1,13 @@
 // const flowbite = require("flowbite-react/tailwind");
 /** @type {import('tailwindcss').Config} */
-// const colors = require("./src/tokens/color.tokens");
+// eslint-disable-next-line no-undef
+const colors = require("./src/tokens/color.tokens");
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   safelist: ["hover:bg-primary-800", "text-neutral-white"],
   theme: {
     extend: {
-      // colors,
+      colors,
       backgroundImage: {},
       boxShadow: {
         "shadow-xs": "0px 1px 2px 0px rgba(16, 24, 40, 0.05)",
@@ -23,8 +24,14 @@ export default {
         "shadow-input": "0px 0px 0px 4px rgba(244, 235, 255, 1)",
       },
       screens: {
-        "3xl": "1680px",
-        "4xl": "1800px",
+        xs: "500px",
+        sm: "640px",
+        md: "768px",
+        lg: "1024px",
+        xl: "1280px",
+        "2xl": "1440px",
+        "3xl": "1780px",
+        "4xl": "2160px", // only need to control product grid mode in ultra 4k device
       },
     },
     fontFamily: {
