@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import MainDashboardLayout from "./layout/MainDashboardLayout";
 
 import Dashboard from "./layout/dashboard";
+import Login from "./components/pages/Login";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           </Route> */}
 
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
 
         <Route element={<MainDashboardLayout />}>
           <Route path="/dashboard" element={<Dashboard />}>
