@@ -5,12 +5,9 @@ import { Link } from "react-router-dom";
 
 const Logo = ({ className }) => {
   return (
-    <Link
-      to="/"
-      className={`ttnc-logo inline-block text-slate-600 flex-shrink-0 ${className}`}
-    >
+    <Link to="/" className={` ${className}`}>
       <img
-        className="hidden h-8 sm:h-10 w-auto dark:block"
+        // className=" h-8 sm:h-10 w-auto "
         src={logo}
         alt="Logo"
         sizes="200px"
