@@ -17,12 +17,18 @@ const Header = () => {
 
   const handleSearchBar = () => {
     setOpenSearchBar(!openSearchBar);
+    setOpenCartMenu(false);
+    setOpenDashboardMenu(false);
   };
   const handleCartMenu = () => {
     setOpenCartMenu(!openCartMenu);
+    setOpenDashboardMenu(false);
+    setOpenSearchBar(false);
   };
   const handleDashMenu = () => {
     setOpenDashboardMenu(!openDashboardMenu);
+    setOpenCartMenu(false);
+    setOpenSearchBar(false);
   };
 
   const { isAuthenticated } = useSelector((state) => state.auth);
