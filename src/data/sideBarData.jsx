@@ -166,7 +166,7 @@ export const sidedata = [
   {
     title: "Orders Mgt.",
     icon: <CartIcon />,
-    // href: "",
+    href: "/orders-management",
     child: [
       {
         title: "Orders List",
@@ -209,8 +209,34 @@ export const sidedata = [
   {
     title: "Product",
     icon: <ShipmentIcon />,
-    // href: "",
-    child: [],
+    href: "/product",
+    child: [
+      {
+        title: "Inventory",
+        // icon: <SettingsIcon />,
+        href: "/product/inventory",
+      },
+      {
+        title: "Categories",
+        // icon: <HomeIcon />,
+        href: "/product/categories",
+      },
+      {
+        title: "Tags",
+        // icon: <HomeIcon />,
+        href: "/product/tags",
+      },
+      {
+        title: "Attributes",
+        // icon: <HomeIcon />,
+        href: "/product/attributes",
+      },
+      {
+        title: "Returned Items",
+        // icon: <HomeIcon />,
+        href: "/product/returned-items",
+      },
+    ],
   },
   {
     title: "CMS",

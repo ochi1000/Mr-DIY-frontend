@@ -6,11 +6,14 @@ import { useState } from "react";
 import SearchBar from "./SearchBar";
 import classNames from "classnames";
 import CartMenu from "./CartMenu";
+import UserFloatMenu from "./UserFloatMenu";
+import { useSelector } from "react-redux";
 // import SearchBar from "./SearchBar";
 
 const Header = () => {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openCartMenu, setOpenCartMenu] = useState(false);
+  const [openDashboardMenu, setOpenDashboardMenu] = useState(false);
 
   const handleSearchBar = () => {
     setOpenSearchBar(!openSearchBar);
@@ -18,6 +21,11 @@ const Header = () => {
   const handleCartMenu = () => {
     setOpenCartMenu(!openCartMenu);
   };
+  const handleDashMenu = () => {
+    setOpenDashboardMenu(!openDashboardMenu);
+  };
+
+  const { isAuthenticated } = useSelector((state) => state.auth);
   return (
     <div>
       <nav className="fixed top-0 z-40 w-full border-b border-gray-100/20 bg-white/80 shadow backdrop-blur transition-colors lg:border-transparent">
@@ -92,16 +100,27 @@ const Header = () => {
                 </button>
               )}
               <div className="AvatarDropdown ">
-                <div className="relative" data-headlessui-state="">
-                  <button
-                    className="w-10 h-10 sm:w-12 sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center"
-                    type="button"
-                    aria-expanded="false"
-                    data-headlessui-state=""
-                    id="headlessui-popover-button-:r3f:"
-                  >
-                    <UsersIcon />
-                  </button>
+                <div className="relative">
+                  {isAuthenticated ? (
+                    <button
+                      className="w-10 h-10 sm:w-12 sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center"
+                      type="button"
+                      onClick={handleDashMenu}
+                    >
+                      <UsersIcon />
+                    </button>
+                  ) : (
+                    <Link to="/login">
+                      <button
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center"
+                        type="button"
+                        id="headlessui-popover-button-:r3f:"
+                      >
+                        <UsersIcon />
+                      </button>
+                    </Link>
+                  )}
+                  {openDashboardMenu && <UserFloatMenu />}
                 </div>
               </div>
               <div className="relative">

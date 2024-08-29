@@ -99,11 +99,13 @@ const Sidebar = ({
                     openMenu === true && clickOpenSideBar === false,
                 })}
               >
-                <img src={LogoWhite} alt="logo" />
+                <Link to="/">
+                  <img src={LogoWhite} alt="logo" />
+                </Link>
               </div>
               <div
                 className={classNames(
-                  "p-2 bg-secondary rounded-lg cursor-pointer ",
+                  "p-2 bg-primary-100 rounded-lg cursor-pointer ",
                   {
                     "rotate-180 ":
                       openMenu === true && clickOpenSideBar === false,
@@ -221,7 +223,7 @@ const Sidebar = ({
                                   onClick={() => toggleMultiMenu(childIndex)}
                                   className={`flex items-center px-4 py-2 text-sm ms-3 rounded-md my-2 text-gray-800 hover:text-primary-800 hover:bg-primary-100 ${
                                     location.pathname === child.href
-                                      ? "bg-gray-700"
+                                      ? "bg-primary-50 text-primary-700"
                                       : ""
                                   }`}
                                 >

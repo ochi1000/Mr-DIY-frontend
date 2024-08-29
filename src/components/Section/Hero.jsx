@@ -10,7 +10,7 @@ import Adsbanner2 from "src/assets/images/product/ads-banner-2.png";
 
 import { Autoplay, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Button from "../forms/Button";
+import { Button } from "../forms/Button";
 import { RightLongArrowIcon } from "../../assets/SvgIcons";
 
 const swiperOptions = {
@@ -64,9 +64,12 @@ const Hero = () => {
                         to="/shop"
                       >
                         <Button
-                          title="Shop Now"
+                          rounded
+                          size="md"
                           rightIcon={<RightLongArrowIcon />}
-                        />
+                        >
+                          Shop Now
+                        </Button>
                       </Link>
                     </div>
                     <div className="tp-slide-item__img rounded-lg">
@@ -133,9 +136,12 @@ const Hero = () => {
                         to="/shop"
                       >
                         <Button
-                          title="Shop Now"
+                          rounded
+                          size="md"
                           rightIcon={<RightLongArrowIcon />}
-                        />
+                        >
+                          Shop Now
+                        </Button>
                       </Link>
                     </div>
                     <div className="tp-slide-item__img rounded-lg">
@@ -202,9 +208,12 @@ const Hero = () => {
                         to="/shop"
                       >
                         <Button
-                          title="Shop Now"
+                          rounded
+                          size="md"
                           rightIcon={<RightLongArrowIcon />}
-                        />
+                        >
+                          Shop Now
+                        </Button>
                       </Link>
                     </div>
                     <div className="tp-slide-item__img rounded-lg">
@@ -244,7 +253,7 @@ const Hero = () => {
                 </p>
               </dl>
               <div className="p-4 pb-2">
-                <Button title="Start Selling" />
+                <Button rounded>Start Selling</Button>
               </div>
             </div>
           </div>

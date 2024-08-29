@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import PRODUCTIMAGE1 from "src/assets/images/product/product-1.png";
 import PRODUCTIMAGE2 from "src/assets/images/product/product-2.png";
 import PRODUCTIMAGE3 from "src/assets/images/product/product-3.png";

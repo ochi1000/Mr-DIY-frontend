@@ -1,11 +1,10 @@
-/* eslint-disable no-unused-vars */
-import Categories from "../Section/Categories";
-import FlashSales from "../Section/FlashSales";
-import FrequentPurchased from "../Section/FrequentPurchased";
-import Hero from "../Section/Hero";
-import TopSelling from "../Section/TopSelling";
-import Footer from "../ui/Footer";
-import Header from "../ui/Header";
+import Categories from "../components/Section/Categories";
+import FlashSales from "../components/Section/FlashSales";
+import FrequentPurchased from "../components/Section/FrequentPurchased";
+import Hero from "../components/Section/Hero";
+import TopSelling from "../components/Section/TopSelling";
+import Footer from "../components/ui/Footer";
+import Header from "../components/ui/Header";
 
 const Home = () => {
   return (

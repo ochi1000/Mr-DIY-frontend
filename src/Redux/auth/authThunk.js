@@ -14,8 +14,14 @@ const loginThunk = createAsyncThunk(
       // Assert the type of 'response' to 'LoginResponse'
       const loginResponse = response;
       console.log("loginResponse", loginResponse);
+
+      if (loginResponse?.status === 202) {
+        toast.success(loginResponse?.message);
+      }
+
       // Extract user data and access token from the response
-      const { user, token } = loginResponse;
+      // eslint-disable-next-line no-unsafe-optional-chaining
+      const { user, token } = loginResponse?.data;
 
       // console.log(user);
       // console.log(access_token);
@@ -40,6 +46,17 @@ const loginThunk = createAsyncThunk(
     } catch (error) {
       // Handle errors
       const errorMessage = error.response.data.message;
+
+      console.log("ererer", error);
+      if (
+        error.status === 400 ||
+        error.status === 401 ||
+        error.status === 402 ||
+        error.status === 403 ||
+        error.status === 404
+      ) {
+        toast.error(errorMessage);
+      }
       // Reject the promise with the error message
       return rejectWithValue(errorMessage);
     }

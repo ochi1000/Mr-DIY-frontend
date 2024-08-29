@@ -17,7 +17,7 @@ const Footer = () => {
     <>
       <div className="px-4 bg-primary-950">
         <div id="footer" className="lg:px-10 xl:px-14">
-          <footer className="pt-16 border-t border-gray-100 text-gray-400 ">
+          <footer className="pt-16 border-t border-gray-100 text-gray-300 ">
             <div className="grid grid-cols-5 gap-6 md:gap-0">
               <div className="col-span-5 lg:col-span-1 ">
                 <div className="flex flex-col lg:flex-row  lg:items-center justify-between gap-6 lg:border-b border-white py-6 md:block md:space-y-5 md:border-none md:py-0">

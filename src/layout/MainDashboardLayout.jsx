@@ -64,7 +64,7 @@ const MainDashboardLayout = () => {
   return (
     <div>
       <>
-        <main className="bg-blue-300 ">
+        <main className="bg-gray-50 ">
           <div className=" hidden lg:block">
             <Sidebar
               openSideMenu={openSideMenu}
