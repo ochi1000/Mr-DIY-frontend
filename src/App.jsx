@@ -3,7 +3,7 @@ import Home from "./pages/Home";
 import { Route, Routes } from "react-router-dom";
 import MainDashboardLayout from "./layout/MainDashboardLayout";
 
-import Dashboard from "./layout/dashboard";
+// import Dashboard from "src/layout/Dashboard";
 import Login from "./pages/Login";
 import Public from "./Routes/Public";
 import Private from "./Routes/Private";
@@ -33,8 +33,8 @@ function App() {
           <Route element={<MainDashboardLayout />}>
             <Route path="/dashboard" element={<AdminDashboard />}>
               {/* <Route index element={<Navigate replace to="dashboard" />} /> */}
-              <Route path="/dashboard/home-admin" element={<Dashboard />} />
-              <Route path="/dashboard/order-home" element={<Dashboard />} />
+              {/* <Route path="/dashboard/home-admin" element={<Dashboard />} />
+              <Route path="/dashboard/order-home" element={<Dashboard />} /> */}
             </Route>
             <Route path="/orders-management" element={<NotFound />}>
               <Route
