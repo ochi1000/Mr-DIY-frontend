@@ -1,6 +1,6 @@
 import Home from "./pages/Home";
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import MainDashboardLayout from "./layout/MainDashboardLayout";
 
 // import Dashboard from "src/layout/Dashboard";
@@ -11,6 +11,10 @@ import Register from "./pages/Register";
 import Inventory from "./pages/Admin/Products/Inventory";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
+import Categories from "./pages/Admin/Products/Categories";
+import Products from "./pages/Admin/Products/Product";
+import CreateProduct from "./pages/Admin/Products/CreateProduct";
+import UpdateProduct from "./pages/Admin/Products/UpdateProduct";
 
 function App() {
   return (
@@ -23,7 +27,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* <Route path="/check-email" element={<CheckEmail />} />
+          {/* <Route path="/check-email" element={<CheckEmail />} />  
             <Route path="/password-reset" element={<PasswordReset />} />
             <Route path="/set-new-password" element={<ResetPassword />} />
             <Route path="/forget-password" element={<ForgetPassword />} />
@@ -66,9 +70,27 @@ function App() {
                 element={<NotFound />}
               />
             </Route>
-            <Route path="/product" element={<Inventory />}>
-              {/* <Route index element={<Navigate replace to="dashboard" />} /> */}
-              <Route path="/product/inventory" element={<Inventory />} />
+
+            {/* <Route path="database" element={<Database />}>
+              <Route index element={<Navigate replace to="users" />} />
+              <Route path="users" element={<Users />} />
+              <Route path="users/:id" element={<UserProfile />} />
+              <Route path="employees" element={<Employee />} />
+              <Route path="employee/:id" element={<EmployeeProfile />} />
+              <Route path="organizations" element={<AdminOrganization />} />
+              <Route
+                path="organizations/:id"
+                element={<AdminOrganizationProfile />}
+              />
+            </Route> */}
+            <Route path="product" element={<Products />}>
+              <Route index element={<Navigate replace to="inventory" />} />
+              <Route path="inventory" element={<Inventory />} />
+              <Route path="inventory/create" element={<CreateProduct />} />
+              <Route path="inventory/update/:id" element={<UpdateProduct />} />
+              {/* <Route path="/orders" element={<Orders />} />
+              <Route path="/orders/:id" element={<OrdersProfile />} /> */}
+              <Route path="categories" element={<Categories />} />
               {/* <Route path="/dashboard/order-home" element={<Dashboard />} /> */}
             </Route>
           </Route>
