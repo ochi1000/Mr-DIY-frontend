@@ -15,6 +15,9 @@ import { getBasePath } from "src/lib/constants";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { sidedata } from "../data/sideBarData";
+import { useDispatch, useSelector } from "react-redux";
+import { getNameInitials } from "../lib/constants";
+import { logoutThunk } from "../Redux/auth/authThunk";
 const Sidebar = ({
   openSideMenu,
   openMenu,
@@ -30,6 +33,9 @@ const Sidebar = ({
     setOpen(index === open ? null : index);
   };
 
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.auth);
+
   // const { currentUser } = useSelector((state: RootState) => state.auth);
 
   const location = useLocation();
@@ -40,7 +46,7 @@ const Sidebar = ({
   // const dispatch = useDispatch();
 
   const handleLogout = () => {
-    // dispatch(logoutThunk());
+    dispatch(logoutThunk());
   };
 
   const [activeSubmenu, setActiveSubmenu] = useState(null);
@@ -426,19 +432,27 @@ const Sidebar = ({
 
           <div className="flex items-start justify-between py-6 my-6   border-t border-white/20">
             <div className="flex items-center gap-4">
-              <img
+              {/* <img
                 className={classNames(" rounded-full w-10 h-10")}
                 src={Avatar}
                 alt="avatar"
-              />
+              /> */}
+              <div className="relative inline-flex items-center justify-center w-11 h-11  cursor-pointer overflow-hidden bg-gray-300 rounded-full ">
+                <span className="font-medium text-gray-600 uppercase text-base ">
+                  {getNameInitials(currentUser?.last_name)}
+                  {getNameInitials(currentUser?.first_name)}
+                </span>
+              </div>
               <div
                 className={classNames("font-medium text-gray-800", {
                   hidden: openMenu === true && clickOpenSideBar === false,
                 })}
               >
-                <h2 className=" capitalize">Admin</h2>
+                <h2 className=" capitalize">
+                  {currentUser?.last_name} {currentUser?.first_name}
+                </h2>
                 <p className="text-sm text-gray-500 font-light ">
-                  admin@example.com
+                  {currentUser?.email}
                 </p>
               </div>
             </div>

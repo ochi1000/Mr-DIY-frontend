@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import UserMenu from "./UserMenu";
@@ -10,10 +11,12 @@ import {
 import MobileSidebar from "./MobileSidebar";
 import { motion } from "framer-motion";
 import { useAnimation } from "framer-motion";
+import { getNameInitials } from "../lib/constants";
+import { useSelector } from "react-redux";
 
 const NavBar = ({ toggleSideBar, openSideMenu }) => {
   const [showUserMenu, setShowUserMenu] = React.useState(false);
-
+  const { currentUser } = useSelector((state) => state.auth);
   function toggleUserMenu() {
     setShowUserMenu(!showUserMenu);
   }
@@ -107,11 +110,17 @@ const NavBar = ({ toggleSideBar, openSideMenu }) => {
               className="flex rounded-full cursor-pointer"
             >
               <span className="sr-only">Open user menu</span>
-              <img
+              <div className="relative inline-flex items-center justify-center w-12 h-12  cursor-pointer overflow-hidden bg-gray-200 rounded-full ">
+                <span className="font-medium text-gray-600 uppercase text-base ">
+                  {getNameInitials(currentUser?.last_name)}
+                  {getNameInitials(currentUser?.first_name)}
+                </span>
+              </div>
+              {/* <img
                 className="w-12 h-12 rounded-full"
                 src={UserAvatar}
                 alt="user photo"
-              />
+              /> */}
             </button>
           </div>
 

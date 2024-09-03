@@ -64,10 +64,10 @@ const loginThunk = createAsyncThunk(
 );
 
 // Create a logout thunk
-const logoutThunk = createAsyncThunk("auth/logout", async (data, thunkAPI) => {
+const logoutThunk = createAsyncThunk("admin/logout", async (data, thunkAPI) => {
   try {
     // Make an HTTP POST request to the logout endpoint
-    const response = await postData("auth/logout", "");
+    const response = await postData("admin/logout", "");
 
     // Remove access token and user cookies
     Cookies.remove("admin_token");
