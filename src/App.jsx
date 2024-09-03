@@ -34,64 +34,51 @@ function App() {
             <Route path="/ui" element={<UI />} /> */}
         </Route>
         <Route element={<Private />}>
-          <Route element={<MainDashboardLayout />}>
-            <Route path="/dashboard" element={<AdminDashboard />}>
+          <Route path="admin" element={<MainDashboardLayout />}>
+            <Route path="dashboard" element={<AdminDashboard />}>
               {/* <Route index element={<Navigate replace to="dashboard" />} /> */}
               {/* <Route path="/dashboard/home-admin" element={<Dashboard />} />
               <Route path="/dashboard/order-home" element={<Dashboard />} /> */}
             </Route>
-            <Route path="/orders-management" element={<NotFound />}>
+            <Route path="orders-management" element={<NotFound />}>
               <Route
-                path="/orders-management/orders-list"
+                path="orders-management/orders-list"
                 element={<NotFound />}
               />
               <Route
-                path="/orders-management/product-reviews"
+                path="orders-management/product-reviews"
                 element={<NotFound />}
               />
               <Route
-                path="/orders-management/abandoned-cart"
+                path="orders-management/abandoned-cart"
                 element={<NotFound />}
               />
               <Route
-                path="/orders-management/order-cancellation-requests"
+                path="orders-management/order-cancellation-requests"
                 element={<NotFound />}
               />
               <Route
-                path="/orders-management/order-return-requests"
+                path="orders-management/order-return-requests"
                 element={<NotFound />}
               />
               <Route
-                path="/orders-management/wishlist-mgt"
+                path="orders-management/wishlist-mgt"
                 element={<NotFound />}
               />
               <Route
-                path="/orders-management/coupon-managements"
+                path="orders-management/coupon-managements"
                 element={<NotFound />}
               />
             </Route>
 
-            {/* <Route path="database" element={<Database />}>
-              <Route index element={<Navigate replace to="users" />} />
-              <Route path="users" element={<Users />} />
-              <Route path="users/:id" element={<UserProfile />} />
-              <Route path="employees" element={<Employee />} />
-              <Route path="employee/:id" element={<EmployeeProfile />} />
-              <Route path="organizations" element={<AdminOrganization />} />
-              <Route
-                path="organizations/:id"
-                element={<AdminOrganizationProfile />}
-              />
-            </Route> */}
             <Route path="product" element={<Products />}>
               <Route index element={<Navigate replace to="inventory" />} />
               <Route path="inventory" element={<Inventory />} />
               <Route path="inventory/create" element={<CreateProduct />} />
               <Route path="inventory/update/:id" element={<UpdateProduct />} />
-              {/* <Route path="/orders" element={<Orders />} />
-              <Route path="/orders/:id" element={<OrdersProfile />} /> */}
+
               <Route path="categories" element={<Categories />} />
-              {/* <Route path="/dashboard/order-home" element={<Dashboard />} /> */}
+              {/* <Route path="dashboard/order-home" element={<Dashboard />} /> */}
             </Route>
           </Route>
         </Route>

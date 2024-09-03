@@ -144,64 +144,64 @@ export const sidedata = [
   {
     title: "Home",
     icon: <HomeIcon />,
-    href: "/dashboard",
+    href: "/admin/dashboard",
     child: [
       // {
       //   title: "Admin Home",
       //   icon: <SettingsIcon />,
-      //   href: "/dashboard/home-admin",
+      //   href: "/admin/dashboard/home-admin",
       // },
       // {
       //   title: "Order Home",
       //   icon: <HomeIcon />,
-      //   href: "/dashboard/order-home",
+      //   href: "/admin/dashboard/order-home",
       // },
       // {
       //   title: "Sales Home",
       //   icon: <HomeIcon />,
-      //   href: "/dashboard/home-sales",
+      //   href: "/admin/dashboard/home-sales",
       // },
     ],
   },
   {
     title: "Orders Mgt.",
     icon: <CartIcon />,
-    href: "/orders-management",
+    href: "/admin/orders-management",
     child: [
       {
         title: "Orders List",
         // icon: <HomeIcon />,
-        href: "/orders-management/orders-list",
+        href: "/admin/orders-management/orders-list",
       },
       {
         title: "Product Reviews",
         // icon: <HomeIcon />,
-        href: "/orders-management/product-reviews",
+        href: "/admin/orders-management/product-reviews",
       },
       {
         title: "Abandoned Cart",
         // icon: <HomeIcon />,
-        href: "/orders-management/abandoned-cart",
+        href: "/admin/orders-management/abandoned-cart",
       },
       {
         title: "Order Cancellation Requests",
         // icon: <HomeIcon />,
-        href: "/orders-management/order-cancellation-requests",
+        href: "/admin/orders-management/order-cancellation-requests",
       },
       {
         title: "Order Return Requests",
         // icon: <HomeIcon />,
-        href: "/orders-management/order-return-requests",
+        href: "/admin/orders-management/order-return-requests",
       },
       {
         title: "Wishlist Mgt",
         // icon: <HomeIcon />,
-        href: "/orders-management/wishlist-mgt",
+        href: "/admin/orders-management/wishlist-mgt",
       },
       {
         title: "Coupon Management",
         // icon: <HomeIcon />,
-        href: "/orders-management/coupon-managements",
+        href: "/admin/orders-management/coupon-managements",
       },
     ],
   },
@@ -209,32 +209,32 @@ export const sidedata = [
   {
     title: "Product",
     icon: <ShipmentIcon />,
-    href: "/product",
+    href: "/admin/product",
     child: [
       {
         title: "Inventory",
         // icon: <SettingsIcon />,
-        href: "/product/inventory",
+        href: "/admin/product/inventory",
       },
       {
         title: "Categories",
         // icon: <HomeIcon />,
-        href: "/product/categories",
+        href: "/admin/product/categories",
       },
       {
         title: "Tags",
         // icon: <HomeIcon />,
-        href: "/product/tags",
+        href: "/admin/product/tags",
       },
       {
         title: "Attributes",
         // icon: <HomeIcon />,
-        href: "/product/attributes",
+        href: "/admin/product/attributes",
       },
       {
         title: "Returned Items",
         // icon: <HomeIcon />,
-        href: "/product/returned-items",
+        href: "/admin/product/returned-items",
       },
     ],
   },
@@ -281,17 +281,17 @@ export const sidedata = [
       {
         title: "Hero Icons",
         icon: <SettingsIcon />,
-        href: "/icons-iconify",
+        href: "/admin/icons-iconify",
       },
       {
         title: "Lucide Icons",
         icon: <SettingsIcon />,
-        href: "/icons-lucide",
+        href: "/admin/icons-lucide",
       },
       {
         title: "Custom Icons",
         icon: <SettingsIcon />,
-        href: "/icons-custom",
+        href: "/admin/icons-custom",
       },
     ],
   },

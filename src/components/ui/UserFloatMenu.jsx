@@ -4,7 +4,7 @@ import Avatar from "src/assets/images/Avatar.png";
 const UserFloatMenu = () => {
   const { currentUser } = useSelector((state) => state.auth);
 
-  console.log("This menu", currentUser);
+  // console.log("This menu", currentUser);
   return (
     <div className="absolute z-10 w-screen max-w-[260px] px-4 mt-1.5 -right-10 sm:right-0 sm:px-0">
       <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
@@ -29,7 +29,7 @@ const UserFloatMenu = () => {
           <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
           <Link
             className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-            to="/dashboard"
+            to="admin/dashboard"
           >
             <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
               <svg

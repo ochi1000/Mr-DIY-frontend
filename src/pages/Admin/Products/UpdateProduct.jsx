@@ -150,7 +150,7 @@ const UpdateProduct = () => {
     <div className="p-4">
       <div className=" flex items-center justify-between  pt-4 pb-8">
         <div className="flex items-center gap-3">
-          <Link to="/product/inventory">
+          <Link to="/admin/product/inventory">
             <Button size="sm" outline color="gray">
               <LeftArrowIcons className="w-6 h-6" />
             </Button>

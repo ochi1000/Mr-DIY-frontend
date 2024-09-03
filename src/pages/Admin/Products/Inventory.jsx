@@ -35,7 +35,7 @@ const Inventory = () => {
 
   const checkDetail = async (data) => {
     try {
-      navigate(`/product/inventory/update/${data.id}`);
+      navigate(`/admin/product/inventory/update/${data.id}`);
     } catch (error) {
       console.error("Error navigating to product details:", error);
     }
@@ -64,7 +64,7 @@ const Inventory = () => {
           </h5>
         </div>
         <div className="flex items-center gap-3">
-          <Link to="/product/inventory/create">
+          <Link to="/admin/product/inventory/create">
             <Button leftIcon={<PlusIcon />}>Add New Product</Button>
           </Link>
         </div>
