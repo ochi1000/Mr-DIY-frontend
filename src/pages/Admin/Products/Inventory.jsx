@@ -16,10 +16,11 @@ import { fetchProducts } from "../../../Redux/products/productsThunk";
 import ErrorStatus from "src/components/ui/ErrorStatus";
 import LoadingSpinner from "src/components/Loading/LoadingSpinner";
 import { formatDate } from "src/utils/constant";
+import { Link, useNavigate } from "react-router-dom";
 
 const Inventory = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const { products, loading, error } = useSelector((state) => state.products);
   console.log("products", products);
@@ -32,6 +33,13 @@ const Inventory = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  const checkDetail = async (data) => {
+    try {
+      navigate(`/product/inventory/update/${data.id}`);
+    } catch (error) {
+      console.error("Error navigating to product details:", error);
+    }
+  };
   const headerDatas = {
     tableHeadings: [
       "S/N",
@@ -56,16 +64,9 @@ const Inventory = () => {
           </h5>
         </div>
         <div className="flex items-center gap-3">
-          {/* <Link to="/drivers/transaction-request">
-            
-          </Link> */}
-
-          <Button
-            // onClick={() => setOpenModal(true)}
-            leftIcon={<PlusIcon />}
-          >
-            Add New Product
-          </Button>
+          <Link to="/product/inventory/create">
+            <Button leftIcon={<PlusIcon />}>Add New Product</Button>
+          </Link>
         </div>
       </div>
 
@@ -118,6 +119,7 @@ const Inventory = () => {
               message={JSON.stringify(error?.message)}
               statusCode={error?.status_code || error?.status}
               link="/dashboard"
+              reload
             />
           ) : (
             <div className="relative overflow-x-auto shadow sm:rounded-lg">
@@ -200,7 +202,7 @@ const Inventory = () => {
                         </div>
                       </td>
                       <td className="px-6 py-5 whitespace-nowrap">
-                        <div className=" flex items-center gap-2">
+                        <div className=" flex items-center gap-4">
                           <div
                             className="cursor-pointer "
                             // onClick={() => fetchSingleCoupon(row?.original?.id)}
@@ -209,15 +211,15 @@ const Inventory = () => {
                           </div>
                           <div
                             className="cursor-pointer "
-                            // onClick={() => editCouponData(row?.original?.id)}
+                            onClick={() => checkDetail(item)}
                           >
                             <EditIcon />
                           </div>
                           <div
-                            className="cursor-pointer "
+                            className="cursor-pointer pl-2"
                             // onClick={() => deleteCouponData(row?.original?.id)}
                           >
-                            <DeleteIcon className="text-red-600 w-6 h-6" />
+                            <DeleteIcon className="text-red-600 w-6 h-6 " />
                           </div>
                         </div>
                       </td>

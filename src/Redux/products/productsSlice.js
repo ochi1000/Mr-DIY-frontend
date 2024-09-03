@@ -44,7 +44,7 @@ const productsSlice = createSlice({
       })
       .addCase(addNewProduct.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = [...state.coupons, action.payload];
+        state.products = [...state.products, action.payload];
       })
       .addCase(addNewProduct.rejected, (state, action) => {
         state.loading = false;
@@ -86,7 +86,7 @@ const productsSlice = createSlice({
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
         state.loading = false;
-        if (Array.isArray(state.coupons)) {
+        if (Array.isArray(state.products)) {
           state.products = state.products.filter(
             (item) => item.id !== action.payload.id
           );

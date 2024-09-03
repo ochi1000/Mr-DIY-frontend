@@ -14,11 +14,11 @@ const ErrorStatus = ({ message, link, statusCode, reload }) => {
   return (
     <div className="pb-32  w-full h-full flex flex-col items-center justify-center space-y-6">
       <div className="relative pt-12 ">
-        <h2 className="text-[280px] text-[#F6F8FC] font-bold ">
+        <h2 className="text-[280px] text-gray-300 font-bold ">
           {statusCode || 404}
         </h2>
         <div className=" absolute top-1/2 left-1/2 -translate-x-1/2  -translate-y-[-40%] ">
-          <img src={EmptyImage} alt="error" />
+          <img src={EmptyImage} alt="error" className="w-40 h-40" />
         </div>
       </div>
       <div className="!-mt-4">
