@@ -162,7 +162,7 @@ const Categories = () => {
               <ErrorStatus
                 message={JSON.stringify(error?.message)}
                 statusCode={error?.status_code || error?.status}
-                link="/dashboard"
+                link="/admin/dashboard"
               />
             ) : (
               <div className="relative overflow-x-auto shadow sm:rounded-lg">

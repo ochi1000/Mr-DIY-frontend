@@ -40,7 +40,7 @@ const Login = () => {
   const onSubmit = (data) => {
     // alert(JSON.stringify(data));
     dispatch(loginThunk(data));
-    navigate("/dashboard");
+    navigate("/admin/dashboard");
   };
   return (
     <div className="m-auto xl:container px-12 sm:px-0 mx-auto">

@@ -171,7 +171,7 @@ const UpdateProduct = () => {
           <ErrorStatus
             message={JSON.stringify(error?.message)}
             statusCode={error?.status_code || error?.status}
-            link="/dashboard"
+            link="/admin/dashboard"
           />
         </div>
       ) : (

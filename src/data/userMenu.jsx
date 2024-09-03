@@ -1,7 +1,7 @@
 const userMenu = [
   {
     routeName: "Dashboard",
-    link: "/dashboard",
+    link: "/admin/dashboard",
   },
   {
     routeName: "Settings",
