@@ -142,7 +142,7 @@ const UpdateProduct = () => {
       updateProduct({ id: product?.data?.id, formData: filteredFormData })
     );
 
-    navigate("/product/inventory/");
+    navigate("/admin/product/inventory/");
     // setOpenModal(false);
   };
 

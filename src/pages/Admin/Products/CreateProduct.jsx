@@ -105,7 +105,7 @@ const CreateProduct = () => {
     // console.log("filtered data", filteredFormData);
     // alert(JSON.stringify(filteredFormData));
     dispatch(addNewProduct(filteredFormData));
-    navigate("/product/inventory/");
+    navigate("/admin/product/inventory/");
     // setOpenModal(false);
   };
 

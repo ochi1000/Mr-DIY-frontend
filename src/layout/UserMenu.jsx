@@ -13,7 +13,7 @@ const UserMenu = () => {
   };
   const { currentUser } = useSelector((state) => state.auth);
 
-  console.log("first login", currentUser);
+  // console.log("first login", currentUser);
   return (
     <div className="absolute top-10 right-3 transition-all duration-300 ease-in">
       <div className="z-50 my-4 text-base text-left list-none bg-gray-50  rounded shadow ">
