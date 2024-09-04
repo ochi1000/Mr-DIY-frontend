@@ -39,7 +39,7 @@ const AddCategoryModal = ({ setOpenModal }) => {
 
     setOpenModal(false);
     dispatch(fetchCategorys());
-    navigate("/product/categories");
+    navigate("/admin/product/categories");
   };
 
   return (
