@@ -215,12 +215,15 @@ export const sidedata = [
         title: "Inventory",
         // icon: <SettingsIcon />,
         href: "/admin/product/inventory",
+        nested: [{ title: "Create", href: "/admin/product/inventory/create" }],
       },
       {
         title: "Categories",
         // icon: <HomeIcon />,
         href: "/admin/product/categories",
+        nested: [{ title: "Create", href: "/admin/product/categories/create" }],
       },
+
       {
         title: "Tags",
         // icon: <HomeIcon />,
