@@ -109,7 +109,7 @@ const Categories = () => {
             <h1 className=" text-xl font-semibold text-gray-900 pb-1.5">
               Categories
             </h1>
-            <h5 className="text-gray-500 text-sm font-normal">
+            <h5 className="text-gray-500 text-sm font-normal max-w-lg">
               Set up categories to group similar products together at the front
               end, and make the product search easier for buyers
             </h5>
@@ -200,7 +200,7 @@ const Categories = () => {
                         <PlusIcon />
                         <p className=" capitalize truncate">{item?.name}</p>
                       </div>
-                      <div className=" w-[15%] flex items-center justify-between">
+                      <div className=" w-[15%] flex items-center gap-6 justify-between">
                         <div className="text-sm  text-gray-600 ">
                           <label className="inline-flex items-center cursor-pointer ">
                             <input
