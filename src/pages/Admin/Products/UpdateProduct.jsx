@@ -31,7 +31,7 @@ const UpdateProduct = () => {
 
   const { product, loading, error } = useSelector((state) => state.products);
 
-  console.log("single product", product);
+  // console.log("single product", product);
 
   useEffect(() => {
     dispatch(fetchProduct(id));
