@@ -37,7 +37,7 @@ export function getNameInitials(name) {
 export function getBasePath(url) {
   const path = url; // get the path part of the URL
   const segments = path.split("/"); // split the path into segments
-  const basePath = segments.slice(0, 2).join("/"); // take the first two segments and join them back into a string
+  const basePath = segments.slice(0, 3).join("/"); // take the first two segments and join them back into a string
   return basePath;
 }
 
