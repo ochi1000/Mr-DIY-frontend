@@ -54,7 +54,7 @@ const CreateCategory = () => {
         </div>
       </div>
 
-      <div className="relative p-4 w-full mx-auto  max-w-4xl max-h-full">
+      <div className="relative p-4 w-full mx-auto h-full max-w-4xl max-h-full">
         <HookForm
           defaultValues={defaultFormValue}
           onSubmit={onSubmit}
@@ -70,7 +70,7 @@ const CreateCategory = () => {
               {/* <CloseModal setOpenModal={setOpenModal} /> */}
             </div>
             {/* contents below */}
-            <div className=" h-[82vh]">
+            <div className=" ">
               {/* <ScrollArea className="h-full"> */}
               <div className="p-5">
                 <div className="">
