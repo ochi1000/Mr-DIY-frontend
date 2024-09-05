@@ -115,6 +115,7 @@ const deleteProduct = createAsyncThunk(
         response?.status_code === 201
       ) {
         dispatch(fetchProducts());
+        toast.success("Product has been deleted successfully");
         // dispatch(
         //   openToast({
         //     type: "success",
