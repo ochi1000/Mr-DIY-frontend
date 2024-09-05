@@ -253,10 +253,10 @@ const Sidebar = ({
                                             <Link
                                               key={nestedIndex}
                                               to={nested.href}
-                                              className={`block px-4 rounded-md py-2 ms-8 text-sm font-bold text-gray-100 hover:bg-gray-700 ${
+                                              className={`block px-4 rounded-md py-2 ms-12 text-sm font-normal text-gray-800 hover:bg-primary-100  ${
                                                 location.pathname ===
                                                 nested.href
-                                                  ? "bg-gray-700"
+                                                  ? "bg-primary-100 text-primary-700"
                                                   : ""
                                               }`}
                                             >
