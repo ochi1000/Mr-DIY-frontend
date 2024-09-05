@@ -11,19 +11,29 @@ import {
   SearchIcon,
 } from "../../../assets/SvgIcons";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchProducts } from "../../../Redux/products/productsThunk";
+import { useEffect, useState } from "react";
+import {
+  deleteProduct,
+  fetchProduct,
+  fetchProducts,
+} from "../../../Redux/products/productsThunk";
 import ErrorStatus from "src/components/ui/ErrorStatus";
 import LoadingSpinner from "src/components/Loading/LoadingSpinner";
 import { formatDate } from "src/utils/constant";
 import { Link, useNavigate } from "react-router-dom";
 
+import Notification from "../../../components/forms/Notification";
+import ViewProductModal from "../../../components/Modals/ViewProductModal";
+
 const Inventory = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const { products, loading, error } = useSelector((state) => state.products);
-  console.log("products", products);
+  const [viewProduct, setViewProduct] = useState(false);
+  const [deleteProductData, setDeleteProductData] = useState(false);
+  const { products, product, loading, error } = useSelector(
+    (state) => state.products
+  );
+  // console.log("products", products);
 
   const fetchProductsHandler = () => {
     dispatch(fetchProducts());
@@ -38,6 +48,39 @@ const Inventory = () => {
       navigate(`/admin/product/inventory/update/${data.id}`);
     } catch (error) {
       console.error("Error navigating to product details:", error);
+    }
+  };
+
+  const fetchSingleProduct = (product_id) => {
+    dispatch(fetchProduct(product_id));
+    setViewProduct(true);
+  };
+
+  const deleteProductHandler = (product_id) => {
+    dispatch(fetchProduct(product_id));
+    setDeleteProductData(true);
+  };
+
+  const handleDelete = async (product) => {
+    // console.log("coupon is here", coupon);
+    if (product) {
+      // Handle delete product logic here
+      try {
+        // setLoading(true);
+        dispatch(deleteProduct(product?.id));
+        navigate("/admin/product/inventory");
+      } catch (error) {
+        console.log(error);
+
+        // dispatch(
+        //   openToast({
+        //     type: "error",
+        //     message: ` Error deleting coupon with error details: ${}`,
+        //   })
+        // );
+      } finally {
+        setDeleteProductData(false);
+      }
     }
   };
   const headerDatas = {
@@ -205,7 +248,7 @@ const Inventory = () => {
                         <div className=" flex items-center gap-4">
                           <div
                             className="cursor-pointer "
-                            // onClick={() => fetchSingleCoupon(row?.original?.id)}
+                            onClick={() => fetchSingleProduct(item?.id)}
                           >
                             <EyeIconBold />
                           </div>
@@ -217,7 +260,7 @@ const Inventory = () => {
                           </div>
                           <div
                             className="cursor-pointer pl-2"
-                            // onClick={() => deleteCouponData(row?.original?.id)}
+                            onClick={() => deleteProductHandler(item?.id)}
                           >
                             <DeleteIcon className="text-red-600 w-6 h-6 " />
                           </div>
@@ -332,6 +375,27 @@ const Inventory = () => {
           </svg>
         </a>
       </div>
+
+      {viewProduct && (
+        <ViewProductModal
+          setOpenModal={setViewProduct}
+          productData={product?.data}
+          loading={loading}
+        />
+      )}
+      {deleteProductData && (
+        <>
+          <Notification
+            message="Are you sure you want to delete this product?"
+            type="warning"
+            onCancel={() => setDeleteProductData(false)}
+            onApprove={() => {
+              handleDelete(product?.data);
+              setDeleteProductData(false);
+            }}
+          />
+        </>
+      )}
     </div>
   );
 };
