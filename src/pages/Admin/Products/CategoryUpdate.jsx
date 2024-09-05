@@ -95,7 +95,7 @@ const CategoryUpdate = () => {
                 {/* <CloseModal setOpenModal={setOpenModal} /> */}
               </div>
               {/* contents below */}
-              <div className=" h-[82vh]">
+              <div className=" ">
                 {/* <ScrollArea className="h-full"> */}
                 <div className="p-5">
                   <div className="">
