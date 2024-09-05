@@ -27,7 +27,7 @@ import AddCategoryModal from "../../../components/Modals/AddCategoryModal";
 import EditCategoryModal from "../../../components/Modals/EditCategoryModal";
 import Notification from "../../../components/forms/Notification";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Categories = () => {
   const dispatch = useDispatch();
@@ -49,10 +49,17 @@ const Categories = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const editCategoryData = (cat_id) => {
-    dispatch(fetchCategory(cat_id));
-    setEditCategory(true);
+  const checkDetail = async (data) => {
+    try {
+      navigate(`/admin/product/categories/update/${data.id}`);
+    } catch (error) {
+      console.error("Error navigating to product details:", error);
+    }
   };
+  // const editCategoryData = (cat_id) => {
+  //   dispatch(fetchCategory(cat_id));
+  //   setEditCategory(true);
+  // };
 
   const deleteCategoryHandler = (cat_id) => {
     dispatch(fetchCategory(cat_id));
@@ -66,7 +73,7 @@ const Categories = () => {
       try {
         // setLoading(true);
         dispatch(deleteCategory(category?.id));
-        navigate("/product/categories");
+        navigate("/admin/product/categories");
       } catch (error) {
         console.log(error);
 
@@ -108,16 +115,14 @@ const Categories = () => {
             </h5>
           </div>
           <div className="flex items-center gap-3">
-            {/* <Link to="/drivers/transaction-request">
-            
-          </Link> */}
-
-            <Button
-              onClick={() => setOpenCreateCategory(true)}
-              leftIcon={<PlusIcon />}
-            >
-              Add New Category
-            </Button>
+            <Link to="/admin/product/categories/create">
+              <Button
+                // onClick={() => setOpenCreateCategory(true)}
+                leftIcon={<PlusIcon />}
+              >
+                Add New Category
+              </Button>
+            </Link>
           </div>
         </div>
 
@@ -162,7 +167,8 @@ const Categories = () => {
               <ErrorStatus
                 message={JSON.stringify(error?.message)}
                 statusCode={error?.status_code || error?.status}
-                link="/admin/dashboard"
+                link="/admin/product/categories"
+                reload
               />
             ) : (
               <div className="relative overflow-x-auto shadow sm:rounded-lg">
@@ -209,7 +215,7 @@ const Categories = () => {
                         <div className=" flex items-center gap-6 pr-10">
                           <div
                             className="cursor-pointer "
-                            onClick={() => editCategoryData(item.id)}
+                            onClick={() => checkDetail(item)}
                           >
                             <EditIcon />
                           </div>
