@@ -3,19 +3,19 @@ import FlashSales from "../components/Section/FlashSales";
 import FrequentPurchased from "../components/Section/FrequentPurchased";
 import Hero from "../components/Section/Hero";
 import TopSelling from "../components/Section/TopSelling";
-import Footer from "../components/ui/Footer";
-import Header from "../components/ui/Header";
+// import Footer from "../components/ui/Footer";
+// import Header from "../components/ui/Header";
 
 const Home = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <Hero />
       <Categories />
       <TopSelling />
       <FlashSales />
       <FrequentPurchased />
-      <Footer />
+      {/* <Footer /> */}
       {/* <div className="p-20 flex flex-col items-center justify-center">
         <h1 className=" text-base lg:text-8xl font-bold text-blue-600">
           Mr DIY Project
