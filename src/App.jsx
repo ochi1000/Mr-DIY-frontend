@@ -17,6 +17,9 @@ import CreateProduct from "./pages/Admin/Products/CreateProduct";
 import UpdateProduct from "./pages/Admin/Products/UpdateProduct";
 import CreateCategory from "./pages/Admin/Products/CreateCategory";
 import CategoryUpdate from "./pages/Admin/Products/CategoryUpdate";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/product-details" element={<ProductDetails />} />
 
           {/* <Route path="/check-email" element={<CheckEmail />} />  
             <Route path="/password-reset" element={<PasswordReset />} />
