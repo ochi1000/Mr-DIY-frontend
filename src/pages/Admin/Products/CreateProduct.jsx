@@ -9,7 +9,7 @@ import { Input } from "../../../components/forms/Input";
 import { TextArea } from "../../../components/forms/TextArea";
 import HookForm from "../../../components/forms/Form";
 import CustomSelect from "../../../components/forms/Select/CustomSelect";
-import Uploader from "../../../components/forms/Upload/uploader";
+// import Uploader from "../../../components/forms/Upload/uploader";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewProduct } from "../../../Redux/products/productsThunk";
@@ -17,12 +17,13 @@ import DefaultToggle from "../../../components/forms/DefaultToggle";
 import { fetchCategorys } from "../../../Redux/category/categoriesThunk";
 import { productSchema } from "../../../schema/productSchema";
 import { Toggle } from "../../../components/forms/Toggle/Toggle";
+import MultipleImageUpload from "../../../components/forms/Upload/MultipleImageUpload";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [filesImgs, setFilesImgs] = useState("");
-  const [filesUpload, setFilesUpload] = useState("");
+  // const [filesImgs, setFilesImgs] = useState("");
+  // const [filesUpload, setFilesUpload] = useState("");
 
   const [selectedState, setSelectedState] = useState(null);
 
@@ -63,7 +64,7 @@ const CreateProduct = () => {
     });
   }
 
-  console.log(productWarrantyData);
+  // console.log(productWarrantyData);
 
   const defaultFormValue = {
     name: "",
@@ -374,11 +375,14 @@ const CreateProduct = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="pt-6">
+                  {/* <div className="pt-6">
                     <Uploader files={filesImgs} setFiles={setFilesImgs} />
                   </div>
                   <div className="pt-6">
                     <Uploader files={filesUpload} setFiles={setFilesUpload} />
+                  </div> */}
+                  <div className="pt-6">
+                    <MultipleImageUpload />
                   </div>
                 </div>
               </div>
