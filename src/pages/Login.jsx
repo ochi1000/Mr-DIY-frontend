@@ -43,7 +43,7 @@ const Login = () => {
     navigate("/admin/dashboard");
   };
   return (
-    <div className="m-auto xl:container px-12 sm:px-0 mx-auto">
+    <div className="m-auto xl:container px-12 pt-20 sm:px-0 mx-auto">
       <div className="mx-auto h-full max-w-sm">
         <div className="m-auto  py-12">
           <div className="space-y-4">
