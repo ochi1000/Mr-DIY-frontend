@@ -20,6 +20,9 @@ import CategoryUpdate from "./pages/Admin/Products/CategoryUpdate";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import ProductDetails from "./pages/ProductDetails";
+import GoogleAuthCallback from "./pages/GoogleAuthCallback";
+import Tags from "./pages/Admin/Products/Tags";
+import Attributes from "./pages/Admin/Products/Attributes";
 
 function App() {
   return (
@@ -30,6 +33,10 @@ function App() {
         <Route element={<Public />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/auth/google/callback"
+            element={<GoogleAuthCallback />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
@@ -91,6 +98,10 @@ function App() {
                 path="categories/update/:id"
                 element={<CategoryUpdate />}
               />
+              <Route path="tags" element={<Tags />} />
+              <Route path="attributes" element={<Attributes />} />
+              {/* <Route path="tags/create" element={<CreateCategory />} />
+              <Route path="tags/update/:id" element={<CategoryUpdate />} /> */}
 
               {/* <Route path="dashboard/order-home" element={<Dashboard />} /> */}
             </Route>
