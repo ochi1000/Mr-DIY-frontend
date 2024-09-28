@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../../components/forms/Button";
 import {
@@ -9,7 +10,7 @@ import { Input } from "../../../components/forms/Input";
 import { TextArea } from "../../../components/forms/TextArea";
 import HookForm from "../../../components/forms/Form";
 import CustomSelect from "../../../components/forms/Select/CustomSelect";
-// import Uploader from "../../../components/forms/Upload/uploader";
+import SmallSpinner from "../../../components/Loading/SmallSpinner";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewProduct } from "../../../Redux/products/productsThunk";
@@ -18,13 +19,15 @@ import { fetchCategorys } from "../../../Redux/category/categoriesThunk";
 import { productSchema } from "../../../schema/productSchema";
 import { Toggle } from "../../../components/forms/Toggle/Toggle";
 import MultipleImageUpload from "../../../components/forms/Upload/MultipleImageUpload";
+import ImageUpload from "../../../components/forms/Upload/ImageUpload";
+import toast from "react-hot-toast";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const [filesImgs, setFilesImgs] = useState("");
   // const [filesUpload, setFilesUpload] = useState("");
-
+  const [imagesFile, setImagesFile] = useState([]);
   const [selectedState, setSelectedState] = useState(null);
 
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -32,8 +35,13 @@ const CreateProduct = () => {
   const [selectedWarranty, setSelectedWarranty] = useState(null);
 
   const { categories } = useSelector((state) => state.category);
+  // console.log("image selected:", imagesFile);
   //   console.log("categories", selectedCategory?.id);
+  // const [images, setImages] = useState([]);
 
+  // const handleImageChange = (event) => {
+  //   setImages([...event.target.files]);
+  // };
   const fetchCategorysHandler = () => {
     dispatch(fetchCategorys());
   };
@@ -42,6 +50,7 @@ const CreateProduct = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  const { loading } = useSelector((state) => state.products);
   const catgoryData = [
     { name: "Nike", shipment_type: "nike" },
     { name: "Samsung", shipment_type: "Samsung" },
@@ -64,6 +73,7 @@ const CreateProduct = () => {
     });
   }
 
+  // console.log("images gotten:", images);
   // console.log(productWarrantyData);
 
   const defaultFormValue = {
@@ -79,36 +89,99 @@ const CreateProduct = () => {
     whats_in_the_box: "",
     status: "",
   };
-  const onSubmit = (data) => {
-    // console.log("Form data", data);
 
-    const filteredFormData = {
-      name: data.name,
-      brand_id: data.brand_id,
-      category_id: selectedCategory?.id,
-      listing_price: data?.listing_price,
-      min_selling_price: data.min_selling_price,
-      model: data.model,
-      warranty: selectedWarranty?.warranty,
-      sku: data.sku,
-      short_description: data.short_description,
-      long_description: data.long_description,
-      whats_in_the_box: data?.whats_in_the_box,
-      imgs: [
-        "https://pictures-nigeria.jijistatic.net/117777770_NjIwLTYwNC0xNmU0ZDc0MDZj.webp",
-      ],
-      attributes: [],
-      tags: [],
-      stock_item: data?.stock_item,
-      status: data?.status,
-    };
+  const onSubmit = async (data) => {
+    const formData = new FormData();
 
-    // console.log("filtered data", filteredFormData);
-    // alert(JSON.stringify(filteredFormData));
-    dispatch(addNewProduct(filteredFormData));
-    navigate("/admin/product/inventory/");
-    // setOpenModal(false);
+    // Check if images array is populated
+    // if (images.length === 0) {
+    //   console.log("No images selected");
+    //   return;
+    // }
+
+    // Append each image to formData
+    imagesFile.forEach((image) => {
+      formData.append("imgs[]", image);
+    });
+
+    // Append other form fields to formData
+    formData.append("name", data.name);
+    formData.append("brand_id", data.brand_id);
+    formData.append("category_id", selectedCategory?.id);
+    formData.append("listing_price", data?.listing_price);
+    formData.append("min_selling_price", data.min_selling_price);
+    formData.append("model", data.model);
+    formData.append("warranty", selectedWarranty?.warranty);
+    formData.append("sku", data.sku);
+    formData.append("short_description", data.short_description);
+    formData.append("long_description", data.long_description);
+    formData.append("whats_in_the_box", data?.whats_in_the_box);
+    // formData.append("stock_item", data?.stock_item);
+    // formData.append("status", data?.status);
+    formData.append("stock_item", data?.stock_item ? "1" : "0");
+    formData.append("status", data?.status ? "1" : "0");
+    formData.append("attributes", []);
+    formData.append("tags", []);
+
+    // Log formData to check if it has the values
+    // for (let [key, value] of formData.entries()) {
+    //   console.log(key, value);
+    // }
+
+    // Dispatch the formData
+    // dispatch(addNewProduct(formData));
+
+    // navigate("/admin/product/inventory/");
+
+    try {
+      const result = await dispatch(addNewProduct(formData)).unwrap();
+      // console.log("Product result: ", result);
+
+      if (result.status >= 200 && result.status <= 300) {
+        toast.success("Product created successfully");
+        navigate("/admin/product/inventory/");
+      }
+    } catch (error) {
+      console.error("Create Error:", error);
+      navigate("/admin/product/inventory/");
+      if (error?.errors) {
+        const errorMessages = Object.values(error?.errors).flat().join(", ");
+        toast.error(errorMessages, { duration: 6000 });
+      }
+    }
   };
+
+  // const onSubmit = (data) => {
+  //   // console.log("Form data", data);
+
+  //   const filteredFormData = {
+  //     name: data.name,
+  //     brand_id: data.brand_id,
+  //     category_id: selectedCategory?.id,
+  //     listing_price: data?.listing_price,
+  //     min_selling_price: data.min_selling_price,
+  //     model: data.model,
+  //     warranty: selectedWarranty?.warranty,
+  //     sku: data.sku,
+  //     short_description: data.short_description,
+  //     long_description: data.long_description,
+  //     whats_in_the_box: data?.whats_in_the_box,
+  //     imgs: images,
+  //     // imgs: [
+  //     //   "https://pictures-nigeria.jijistatic.net/117777770_NjIwLTYwNC0xNmU0ZDc0MDZj.webp",
+  //     // ],
+  //     attributes: [],
+  //     tags: [],
+  //     stock_item: data?.stock_item,
+  //     status: data?.status,
+  //   };
+
+  //   console.log("filtered data", filteredFormData);
+  //   // alert(JSON.stringify(filteredFormData));
+  //   dispatch(addNewProduct(filteredFormData));
+  //   navigate("/admin/product/inventory/");
+  //   // setOpenModal(false);
+  // };
 
   return (
     <div className="p-4">
@@ -255,10 +328,18 @@ const CreateProduct = () => {
               <div className="relative bg-white rounded-2xl shadow space-y-6 p-5 pt-6 w-[30%]">
                 <Button
                   type="submit"
+                  disabled={loading}
                   className="w-full justify-center"
                   size="lg"
                 >
-                  Continue
+                  {loading ? (
+                    <div className="inline-flex items-center gap-3">
+                      <SmallSpinner />
+                      <span>Creating Product...</span>
+                    </div>
+                  ) : (
+                    "Continue"
+                  )}
                 </Button>
                 <div className="border rounded-xl mt-2  p-4 w-full flex items-center justify-between ">
                   <p className=" font-semibold text-gray-700">
@@ -375,15 +456,16 @@ const CreateProduct = () => {
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="pt-6">
+                    <ImageUpload
+                      images={imagesFile}
+                      setImages={setImagesFile}
+                    />
+                  </div>
+
                   {/* <div className="pt-6">
-                    <Uploader files={filesImgs} setFiles={setFilesImgs} />
-                  </div>
-                  <div className="pt-6">
-                    <Uploader files={filesUpload} setFiles={setFilesUpload} />
-                  </div> */}
-                  <div className="pt-6">
                     <MultipleImageUpload />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
