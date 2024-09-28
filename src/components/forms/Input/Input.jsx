@@ -19,6 +19,7 @@ export const Input = ({
   type = "text",
   Icon,
   disabled,
+  multiple,
 }) => {
   const {
     register,
@@ -53,6 +54,7 @@ export const Input = ({
           </div>
         )}
         <input
+          aria-hidden="false"
           className={classNames(
             styles.base,
             leadingIcon
@@ -72,6 +74,7 @@ export const Input = ({
           placeholder={placeholder || label}
           type={isPasswordField ? (showPassword ? "text" : "password") : type}
           disabled={disabled}
+          multiple={multiple}
         />
         {hasErrors && (
           <div
