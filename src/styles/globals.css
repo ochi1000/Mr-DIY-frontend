@@ -401,3 +401,17 @@ input:-webkit-autofill:active {
   z-index: 999;
   color: #0086fe;
 }
+
+/* IMAGE UPLOAD CSSS */
+.image-previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.image-previews img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}
