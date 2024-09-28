@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { postData } from "../../utils/api";
+// import axios from "axios";
 
 // Async thunk action creator for login
 const loginThunk = createAsyncThunk(
@@ -63,6 +64,27 @@ const loginThunk = createAsyncThunk(
   }
 );
 
+const googleLoginThunk = createAsyncThunk(
+  "auth/google",
+  async (_, { rejectWithValue }) => {
+    try {
+      // const response = await getData("auth/google");
+      const response = (window.location.href =
+        "https://phplaravel-1329305-4863390.cloudwaysapps.com/auth/google");
+
+      // await axios.get(
+      //   "https://phplaravel-1329305-4863390.cloudwaysapps.com/auth/google"
+      // );
+      console.log("google login:", response);
+      return response;
+    } catch (error) {
+      const errorMessage = error;
+      console.log(errorMessage);
+      return rejectWithValue(errorMessage?.response?.data);
+    }
+  }
+);
+
 // Create a logout thunk
 const logoutThunk = createAsyncThunk("admin/logout", async (data, thunkAPI) => {
   try {
@@ -96,4 +118,4 @@ const logoutThunk = createAsyncThunk("admin/logout", async (data, thunkAPI) => {
   }
 });
 
-export { loginThunk, logoutThunk };
+export { loginThunk, logoutThunk, googleLoginThunk };

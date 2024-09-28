@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginThunk, logoutThunk } from "./authThunk";
+import { loginThunk, logoutThunk, googleLoginThunk } from "./authThunk";
 import Cookies from "js-cookie";
 
 const initialState = {
@@ -9,6 +9,9 @@ const initialState = {
   isAuthenticated: !!Cookies.get("admin_token"),
   loading: false,
   error: null,
+  currentGoogleUser: [],
+  googleLoading: false,
+  googleError: null,
 };
 
 const authSlice = createSlice({
@@ -31,6 +34,20 @@ const authSlice = createSlice({
         state.loading = false;
         state.isAuthenticated = false;
         state.error = action.payload; // Set error state from rejection value
+      })
+
+      .addCase(googleLoginThunk.pending, (state) => {
+        state.googleLoading = true;
+        state.googleError = null;
+      })
+      .addCase(googleLoginThunk.fulfilled, (state, action) => {
+        state.googleLoading = false;
+        state.currentGoogleUser = action.payload;
+      })
+
+      .addCase(googleLoginThunk.rejected, (state, action) => {
+        state.googleLoading = false;
+        state.googleError = action.payload ?? "Failed to fetch Categories";
       })
       .addCase(logoutThunk.pending, (state) => {
         state.loading = true;

@@ -13,6 +13,7 @@ const initialState = {
   product: [],
   loading: false,
   error: null,
+  addproducts: [],
 };
 
 // Create the products slice
@@ -44,7 +45,7 @@ const productsSlice = createSlice({
       })
       .addCase(addNewProduct.fulfilled, (state, action) => {
         state.loading = false;
-        state.products = [...state.products, action.payload];
+        state.addproducts = [...state.addproducts, action.payload];
       })
       .addCase(addNewProduct.rejected, (state, action) => {
         state.loading = false;
