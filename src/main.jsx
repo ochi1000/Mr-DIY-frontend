@@ -10,14 +10,17 @@ import store from "./Redux/store";
 import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 
 createRoot(document.getElementById("root")).render(
-  // <StrictMode>
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-      <Toaster />
-    </BrowserRouter>
-  </Provider>
+  // <StrictMode>862148088321-5bvg7nvjip300vn8piqa72v0qhr58fp5.apps.googleusercontent.com
+  <GoogleOAuthProvider clientId="319976990423-e1h3jo5lvfiob2s58bdiat61vcf27h1j.apps.googleusercontent.com">
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+        <Toaster />
+      </BrowserRouter>
+    </Provider>
+  </GoogleOAuthProvider>
   // </StrictMode>
 );
