@@ -1,7 +1,14 @@
+/* eslint-disable no-unused-vars */
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 import { getData, postData, putData, removeData } from "../../utils/api";
 // import { openToast } from "../Toast/toastSlice";
+import { useNavigate } from "react-router-dom";
+
+const useSignupNavigation = () => {
+  const navigate = useNavigate();
+  return (path) => navigate(path);
+};
 
 const PRODUCT_URL = "admin/product";
 
@@ -21,32 +28,21 @@ const fetchProducts = createAsyncThunk(
 
 const addNewProduct = createAsyncThunk(
   "addNewProduct",
-  async (ProductData, { rejectWithValue, dispatch }) => {
+  async (ProductData, { rejectWithValue }) => {
     try {
       const response = await postData(PRODUCT_URL, ProductData);
+      // const { status, message } = response;
+      // if (status >= 200 && status < 300) {
+      //   toast.success(message);
+      // }
 
-      if (
-        response?.status === 202 ||
-        response?.status === 200 ||
-        response?.status === 201 ||
-        response?.status_code === 202 ||
-        response?.status_code === 200 ||
-        response?.status_code === 201
-      ) {
-        toast.success("Product created successfully!");
-        // dispatch(
-        //   openToast({
-        //     type: "success",
-        //     message: "Product created successfully",
-        //   })
-        // );
-      }
-      console.log("Product create response", response);
-      dispatch(fetchProducts());
+      // dispatch(fetchProducts());
+      return response;
     } catch (error) {
-      const errorMessage = error;
-      console.log(errorMessage);
-      return rejectWithValue(errorMessage?.response?.data);
+      // const errorMessage = error;
+      const errorMessage = error.response?.data || error.message;
+      console.log("thunk error:", errorMessage);
+      return rejectWithValue(errorMessage);
     }
   }
 );

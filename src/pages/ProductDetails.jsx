@@ -9,7 +9,7 @@ import logo from "src/assets/images/logo.svg";
 const ProductDetails = () => {
   return (
     <div className="pt-20 ">
-      <main className="container mx-auto lg:px-10 2xl:px-20 mt-5 lg:mt-11">
+      <main className="container mx-auto px-4 lg:px-10 2xl:px-20 mt-5 lg:mt-11">
         <div className="lg:flex">
           <div className="w-full lg:w-[55%] ">
             <div className="relative">
