@@ -1,11 +1,11 @@
 const userMenu = [
   {
     routeName: "Dashboard",
-    link: "/admin/dashboard",
+    link: "dashboard",
   },
   {
     routeName: "Settings",
-    link: "/settings",
+    link: "settings",
   },
 ];
 
