@@ -2,11 +2,46 @@ import { createSlice } from "@reduxjs/toolkit";
 import { loginThunk, logoutThunk, googleLoginThunk } from "./authThunk";
 import Cookies from "js-cookie";
 
+const getAdminRole = Cookies.get("diy_admin_roles")
+  ? JSON.parse(Cookies.get("diy_admin_roles"))
+  : null;
+
+console.log("get admin role", getAdminRole);
+
+const hasAdmin = getAdminRole
+  ? getAdminRole.some((role) => role.name === "admin")
+  : null;
+
+const hasUser = getAdminRole
+  ? getAdminRole.some((role) => role.name === "user")
+  : null;
+
+// if (hasAdmin && hasUser) {
+//   console.log("The role data contains both 'admin' and 'user'.");
+// } else {
+//   console.log(
+//     "The role data does not contain both 'admin' and 'user'.",
+//     hasAdmin,
+//     hasUser
+//   );
+// }
+// console.log(
+//   "getAdminRole auth:",
+//   Array.isArray(getAdminRole),
+//   getAdminRole.find((item) => item.name === "admin")
+// );
+
+// if (Array.isArray(getAdminRole)) {
+//   console.log("Data is an array.");
+// } else {
+//   console.log("Data is not an array.");
+// }
 const initialState = {
-  currentUser: Cookies.get("currentUser")
-    ? JSON.parse(Cookies.get("currentUser"))
+  currentUser: Cookies.get("diy_currentUser")
+    ? JSON.parse(Cookies.get("diy_currentUser"))
     : null,
-  isAuthenticated: !!Cookies.get("admin_token"),
+  isAuthenticated: !!Cookies.get("diy_admin_token"),
+  isAdmin: hasAdmin && hasUser,
   loading: false,
   error: null,
   currentGoogleUser: [],
@@ -27,12 +62,14 @@ const authSlice = createSlice({
       .addCase(loginThunk.fulfilled, (state, action) => {
         state.currentUser = action.payload;
         state.isAuthenticated = true;
+        state.isAdmin = true;
         state.loading = false;
         state.error = null; // Reset error state on success
       })
       .addCase(loginThunk.rejected, (state, action) => {
         state.loading = false;
         state.isAuthenticated = false;
+        state.isAdmin = false;
         state.error = action.payload; // Set error state from rejection value
       })
 
@@ -55,6 +92,7 @@ const authSlice = createSlice({
       .addCase(logoutThunk.fulfilled, (state) => {
         state.currentUser = null;
         state.isAuthenticated = false;
+        state.isAdmin = false;
         state.loading = false;
         state.error = null;
       })
