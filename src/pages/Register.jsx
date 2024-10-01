@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import Logo from "../components/shared/Logo/Logo";
 import { LoginSchema } from "../schema/authSchema";
@@ -22,19 +23,35 @@ const Register = () => {
     dispatch(loginThunk(data));
   };
   return (
-    <div className="m-auto xl:container px-12 sm:px-0 mx-auto">
-      <div className="mx-auto h-full max-w-sm">
+    <div className="m-auto xl:container px-4 lg:px-12 pt-20 sm:px-0 mx-auto">
+      <div className="mx-auto h-full max-w-lg">
         <div className="m-auto  py-12">
           <div className="space-y-4">
             <Logo />
           </div>
-          <div className="mt-4 rounded-3xl border bg-gray-50 dark:border-gray-700 dark:bg-gray-800 -mx-6 sm:-mx-10 p-8 sm:p-10">
+          <div className="mt-4 rounded-3xl border bg-gray-50  py-8 px-4 sm:p-10">
             <h3 className="text-xl font-semibold text-gray-700 dark:text-white">
-              Login to your account
+              Register an account
             </h3>
 
-            <div className="max-w-xl pt-6">
+            <div className="max-w-xl pt-10">
               <HookForm onSubmit={onSubmit} schema={LoginSchema}>
+                <div className="grid lg:grid-cols-2 lg:gap-3 w-full ">
+                  <div className="">
+                    <Input
+                      name="first_name"
+                      label="First Name"
+                      placeholder="Enter first name"
+                    />
+                  </div>
+                  <div className="">
+                    <Input
+                      name="last_name"
+                      label="Last Name"
+                      placeholder="Enter last name"
+                    />
+                  </div>
+                </div>
                 <Input
                   name="email"
                   label="Email Address"
@@ -47,13 +64,13 @@ const Register = () => {
                   placeholder="••••••••"
                 />
 
-                <div className=" float-start text-sm mb-4">
+                {/* <div className=" float-start text-sm mb-4">
                   <Link to="/forget-password">
                     <p className=" text-primary-700 font-medium">
                       Forgot Password?
                     </p>
                   </Link>
-                </div>
+                </div> */}
 
                 <Button
                   type="submit"
@@ -68,7 +85,7 @@ const Register = () => {
                       <span>Loading...</span>
                     </div>
                   ) : (
-                    "Sign in"
+                    "Create Account"
                   )}
                 </Button>
               </HookForm>
@@ -84,7 +101,7 @@ const Register = () => {
                 <p className="text-center text-gray-600 ">Or</p>
                 <div className="bg-gray-300 h-px w-full"></div>
               </div>
-              <div className="mt-4 flex flex-wrap sm:grid gap-4 grid-cols-2">
+              <div className="mt-4 flex flex-wrap sm:grid gap-4 grid-cols-1">
                 <button className="w-full h-12 rounded-lg border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
                   <div className="w-max mx-auto flex items-center justify-center space-x-2">
                     <GoogleIcon />
@@ -93,14 +110,14 @@ const Register = () => {
                     </span>
                   </div>
                 </button>
-                <button className="w-full h-12 rounded-lg border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
+                {/* <button className="w-full h-12 rounded-lg border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
                   <div className="w-max mx-auto flex items-center justify-center space-x-2">
                     <Facebook className="w-6 h-6 text-[#1877F2]" />
                     <span className="block w-max text-sm font-semibold tracking-wide text-gray-700 dark:text-white">
                       Facebook
                     </span>
                   </div>
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
