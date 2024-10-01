@@ -21,6 +21,8 @@ import { Toggle } from "../../../components/forms/Toggle/Toggle";
 import MultipleImageUpload from "../../../components/forms/Upload/MultipleImageUpload";
 import ImageUpload from "../../../components/forms/Upload/ImageUpload";
 import toast from "react-hot-toast";
+import ReactSelectOption from "../../../components/forms/Select/react-select-options";
+import { fetchTags } from "../../../Redux/tags/tagsThunk";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
@@ -35,6 +37,9 @@ const CreateProduct = () => {
   const [selectedWarranty, setSelectedWarranty] = useState(null);
 
   const { categories } = useSelector((state) => state.category);
+  const { tags } = useSelector((state) => state.tags);
+
+  console.log("tags: ", tags);
   // console.log("image selected:", imagesFile);
   //   console.log("categories", selectedCategory?.id);
   // const [images, setImages] = useState([]);
@@ -42,6 +47,14 @@ const CreateProduct = () => {
   // const handleImageChange = (event) => {
   //   setImages([...event.target.files]);
   // };
+  const fetchTagsHandler = () => {
+    dispatch(fetchTags());
+  };
+  useEffect(() => {
+    fetchTagsHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
+
   const fetchCategorysHandler = () => {
     dispatch(fetchCategorys());
   };
@@ -182,7 +195,16 @@ const CreateProduct = () => {
   //   navigate("/admin/product/inventory/");
   //   // setOpenModal(false);
   // };
+  const fruits = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+    { value: "orange", label: "Orange" },
+    { value: "apple", label: "Apple" },
+  ];
+  const [selectedOptions, setSelectedOptions] = useState([]);
 
+  console.log("tag selected:", selectedOptions);
   return (
     <div className="p-4">
       <div className=" flex items-center justify-between  pt-4 pb-8">
@@ -228,6 +250,15 @@ const CreateProduct = () => {
                       label="Product Name"
                       placeholder="Enter product Name"
                     />
+                    <div className="pb-6">
+                      <ReactSelectOption
+                        data={fruits}
+                        setSelectedOptions={setSelectedOptions}
+                        selectedOptions={selectedOptions}
+                        placeholder="Select a tag"
+                        name="fruits"
+                      />
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
                         <div className="pb-4">
