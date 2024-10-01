@@ -12,13 +12,13 @@ const userLoginThunk = createAsyncThunk(
       const response = await postData("auth", diyUserData);
 
       const userAuthResponse = response;
-      console.log("userAuthResponse", userAuthResponse);
-      toast.success(userAuthResponse?.message);
+      console.log("user Auth Response", userAuthResponse);
+      // toast.success(userAuthResponse?.message);
 
       const { data } = userAuthResponse;
 
       // Store the access token in a cookie with expiry, sameSite, and secure options
-      Cookies.set("user_token", data.token, {
+      Cookies.set("diy_user_token", data.token, {
         expires: 7,
         sameSite: "None",
         secure: true,
@@ -26,22 +26,27 @@ const userLoginThunk = createAsyncThunk(
 
       // Store user information in a cookie
       const userAuthInfo = JSON.stringify(data?.user);
-      console.log("userAuthInfo", userAuthInfo);
+      // console.log("userAuthInfo", userAuthInfo);
 
-      Cookies.set("currentuserAuth", userAuthInfo, {
+      Cookies.set("diy_user_info", userAuthInfo, {
         expires: 7,
         sameSite: "None",
         secure: true,
       });
 
       // Return the user data
-      return data;
+      return response;
     } catch (error) {
-      // Handle errors
-      const errorMessage = error.response.data.message;
-      // Reject the promise with the error message
+      const errorMessage = error.response?.data || error.message;
+      console.error(errorMessage);
       return rejectWithValue(errorMessage);
     }
+    // } catch (error) {
+    //   // Handle errors
+    //   const errorMessage = error.response.data.message;
+    //   // Reject the promise with the error message
+    //   return rejectWithValue(errorMessage);
+    // }
   }
 );
 
@@ -51,11 +56,11 @@ const userLogoutThunk = createAsyncThunk(
   async (data, thunkAPI) => {
     try {
       // Make an HTTP POST request to the logout endpoint
-      const response = await postData("auth", "");
+      const response = await postData("user/logout", "");
 
       // Remove access token and user cookies
-      Cookies.remove("user_token");
-      Cookies.remove("currentuserAuth");
+      Cookies.remove("diy_user_token");
+      Cookies.remove("diy_user_info");
 
       // Return success message
       console.log("Logged out successfully");
@@ -75,6 +80,7 @@ const userLogoutThunk = createAsyncThunk(
       // Handle errors
       const errorMessage = error.response.data.message;
       // Reject the promise with the error message
+      toast.error(errorMessage);
       return thunkAPI.rejectWithValue(errorMessage);
     }
   }
