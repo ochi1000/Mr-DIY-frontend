@@ -1,35 +1,59 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Avatar from "src/assets/images/Avatar.png";
+// import Avatar from "src/assets/images/Avatar.png";
+import { getNameInitials } from "../../lib/constants";
+import { userLogoutThunk } from "../../Redux/userAuth/userAuthThunk";
 const UserFloatMenu = () => {
-  const { currentUser } = useSelector((state) => state.auth);
-
-  // console.log("This menu", currentUser);
+  // const { currentUser } = useSelector((state) => state.auth);
+  const { currentauthUser, loading } = useSelector((state) => state.userauth);
+  const dispatch = useDispatch();
+  // console.log("This menu", currentauthUser?.data?.user);
+  const handleLogout = () => {
+    dispatch(userLogoutThunk());
+  };
   return (
     <div className="absolute z-10 w-screen max-w-[260px] px-4 mt-1.5 -right-10 sm:right-0 sm:px-0">
       <div className="overflow-hidden rounded-3xl shadow-lg ring-1 ring-black ring-opacity-5">
         <div className="relative grid grid-cols-1 gap-6 bg-white dark:bg-neutral-800 py-7 px-6">
           <div className="flex items-center space-x-3">
             <div className="wil-avatar relative flex-shrink-0 inline-flex items-center justify-center text-neutral-100 uppercase font-semibold shadow-inner rounded-full w-12 h-12 ring-1 ring-white dark:ring-neutral-900">
-              <img
+              {/* <img
                 alt="user or administrator"
                 className="absolute inset-0 w-full h-full object-cover rounded-full"
                 sizes="100px"
                 src={Avatar}
-              />
+              /> */}
+
+              <div className="relative inline-flex items-center justify-center w-11 h-11  cursor-pointer overflow-hidden bg-gray-300 rounded-full ">
+                <span className="font-medium text-gray-600 uppercase text-base ">
+                  {getNameInitials(
+                    currentauthUser?.last_name ||
+                      currentauthUser?.data?.user?.last_name
+                  )}
+                  {getNameInitials(
+                    currentauthUser?.first_name ||
+                      currentauthUser?.data?.user?.first_name
+                  )}
+                </span>
+              </div>
               {/* <span className="wil-avatar__name">J</span> */}
             </div>
             <div className="flex-grow">
               <h4 className="font-semibold">
-                {currentUser?.first_name} {currentUser?.last_name}
+                {currentauthUser?.first_name ||
+                  currentauthUser?.data?.user?.first_name}{" "}
+                {currentauthUser?.last_name ||
+                  currentauthUser?.data?.user?.last_name}
               </h4>
-              <p className="text-xs mt-0.5">{currentUser?.email}</p>
+              <p className="text-xs mt-0.5">
+                {currentauthUser?.email || currentauthUser?.data?.user?.email}
+              </p>
             </div>
           </div>
           <div className="w-full border-b border-neutral-200 dark:border-neutral-700" />
           <Link
             className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-            to="/admin/dashboard"
+            to="/user/dashboard"
           >
             <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
               <svg
@@ -56,7 +80,7 @@ const UserFloatMenu = () => {
               </svg>
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium ">My Account</p>
+              <p className="text-sm font-medium ">My Dashboard</p>
             </div>
           </Link>
           <a
@@ -241,9 +265,9 @@ const UserFloatMenu = () => {
               <p className="text-sm font-medium ">Help</p>
             </div>
           </a>
-          <a
-            className="flex items-center p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
-            href="/#"
+          <div
+            onClick={handleLogout}
+            className="flex items-center cursor-pointer p-2 -m-3 transition duration-150 ease-in-out rounded-lg hover:bg-neutral-100 dark:hover:bg-neutral-700 focus:outline-none focus-visible:ring focus-visible:ring-orange-500 focus-visible:ring-opacity-50"
           >
             <div className="flex items-center justify-center flex-shrink-0 text-neutral-500 dark:text-neutral-300">
               <svg
@@ -277,9 +301,11 @@ const UserFloatMenu = () => {
               </svg>
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium ">Log out</p>
+              <p className="text-sm font-medium ">
+                {loading ? "Logging out..." : "Log out"}
+              </p>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </div>
