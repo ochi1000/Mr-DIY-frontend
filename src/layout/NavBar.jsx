@@ -17,6 +17,10 @@ import { useSelector } from "react-redux";
 const NavBar = ({ toggleSideBar, openSideMenu }) => {
   const [showUserMenu, setShowUserMenu] = React.useState(false);
   const { currentUser } = useSelector((state) => state.auth);
+  const { userIsAuthenticated, currentauthUser } = useSelector(
+    (state) => state.userauth
+  );
+
   function toggleUserMenu() {
     setShowUserMenu(!showUserMenu);
   }
@@ -112,8 +116,18 @@ const NavBar = ({ toggleSideBar, openSideMenu }) => {
               <span className="sr-only">Open user menu</span>
               <div className="relative inline-flex items-center justify-center w-12 h-12  cursor-pointer overflow-hidden bg-gray-200 rounded-full ">
                 <span className="font-medium text-gray-600 uppercase text-base ">
-                  {getNameInitials(currentUser?.last_name)}
-                  {getNameInitials(currentUser?.first_name)}
+                  {getNameInitials(
+                    currentUser?.last_name ||
+                      currentUser?.data?.user?.last_name ||
+                      currentauthUser?.last_name ||
+                      currentauthUser?.data?.user?.last_name
+                  )}
+                  {getNameInitials(
+                    currentUser?.first_name ||
+                      currentUser?.data?.user?.first_name ||
+                      currentauthUser?.first_name ||
+                      currentauthUser?.data?.user?.first_name
+                  )}
                 </span>
               </div>
               {/* <img
