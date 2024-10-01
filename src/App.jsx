@@ -6,7 +6,7 @@ import MainDashboardLayout from "./layout/MainDashboardLayout";
 // import Dashboard from "src/layout/Dashboard";
 import Login from "./pages/Login";
 import Public from "./Routes/Public";
-import Private from "./Routes/Private";
+import PrivateRoute from "./Routes/PrivateRoute";
 import Register from "./pages/Register";
 import Inventory from "./pages/Admin/Products/Inventory";
 import NotFound from "./pages/NotFound";
@@ -23,6 +23,10 @@ import ProductDetails from "./pages/ProductDetails";
 import GoogleAuthCallback from "./pages/GoogleAuthCallback";
 import Tags from "./pages/Admin/Products/Tags";
 import Attributes from "./pages/Admin/Products/Attributes";
+import AdminLogin from "./pages/AdminLogin";
+import UserPrivateRoute from "./Routes/UserPrivateRoute";
+import UserDashboardLayout from "./layout/UserDashboardLayout";
+import UserDashboard from "./pages/User/userDashboard";
 
 function App() {
   return (
@@ -33,6 +37,7 @@ function App() {
         <Route element={<Public />}>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
           <Route
             path="/auth/google/callback"
             element={<GoogleAuthCallback />}
@@ -48,7 +53,7 @@ function App() {
             <Route path="/forget-password" element={<ForgetPassword />} />
             <Route path="/ui" element={<UI />} /> */}
         </Route>
-        <Route element={<Private />}>
+        <Route element={<PrivateRoute />}>
           <Route path="admin" element={<MainDashboardLayout />}>
             <Route path="dashboard" element={<AdminDashboard />}>
               {/* <Route index element={<Navigate replace to="dashboard" />} /> */}
@@ -107,7 +112,62 @@ function App() {
             </Route>
           </Route>
         </Route>
+        <Route element={<UserPrivateRoute />}>
+          <Route path="user" element={<UserDashboardLayout />}>
+            <Route path="dashboard" element={<UserDashboard />}>
+              {/* <Route index element={<Navigate replace to="dashboard" />} /> */}
+              {/* <Route path="/dashboard/home-admin" element={<Dashboard />} />
+              <Route path="/dashboard/order-home" element={<Dashboard />} /> */}
+            </Route>
+            {/* <Route path="orders-management" element={<NotFound />}>
+              <Route
+                path="orders-management/orders-list"
+                element={<NotFound />}
+              />
+              <Route
+                path="orders-management/product-reviews"
+                element={<NotFound />}
+              />
+              <Route
+                path="orders-management/abandoned-cart"
+                element={<NotFound />}
+              />
+              <Route
+                path="orders-management/order-cancellation-requests"
+                element={<NotFound />}
+              />
+              <Route
+                path="orders-management/order-return-requests"
+                element={<NotFound />}
+              />
+              <Route
+                path="orders-management/wishlist-mgt"
+                element={<NotFound />}
+              />
+              <Route
+                path="orders-management/coupon-managements"
+                element={<NotFound />}
+              />
+            </Route> */}
 
+            {/* <Route path="product" element={<Products />}>
+              <Route index element={<Navigate replace to="inventory" />} />
+              <Route path="inventory" element={<Inventory />} />
+              <Route path="inventory/create" element={<CreateProduct />} />
+              <Route path="inventory/update/:id" element={<UpdateProduct />} />
+
+              <Route path="categories" element={<Categories />} />
+              <Route path="categories/create" element={<CreateCategory />} />
+              <Route
+                path="categories/update/:id"
+                element={<CategoryUpdate />}
+              />
+              <Route path="tags" element={<Tags />} />
+              <Route path="attributes" element={<Attributes />} />
+            
+            </Route> */}
+          </Route>
+        </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
