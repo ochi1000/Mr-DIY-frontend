@@ -10,38 +10,43 @@ import HookForm from "../components/forms/Form";
 import { GoogleIcon } from "../assets/SvgIcons";
 // import toast from "react-hot-toast";
 
-import { googleLoginThunk, loginThunk } from "../Redux/auth/authThunk";
+import { googleLoginThunk } from "../Redux/auth/authThunk";
 import LoadingSpinner from "../components/Loading/LoadingSpinner";
 import { useEffect, useState } from "react";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
 import axios from "axios";
+import { userLoginThunk } from "../Redux/userAuth/userAuthThunk";
+import toast from "react-hot-toast";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // Explicitly define the type of 'state' using the RootState interface
-  const { isAuthenticated, error, loading } = useSelector(
-    (state) => state.auth
+  const { userIsAuthenticated, error, loading } = useSelector(
+    (state) => state.userauth
   );
 
+  // console.log("user is authenticated", userIsAuthenticated);
   useEffect(() => {
     const checkAuthentication = async () => {
-      if (isAuthenticated === null) {
+      if (userIsAuthenticated === null || false) {
         // setLoading(true);
         return;
       }
 
-      if (isAuthenticated) {
+      if (userIsAuthenticated) {
         navigate("/");
       }
       // setLoading(false);
     };
 
     checkAuthentication();
-  }, [isAuthenticated, navigate]); // Dependency array to ensure useEffect() runs only when needed
+  }, [userIsAuthenticated, navigate]); // Dependency array to ensure useEffect() runs only when needed
 
-  console.log(error);
+  // console.log(error);
+
+  //////////////////////////////////////////////////////////////////////// START HERE
 
   // const history = useHistory();
   // const [userData, setUserData] = useState({});
@@ -100,10 +105,25 @@ const Login = () => {
 
   // if (!authData) return <div>Loading...</div>;
   // toast.error(error);
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     // alert(JSON.stringify(data));
-    dispatch(loginThunk(data));
-    navigate("/admin/dashboard");
+    // dispatch(userLoginThunk(data));
+
+    try {
+      const result = await dispatch(userLoginThunk(data)).unwrap();
+      console.log("user result", result);
+      if (result.status >= 200 && result.status <= 300) {
+        navigate("/");
+        toast.success(result?.message);
+      }
+    } catch (error) {
+      if (error?.status >= 400 && error?.status <= 499) {
+        // console.log("USER LOGIN ERROR", error);
+        // const errorMessages = Object.values(error?.errors).flat().join(", ");
+        toast.error(error?.message, { duration: 6000 });
+      }
+    }
+    // navigate("/admin/dashboard");
   };
 
   const handleGoogleLogin = () => {
@@ -126,13 +146,13 @@ const Login = () => {
   //   }
   // };
   return (
-    <div className="m-auto xl:container px-12 pt-20 sm:px-0 mx-auto">
-      <div className="mx-auto h-full max-w-sm">
+    <div className="m-auto xl:container px-4 lg:px-12 pt-20 sm:px-0 mx-auto">
+      <div className="mx-auto h-full max-w-lg">
         <div className="m-auto  py-12">
           <div className="space-y-4">
             <Logo />
           </div>
-          <div className="mt-4 rounded-3xl border bg-gray-50 dark:border-gray-700 dark:bg-gray-800 -mx-6 sm:-mx-10 p-8 sm:p-10">
+          <div className="mt-4 rounded-3xl border bg-gray-50 dark:border-gray-700 dark:bg-gray-800  py-8 px-4 sm:p-10">
             <h3 className="text-xl font-semibold text-gray-700 dark:text-white">
               Login to your account
             </h3>
@@ -142,7 +162,7 @@ const Login = () => {
                 <Input
                   name="email"
                   label="Email Address"
-                  placeholder="Enter your username"
+                  placeholder="Enter your email address"
                 />
                 <Input
                   name="password"
