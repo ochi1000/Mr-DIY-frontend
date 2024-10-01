@@ -3,10 +3,10 @@ import { userLoginThunk, userLogoutThunk } from "./userAuthThunk";
 import Cookies from "js-cookie";
 
 const initialState = {
-  currentauthUser: Cookies.get("currentuserAuth")
-    ? JSON.parse(Cookies.get("currentuserAuth"))
+  currentauthUser: Cookies.get("diy_user_info")
+    ? JSON.parse(Cookies.get("diy_user_info"))
     : null,
-  userIsAuthenticated: !!Cookies.get("user_token"),
+  userIsAuthenticated: !!Cookies.get("diy_user_token"),
   loading: false,
   error: null,
 };
