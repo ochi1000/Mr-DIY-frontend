@@ -4,14 +4,21 @@ import { useSelector } from "react-redux";
 
 import { useDispatch } from "react-redux";
 import { logoutThunk } from "src/Redux/auth/authThunk";
+import { userLogoutThunk } from "../Redux/userAuth/userAuthThunk";
 
 const UserMenu = () => {
   const dispatch = useDispatch();
 
+  const { currentUser, loading } = useSelector((state) => state.auth);
+  const { currentauthUser, loading: userLoading } = useSelector(
+    (state) => state.userauth
+  );
+
   const handleLogout = () => {
-    dispatch(logoutThunk());
+    if (currentUser) {
+      dispatch(logoutThunk());
+    } else dispatch(userLogoutThunk());
   };
-  const { currentUser } = useSelector((state) => state.auth);
 
   // console.log("first login", currentUser);
   return (
@@ -19,10 +26,20 @@ const UserMenu = () => {
       <div className="z-50 my-4 text-base text-left list-none bg-gray-50  rounded shadow ">
         <div className="border-b pb-2 border-gray-400 p-4 px-8">
           <p className=" text-gray-900 font-semibold capitalize">
-            {currentUser?.first_name} {currentUser?.last_name}
+            {currentUser?.first_name ||
+              currentUser?.data?.user?.first_name ||
+              currentauthUser?.first_name ||
+              currentauthUser?.data?.user?.first_name}{" "}
+            {currentUser?.last_name ||
+              currentUser?.data?.user?.last_name ||
+              currentauthUser?.last_name ||
+              currentauthUser?.data?.user?.last_name}
           </p>
           <p className="text-sm font-normal text-gray-500 truncate ">
-            {currentUser?.email}
+            {currentUser?.email ||
+              currentUser?.data?.user?.email ||
+              currentauthUser?.email ||
+              currentauthUser?.data?.user?.email}
           </p>
         </div>
         <ul className="py-2 ">
@@ -40,7 +57,7 @@ const UserMenu = () => {
             className="block  py-2 px-8 text-sm text-gray-800 hover:text-gray-900 hover:bg-gray-200 cursor-pointer"
             onClick={handleLogout}
           >
-            Sign out
+            {loading || userLoading ? "Signing out..." : "Sign out"}
           </li>
         </ul>
       </div>
