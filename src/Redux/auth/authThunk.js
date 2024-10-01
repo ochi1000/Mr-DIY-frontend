@@ -14,21 +14,30 @@ const loginThunk = createAsyncThunk(
 
       // Assert the type of 'response' to 'LoginResponse'
       const loginResponse = response;
-      console.log("loginResponse", loginResponse);
+      // console.log("loginResponse", loginResponse);
 
-      if (loginResponse?.status === 202) {
-        toast.success(loginResponse?.message);
-      }
+      // if (loginResponse?.status === 202) {
+      //   toast.success(loginResponse?.message);
+      // }
+
+      const adminRole = response?.data?.user?.roles;
+
+      const checkRole = JSON.stringify(adminRole);
+
+      Cookies.set("diy_admin_roles", checkRole, {
+        expires: 7,
+        sameSite: "None",
+        secure: true,
+      });
 
       // Extract user data and access token from the response
       // eslint-disable-next-line no-unsafe-optional-chaining
       const { user, token } = loginResponse?.data;
 
-      // console.log(user);
       // console.log(access_token);
 
       // Store the access token in a cookie with expiry, sameSite, and secure options
-      Cookies.set("admin_token", token, {
+      Cookies.set("diy_admin_token", token, {
         expires: 7,
         sameSite: "None",
         secure: true,
@@ -36,19 +45,31 @@ const loginThunk = createAsyncThunk(
 
       // Store user information in a cookie
       const userInfo = JSON.stringify(user);
-      Cookies.set("currentUser", userInfo, {
+      Cookies.set("diy_currentUser", userInfo, {
         expires: 7,
         sameSite: "None",
         secure: true,
       });
 
+      //         const { status, message } = response;
+      //   if (status >= 200 && status < 300) {
+      //     toast.success(message);
+      //   }
+      //   return response;
+      // } catch (error) {
+      //   // Handle errors
+      //   const errorMessage = error.response.data.message;
+      //   // Reject the promise with the error message
+      //   return thunkAPI.rejectWithValue(errorMessage);
+      // }
+
       // Return the user data
-      return user;
+      return response;
     } catch (error) {
       // Handle errors
       const errorMessage = error.response.data.message;
 
-      console.log("ererer", error);
+      console.log(" LOGIN ERROR:", error);
       if (
         error.status === 400 ||
         error.status === 401 ||
@@ -92,8 +113,9 @@ const logoutThunk = createAsyncThunk("admin/logout", async (data, thunkAPI) => {
     const response = await postData("admin/logout", "");
 
     // Remove access token and user cookies
-    Cookies.remove("admin_token");
-    Cookies.remove("currentUser");
+    Cookies.remove("diy_admin_token");
+    Cookies.remove("diy_currentUser");
+    Cookies.remove("diy_admin_roles");
 
     // Return success message
     // return "Logged out successfully";

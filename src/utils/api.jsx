@@ -11,8 +11,8 @@ const axiosInstance = axios.create({
 // Add request interceptor to add token to headers
 axiosInstance.interceptors.request.use(
   async (config) => {
-    const token = Cookies.get("admin_token");
-    const userToken = Cookies.get("user_token");
+    const token = Cookies.get("diy_admin_token");
+    const userToken = Cookies.get("diy_user_token");
     // console.log("token given", userToken);
     if (token || userToken) {
       config.headers.Authorization = `Bearer ${token || userToken}`;

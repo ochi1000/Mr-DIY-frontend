@@ -28,7 +28,7 @@ const Sidebar = ({
 }) => {
   const [open, setOpen] = useState(null);
   // const [hovered, setHovered] = useState(false);
-  console.log("first state", clickOpenSideBar);
+  // console.log("first state", clickOpenSideBar);
   const toggle = (index) => {
     setOpen(index === open ? null : index);
   };
@@ -439,8 +439,13 @@ const Sidebar = ({
               /> */}
               <div className="relative inline-flex items-center justify-center w-11 h-11  cursor-pointer overflow-hidden bg-gray-300 rounded-full ">
                 <span className="font-medium text-gray-600 uppercase text-base ">
-                  {getNameInitials(currentUser?.last_name)}
-                  {getNameInitials(currentUser?.first_name)}
+                  {getNameInitials(
+                    currentUser?.last_name || currentUser?.data?.user?.last_name
+                  )}
+                  {getNameInitials(
+                    currentUser?.first_name ||
+                      currentUser?.data?.user?.first_name
+                  )}
                 </span>
               </div>
               <div
@@ -449,10 +454,12 @@ const Sidebar = ({
                 })}
               >
                 <h2 className=" capitalize">
-                  {currentUser?.last_name} {currentUser?.first_name}
+                  {currentUser?.data?.user?.last_name || currentUser?.last_name}{" "}
+                  {currentUser?.data?.user?.first_name ||
+                    currentUser?.first_name}
                 </h2>
                 <p className="text-sm text-gray-500 font-light ">
-                  {currentUser?.email}
+                  {currentUser?.data?.user?.email || currentUser?.email}
                 </p>
               </div>
             </div>
