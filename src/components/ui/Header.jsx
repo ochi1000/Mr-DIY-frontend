@@ -7,31 +7,41 @@ import SearchBar from "./SearchBar";
 import classNames from "classnames";
 import CartMenu from "./CartMenu";
 import UserFloatMenu from "./UserFloatMenu";
+import AdminFloatMenu from "./AdminFloatMenu";
 import { useSelector } from "react-redux";
 // import SearchBar from "./SearchBar";
 
 const Header = () => {
   const [openSearchBar, setOpenSearchBar] = useState(false);
   const [openCartMenu, setOpenCartMenu] = useState(false);
-  const [openDashboardMenu, setOpenDashboardMenu] = useState(false);
+  const [openUserWebMenu, setOpenUserWebMenu] = useState(false);
+  const [openAdminWebMenu, setOpenAdminWebMenu] = useState(false);
 
   const handleSearchBar = () => {
     setOpenSearchBar(!openSearchBar);
     setOpenCartMenu(false);
-    setOpenDashboardMenu(false);
+    setOpenUserWebMenu(false);
+    setOpenAdminWebMenu(false);
   };
   const handleCartMenu = () => {
     setOpenCartMenu(!openCartMenu);
-    setOpenDashboardMenu(false);
+    setOpenUserWebMenu(false);
     setOpenSearchBar(false);
+    setOpenAdminWebMenu(false);
   };
   const handleDashMenu = () => {
-    setOpenDashboardMenu(!openDashboardMenu);
+    setOpenAdminWebMenu(!openAdminWebMenu);
+    setOpenUserWebMenu(!openUserWebMenu);
     setOpenCartMenu(false);
     setOpenSearchBar(false);
+    // setOpenAdminWebMenu(false);
   };
 
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAdmin } = useSelector((state) => state.auth);
+  const { userIsAuthenticated } = useSelector((state) => state.userauth);
+
+  console.log("isAdmin", isAdmin);
+  console.log("user isAuthenticated", userIsAuthenticated);
   return (
     <div>
       <nav className="fixed top-0 z-40 w-full border-b border-gray-100/20 bg-white/80 shadow backdrop-blur transition-colors lg:border-transparent">
@@ -107,7 +117,7 @@ const Header = () => {
               )}
               <div className="AvatarDropdown ">
                 <div className="relative">
-                  {isAuthenticated ? (
+                  {isAdmin || userIsAuthenticated ? (
                     <button
                       className="w-10 h-10 sm:w-12 sm:h-12 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none flex items-center justify-center"
                       type="button"
@@ -126,7 +136,8 @@ const Header = () => {
                       </button>
                     </Link>
                   )}
-                  {openDashboardMenu && <UserFloatMenu />}
+                  {userIsAuthenticated && openUserWebMenu && <UserFloatMenu />}
+                  {isAdmin && openAdminWebMenu && <AdminFloatMenu />}
                 </div>
               </div>
               <div className="relative">
