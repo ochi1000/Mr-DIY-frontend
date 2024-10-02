@@ -1,8 +1,11 @@
 // import classNames from "classnames";
 // import { useState } from "react";
 // import product from "src/assets/images/product/brown-handbag-1.jpg";
+import { useDispatch } from "react-redux";
 import productData from "../../data/product";
 import ProductCard from "../ui/ProductCard";
+import { addCart } from "../../Redux/shopSlice";
+import { addWishlist } from "../../Redux/wishlistSlice";
 const TopSelling = () => {
   // const [favorite, setFavorite] = useState(0);
 
@@ -14,7 +17,16 @@ const TopSelling = () => {
   //     setFavorite(0);
   //   }
   // };
+  const dispatch = useDispatch();
 
+  const addToCart = (id) => {
+    const item = productData?.find((item) => item.id === id);
+    dispatch(addCart({ product: item }));
+  };
+  const addToWishlist = (id) => {
+    const item = productData?.find((item) => item.id === id);
+    dispatch(addWishlist({ product: item }));
+  };
   return (
     <div className="px-4">
       <div className="nc-Section-Heading relative flex flex-row items-center justify-between mb-6 lg:mb-8 text-neutral-800 dark:text-neutral-50">
@@ -59,7 +71,7 @@ const TopSelling = () => {
       <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3 xl:grid-cols-4 ">
         {productData
           .slice(0, 8)
-          .map(({ image, title, discount, category, price }, index) => (
+          .map(({ id, image, title, discount, category, price }, index) => (
             <ProductCard
               key={index}
               image={image}
@@ -67,6 +79,9 @@ const TopSelling = () => {
               discount={discount}
               category={category}
               price={price}
+              id={id}
+              addToWishlist={addToWishlist}
+              addToCart={addToCart}
             />
             // <div
             //   key={index}
