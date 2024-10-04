@@ -1,61 +1,72 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import Cloth from "src/assets/images/product/cloth.png";
-import Headphone from "src/assets/images/product/headphone.png";
-import Laptop from "src/assets/images/product/laptop.png";
+import { deleteCart } from "../../Redux/shopSlice";
+// import Cloth from "src/assets/images/product/cloth.png";
+// import Headphone from "src/assets/images/product/headphone.png";
+// import Laptop from "src/assets/images/product/laptop.png";
 const CartMenu = () => {
+  const { cart } = useSelector((state) => state.shop) || {};
+  const dispatch = useDispatch();
+
+  // delete cart item
+  const deleteCartHandler = (id) => {
+    dispatch(deleteCart(id));
+  };
+  // console.log("cart: ", cart);
   return (
     <div className="overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5  w-[450px] max-w-2xl">
       <div className="relative bg-white dark:bg-neutral-800">
         <div className="max-h-[60vh] p-5 overflow-y-auto hiddenScrollbar">
           <h3 className="text-xl font-semibold">Shopping cart</h3>
           <div className="divide-y divide-slate-100 dark:divide-slate-700">
-            <div className="flex py-5 last:pb-0">
-              <div className="relative h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
-                <img
-                  alt="cloth"
-                  className="h-full w-full object-contain object-center"
-                  src={Cloth}
-                />
-                <a className="absolute inset-0" href="/product-detail" />
-              </div>
-              <div className="ml-4 flex flex-1 flex-col">
-                <div>
-                  <div className="flex justify-between ">
-                    <div>
-                      <h3 className="text-base font-medium  max-w-48 truncate ">
-                        <a href="/product-detail">
-                          Triathlon Suit Men Swim Mens Autumn
-                        </a>
-                      </h3>
-                      <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-                        <span>Natural</span>
-                        <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4" />
-                        <span>XL</span>
-                      </p>
-                    </div>
-                    <div className="mt-0.5">
-                      <div className="flex items-center border-2 border-primary-500 rounded-lg py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium">
-                        <span className="text-primary-500 !leading-none">
-                          $74
-                        </span>
+            {cart?.map((product, index) => (
+              <div key={index} className="flex py-5 last:pb-0">
+                <div className="relative h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
+                  <img
+                    alt="cloth"
+                    className="h-full w-full object-contain object-center"
+                    src={product?.image}
+                  />
+                  <a className="absolute inset-0" href="/product-detail" />
+                </div>
+                <div className="ml-4 flex flex-1 flex-col">
+                  <div>
+                    <div className="flex justify-between ">
+                      <div>
+                        <h3 className="text-base font-medium  max-w-48 truncate ">
+                          <a href="/product-detail">{product?.title}</a>
+                        </h3>
+                        <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+                          <span>{product?.category}</span>
+                          {/* <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4" />
+                          <span>XL</span> */}
+                        </p>
+                      </div>
+                      <div className="mt-0.5">
+                        <div className="flex items-center border-2 border-green-500 rounded-lg py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium">
+                          <span className="text-green-500 !leading-none font-semibold">
+                            {/* $ */}₦{product?.price}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="flex flex-1 items-end justify-between text-sm">
-                  <p className="text-gray-500 dark:text-slate-400">Qty 1</p>
-                  <div className="flex">
-                    <button
-                      type="button"
-                      className="font-medium text-primary-6000 dark:text-primary-500 "
-                    >
-                      Remove
-                    </button>
+                  <div className="flex flex-1 items-end justify-between text-sm">
+                    <p className="text-gray-500 dark:text-slate-400">Qty 1</p>
+                    <div className="flex">
+                      <button
+                        onClick={() => deleteCartHandler(product?.id)}
+                        type="button"
+                        className="font-medium text-primary-800 dark:text-primary-800 "
+                      >
+                        Remove
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="flex py-5 last:pb-0">
+            ))}
+            {/* <div className="flex py-5 last:pb-0">
               <div className="relative h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
                 <img
                   alt='Round Buckle 1" Belt'
@@ -148,7 +159,7 @@ const CartMenu = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="bg-neutral-50 dark:bg-slate-900 p-5">
