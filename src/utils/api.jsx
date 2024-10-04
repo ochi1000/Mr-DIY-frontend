@@ -2,7 +2,11 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 // Define base URL
-const baseURL = "https://phplaravel-1329305-4863390.cloudwaysapps.com/api/";
+// const baseURL = "https://phplaravel-1329305-4863390.cloudwaysapps.com/api/";
+const baseURL = `${import.meta.env.VITE_BASE_URL}/api/`;
+
+export const newBaseURL = baseURL.replace("/api/", "/");
+// console.log("getnew base: ", newBaseURL);
 // Create an Axios instance with default configurations
 const axiosInstance = axios.create({
   baseURL,
