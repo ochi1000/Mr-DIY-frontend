@@ -11,6 +11,7 @@ import { DotIcon } from "../../assets/SvgIcons";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { fetchCategorys } from "../../Redux/category/categoriesThunk";
+import { newBaseURL } from "../../utils/api";
 
 const ViewProductModal = ({ setOpenModal, productData, loading }) => {
   const dispatch = useDispatch();
@@ -201,7 +202,7 @@ const ViewProductModal = ({ setOpenModal, productData, loading }) => {
                         {productData?.imgs?.map((item, imageIndex) => (
                           <div key={imageIndex} className=" rounded-lg">
                             <img
-                              src={`https://phplaravel-1329305-4863390.cloudwaysapps.com/storage/${item}`}
+                              src={`${newBaseURL}storage/${item}`}
                               className=" h-40 rounded-md"
                               alt="product"
                             />
