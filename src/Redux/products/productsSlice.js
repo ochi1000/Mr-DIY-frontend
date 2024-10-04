@@ -5,6 +5,7 @@ import {
   fetchProduct,
   updateProduct,
   deleteProduct,
+  getAllProducts,
 } from "./productsThunk";
 // / Import the new thunk action creators
 
@@ -14,6 +15,9 @@ const initialState = {
   loading: false,
   error: null,
   addproducts: [],
+  allProducts: [],
+  loadingProduct: false,
+  errorProduct: null,
 };
 
 // Create the products slice
@@ -36,6 +40,21 @@ const productsSlice = createSlice({
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload ?? "Failed to fetch products";
+      })
+
+      // Get all Products
+      .addCase(getAllProducts.pending, (state) => {
+        state.loadingProduct = true;
+        state.errorProduct = null;
+      })
+      .addCase(getAllProducts.fulfilled, (state, action) => {
+        state.loadingProduct = false;
+        state.allProducts = action.payload;
+      })
+
+      .addCase(getAllProducts.rejected, (state, action) => {
+        state.loadingProduct = false;
+        state.errorProduct = action.payload ?? "Failed to get all products";
       })
 
       // addNewProduct
