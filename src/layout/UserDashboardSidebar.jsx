@@ -12,7 +12,7 @@ import { Link, useLocation } from "react-router-dom";
 import { getBasePath } from "src/lib/constants";
 import { motion, AnimatePresence } from "framer-motion";
 
-import { sidedata } from "../data/sideBarData";
+import { usersidedata } from "../data/sideBarData";
 import { useDispatch, useSelector } from "react-redux";
 import { getNameInitials } from "../lib/constants";
 
@@ -125,7 +125,7 @@ const UserDashboardSidebar = ({
           </div>
 
           <div className="space-y-1.5">
-            {sidedata.map((item, index) => (
+            {usersidedata.map((item, index) => (
               <div key={index}>
                 {item.isHeader ? (
                   <h2
