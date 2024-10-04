@@ -127,6 +127,19 @@ const deleteProduct = createAsyncThunk(
     }
   }
 );
+const getAllProducts = createAsyncThunk(
+  "admin/getProduct",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await getData("product/get-all-products");
+      return response;
+    } catch (error) {
+      const errorMessage = error;
+      console.log(errorMessage);
+      return rejectWithValue(errorMessage?.response?.data);
+    }
+  }
+);
 
 export {
   fetchProducts,
@@ -134,4 +147,5 @@ export {
   fetchProduct,
   updateProduct,
   deleteProduct,
+  getAllProducts,
 };
