@@ -1,13 +1,24 @@
 /* eslint-disable react/prop-types */
 import classNames from "classnames";
 import { useState } from "react";
+import { newBaseURL } from "../../utils/api";
 
-const ProductCard = ({ image, title, discount, category, price }) => {
+const ProductCard = ({
+  image,
+  name,
+  discount,
+  category,
+  price,
+  addToWishlist,
+  id,
+  addToCart,
+}) => {
   //   const [favorite, setFavorite] = useState(0);
   const [favorite, setFavorite] = useState(false);
 
   const toggleFavorite = () => {
     setFavorite(!favorite);
+    addToWishlist(id);
     // if (favorite === 0) {
     //   setFavorite(1);
     // } else {
@@ -24,7 +35,8 @@ const ProductCard = ({ image, title, discount, category, price }) => {
               alt="product"
               className="object-cover w-full h-full drop-shadow-xl transition-transform duration-[1600ms]  group-hover:scale-110 scale-100"
               sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 40vw"
-              src={image}
+              // src={image}
+              src={`${newBaseURL}storage/${image}`}
             />
           </div>
           <div className=" absolute w-full h-full inset-0  bg-black/20"></div>
@@ -89,7 +101,10 @@ const ProductCard = ({ image, title, discount, category, price }) => {
           </svg>
         </button>
         <div className="absolute bottom-0 group-hover:bottom-4 inset-x-1 flex justify-center opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-          <button className="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-xs py-2 px-4  ttnc-ButtonPrimary disabled:bg-opacity-90 bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 text-slate-50 dark:text-slate-800 shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 dark:focus:ring-offset-0">
+          <button
+            onClick={() => addToCart(id)}
+            className="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-xs py-2 px-4  ttnc-ButtonPrimary disabled:bg-opacity-90 bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 text-slate-50 dark:text-slate-800 shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 dark:focus:ring-offset-0"
+          >
             <svg className="w-3.5 h-3.5 mb-0.5" viewBox="0 0 9 9" fill="none">
               <path
                 d="M2.99997 4.125C3.20708 4.125 3.37497 4.29289 3.37497 4.5C3.37497 5.12132 3.87865 5.625 4.49997 5.625C5.12129 5.625 5.62497 5.12132 5.62497 4.5C5.62497 4.29289 5.79286 4.125 5.99997 4.125C6.20708 4.125 6.37497 4.29289 6.37497 4.5C6.37497 5.53553 5.5355 6.375 4.49997 6.375C3.46444 6.375 2.62497 5.53553 2.62497 4.5C2.62497 4.29289 2.79286 4.125 2.99997 4.125Z"
@@ -128,7 +143,7 @@ const ProductCard = ({ image, title, discount, category, price }) => {
       <div className="space-y-4 px-2.5 pt-5 pb-2.5">
         <div>
           <h2 className="nc-ProductCard__title text-base font-semibold transition-colors">
-            {title}
+            {name}
           </h2>
           <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 ">
             {category}
