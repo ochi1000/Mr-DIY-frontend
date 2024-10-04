@@ -6,7 +6,7 @@ const getAdminRole = Cookies.get("diy_admin_roles")
   ? JSON.parse(Cookies.get("diy_admin_roles"))
   : null;
 
-console.log("get admin role", getAdminRole);
+// console.log("get admin role", getAdminRole);
 
 const hasAdmin = getAdminRole
   ? getAdminRole.some((role) => role.name === "admin")
