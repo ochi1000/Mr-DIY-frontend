@@ -39,6 +39,7 @@ const Categories = () => {
   const { categories, category, loading, error } = useSelector(
     (state) => state.category
   );
+
   // console.log("categories", categories);
 
   const fetchCategorysHandler = () => {
