@@ -2,13 +2,14 @@ import { Link } from "react-router-dom";
 import { NAVIGATION } from "../../data/menu";
 import Logo from "../shared/Logo/Logo";
 import { CartsIcon, SearchIcon, UsersIcon } from "../../assets/SvgIcons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
 import classNames from "classnames";
 import CartMenu from "./CartMenu";
 import UserFloatMenu from "./UserFloatMenu";
 import AdminFloatMenu from "./AdminFloatMenu";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { reloadCart } from "../../Redux/shopSlice";
 // import SearchBar from "./SearchBar";
 
 const Header = () => {
@@ -40,8 +41,14 @@ const Header = () => {
   const { isAdmin } = useSelector((state) => state.auth);
   const { userIsAuthenticated } = useSelector((state) => state.userauth);
 
-  console.log("isAdmin", isAdmin);
-  console.log("user isAuthenticated", userIsAuthenticated);
+  // console.log("isAdmin", isAdmin);
+  // console.log("user isAuthenticated", userIsAuthenticated);
+  const { cart } = useSelector((state) => state.shop) || {};
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(reloadCart());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, reloadCart]);
   return (
     <div>
       <nav className="fixed top-0 z-40 w-full border-b border-gray-100/20 bg-white/80 shadow backdrop-blur transition-colors lg:border-transparent">
@@ -154,7 +161,7 @@ const Header = () => {
                   id="headlessui-popover-button-:r3h:"
                 >
                   <div className="w-3.5 h-3.5 flex items-center justify-center bg-primary-500 absolute top-1.5 right-1.5 rounded-full text-[10px] leading-none text-white font-medium">
-                    <span className="mt-[1px]">3</span>
+                    <span className="mt-[1px]">{cart?.length}</span>
                   </div>
                   <CartsIcon />
                   <a
