@@ -23,6 +23,9 @@ import ImageUpload from "../../../components/forms/Upload/ImageUpload";
 import toast from "react-hot-toast";
 import ReactSelectOption from "../../../components/forms/Select/react-select-options";
 import { fetchTags } from "../../../Redux/tags/tagsThunk";
+import AsyncSelect from "react-select/async";
+import { getData } from "../../../utils/api";
+import AsyncReactSelect from "../../../components/forms/Select/async-react-select";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
@@ -37,9 +40,25 @@ const CreateProduct = () => {
   const [selectedWarranty, setSelectedWarranty] = useState(null);
 
   const { categories } = useSelector((state) => state.category);
-  const { tags } = useSelector((state) => state.tags);
 
-  console.log("tags: ", tags);
+  const [selectedValue, setSelectedValue] = useState(null);
+
+  const TAGS_URL = "admin/tag";
+
+  const fetchProductTags = async () => {
+    try {
+      const response = await getData(TAGS_URL);
+      return response?.data;
+    } catch (error) {
+      const errorMessage = error;
+      console.log(errorMessage);
+      // return rejectWithValue(errorMessage?.response?.data);
+    }
+  };
+
+  // const { tags } = useSelector((state) => state.tags);
+
+  // console.log("tags: ", tags);
   // console.log("image selected:", imagesFile);
   //   console.log("categories", selectedCategory?.id);
   // const [images, setImages] = useState([]);
@@ -47,13 +66,13 @@ const CreateProduct = () => {
   // const handleImageChange = (event) => {
   //   setImages([...event.target.files]);
   // };
-  const fetchTagsHandler = () => {
-    dispatch(fetchTags());
-  };
-  useEffect(() => {
-    fetchTagsHandler();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  // const fetchTagsHandler = () => {
+  //   dispatch(fetchTags());
+  // };
+  // useEffect(() => {
+  //   fetchTagsHandler();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [dispatch]);
 
   const fetchCategorysHandler = () => {
     dispatch(fetchCategorys());
@@ -86,9 +105,9 @@ const CreateProduct = () => {
     });
   }
 
-  // console.log("images gotten:", images);
-  // console.log(productWarrantyData);
+  const selectedTags = selectedValue?.map((value) => value.id);
 
+  // console.log("tags selected:", selectedTags);
   const defaultFormValue = {
     name: "",
     brand_id: "",
@@ -104,50 +123,30 @@ const CreateProduct = () => {
   };
 
   const onSubmit = async (data) => {
-    const formData = new FormData();
+    // console.log("Form data", data);
 
-    // Check if images array is populated
-    // if (images.length === 0) {
-    //   console.log("No images selected");
-    //   return;
-    // }
+    const filteredFormData = {
+      name: data.name,
+      brand_id: data.brand_id,
+      category_id: selectedCategory?.id,
+      listing_price: data?.listing_price,
+      min_selling_price: data.min_selling_price,
+      model: data.model,
+      warranty: selectedWarranty?.warranty,
+      sku: data.sku,
+      short_description: data.short_description,
+      long_description: data.long_description,
+      whats_in_the_box: data?.whats_in_the_box,
+      imgs: imagesFile,
+      attributes: [],
+      tags: selectedTags,
+      stock_item: data?.stock_item ? 1 : 0,
+      status: data?.status ? 1 : 0,
+    };
 
-    // Append each image to formData
-    imagesFile.forEach((image) => {
-      formData.append("imgs[]", image);
-    });
-
-    // Append other form fields to formData
-    formData.append("name", data.name);
-    formData.append("brand_id", data.brand_id);
-    formData.append("category_id", selectedCategory?.id);
-    formData.append("listing_price", data?.listing_price);
-    formData.append("min_selling_price", data.min_selling_price);
-    formData.append("model", data.model);
-    formData.append("warranty", selectedWarranty?.warranty);
-    formData.append("sku", data.sku);
-    formData.append("short_description", data.short_description);
-    formData.append("long_description", data.long_description);
-    formData.append("whats_in_the_box", data?.whats_in_the_box);
-    // formData.append("stock_item", data?.stock_item);
-    // formData.append("status", data?.status);
-    formData.append("stock_item", data?.stock_item ? "1" : "0");
-    formData.append("status", data?.status ? "1" : "0");
-    formData.append("attributes", []);
-    formData.append("tags", []);
-
-    // Log formData to check if it has the values
-    // for (let [key, value] of formData.entries()) {
-    //   console.log(key, value);
-    // }
-
-    // Dispatch the formData
-    // dispatch(addNewProduct(formData));
-
-    // navigate("/admin/product/inventory/");
-
+    console.log("filtered data", filteredFormData);
     try {
-      const result = await dispatch(addNewProduct(formData)).unwrap();
+      const result = await dispatch(addNewProduct(filteredFormData)).unwrap();
       // console.log("Product result: ", result);
 
       if (result.status >= 200 && result.status <= 300) {
@@ -162,49 +161,24 @@ const CreateProduct = () => {
         toast.error(errorMessages, { duration: 6000 });
       }
     }
+    // alert(JSON.stringify(filteredFormData));
+    // dispatch(addNewProduct(filteredFormData));
+    // navigate("/admin/product/inventory/");
+    // setOpenModal(false);
   };
 
-  // const onSubmit = (data) => {
-  //   // console.log("Form data", data);
+  // OLD SELECT DATA
 
-  //   const filteredFormData = {
-  //     name: data.name,
-  //     brand_id: data.brand_id,
-  //     category_id: selectedCategory?.id,
-  //     listing_price: data?.listing_price,
-  //     min_selling_price: data.min_selling_price,
-  //     model: data.model,
-  //     warranty: selectedWarranty?.warranty,
-  //     sku: data.sku,
-  //     short_description: data.short_description,
-  //     long_description: data.long_description,
-  //     whats_in_the_box: data?.whats_in_the_box,
-  //     imgs: images,
-  //     // imgs: [
-  //     //   "https://pictures-nigeria.jijistatic.net/117777770_NjIwLTYwNC0xNmU0ZDc0MDZj.webp",
-  //     // ],
-  //     attributes: [],
-  //     tags: [],
-  //     stock_item: data?.stock_item,
-  //     status: data?.status,
-  //   };
+  // const fruits = [
+  //   { value: "chocolate", label: "Chocolate" },
+  //   { value: "strawberry", label: "Strawberry" },
+  //   { value: "vanilla", label: "Vanilla" },
+  //   { value: "orange", label: "Orange" },
+  //   { value: "apple", label: "Apple" },
+  // ];
+  // const [selectedOptions, setSelectedOptions] = useState([]);
 
-  //   console.log("filtered data", filteredFormData);
-  //   // alert(JSON.stringify(filteredFormData));
-  //   dispatch(addNewProduct(filteredFormData));
-  //   navigate("/admin/product/inventory/");
-  //   // setOpenModal(false);
-  // };
-  const fruits = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-    { value: "orange", label: "Orange" },
-    { value: "apple", label: "Apple" },
-  ];
-  const [selectedOptions, setSelectedOptions] = useState([]);
-
-  console.log("tag selected:", selectedOptions);
+  // console.log("tag selected:", selectedOptions);
   return (
     <div className="p-4">
       <div className=" flex items-center justify-between  pt-4 pb-8">
@@ -250,14 +224,22 @@ const CreateProduct = () => {
                       label="Product Name"
                       placeholder="Enter product Name"
                     />
+
                     <div className="pb-6">
-                      <ReactSelectOption
+                      <AsyncReactSelect
+                        selectedValue={selectedValue}
+                        setSelectedValue={setSelectedValue}
+                        fetchData={fetchProductTags}
+                        placeholder="Select a product tags"
+                        label="Product Tags"
+                      />
+                      {/* <ReactSelectOption
                         data={fruits}
                         setSelectedOptions={setSelectedOptions}
                         selectedOptions={selectedOptions}
                         placeholder="Select a tag"
                         name="fruits"
-                      />
+                      /> */}
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
@@ -486,7 +468,7 @@ const CreateProduct = () => {
                     </p>
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1  gap-6">
                   <div className="pt-6">
                     <ImageUpload
                       images={imagesFile}
