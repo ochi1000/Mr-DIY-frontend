@@ -337,3 +337,126 @@ export const sidedata = [
   //   ],
   // },
 ];
+
+export const usersidedata = [
+  {
+    title: "Profile",
+    icon: <HomeIcon />,
+    href: "/admin/dashboard",
+    child: [
+      // {
+      //   title: "Admin Home",
+      //   icon: <SettingsIcon />,
+      //   href: "/admin/dashboard/home-admin",
+      // },
+      // {
+      //   title: "Order Home",
+      //   icon: <HomeIcon />,
+      //   href: "/admin/dashboard/order-home",
+      // },
+      // {
+      //   title: "Sales Home",
+      //   icon: <HomeIcon />,
+      //   href: "/admin/dashboard/home-sales",
+      // },
+    ],
+  },
+  {
+    title: "Overview",
+    icon: <ShipmentIcon />,
+    href: "/admin/orders-management",
+    child: [],
+  },
+
+  {
+    title: "Orders",
+    icon: <CartIcon />,
+    href: "/admin/product",
+    child: [],
+  },
+  {
+    title: "Cards",
+    icon: <CmsIcon />,
+    // href: "",
+    child: [],
+  },
+  {
+    title: "Delivery Address",
+    icon: <GlobeIcon />,
+    // href: "",
+    child: [],
+  },
+
+  {
+    title: "Reviews",
+    icon: <AnalyticsIcon />,
+    // href: "",
+    child: [],
+  },
+  {
+    title: "Profile Settings",
+    icon: <UserGroupIcon />,
+    // href: "",
+    child: [],
+  },
+  {
+    title: "Wallet",
+    icon: <InvoiceIcon />,
+    // href: "",
+    child: [],
+  },
+  {
+    isHeader: true,
+    title: "Internal tools",
+  },
+  {
+    title: "Help",
+    icon: <SupportIcon />,
+    // href: "",
+    child: [],
+  },
+
+  {
+    title: "Settings",
+    icon: <SettingsIcon />,
+    child: [],
+  },
+  // {
+  //   title: "Multi Level",
+  //   icon: <AuditTrailIcon />,
+  //   child: [
+  //     {
+  //       title: "Level 1.1",
+  //       icon: <AuditTrailIcon />,
+  //       href: "#",
+  //     },
+  //     {
+  //       title: "Level 2",
+  //       icon: <SettingsIcon />,
+  //       nested: [
+  //         {
+  //           title: "Level-2.1",
+  //           href: "#",
+  //         },
+  //         {
+  //           title: "Level 2.2",
+  //           href: "#",
+  //         },
+  //         {
+  //           title: "Level 3",
+  //           child: [
+  //             {
+  //               title: "Level 3.1",
+  //               href: "#",
+  //             },
+  //             {
+  //               title: "Level 3.2",
+  //               href: "#",
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
+];
