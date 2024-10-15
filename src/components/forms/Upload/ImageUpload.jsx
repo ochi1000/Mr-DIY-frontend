@@ -5,7 +5,7 @@ import UploadIcon from "src/assets/images/UploadIcon.svg";
 import { Label } from "../Label";
 import classNames from "classnames";
 
-const ImageUpload = ({ images, setImages, label, className }) => {
+const ImageUpload = ({ images, setImages, label, className, updateImages }) => {
   // const [images, setImages] = useState([]);
   const [preview, setPreview] = useState([]);
   const [showImageModal, setshowImageModal] = useState(false);
@@ -32,7 +32,7 @@ const ImageUpload = ({ images, setImages, label, className }) => {
       if (file.type.split("/")[0] !== "image") return;
 
       // Check if the image file already exists by name
-      const isDuplicate = images.some((img) => img.name === file.name);
+      const isDuplicate = images?.some((img) => img.name === file.name);
       if (!isDuplicate) {
         newImages.push(file); // Add new images
         newPreviews.push(URL.createObjectURL(file)); // Generate preview for new images
@@ -91,7 +91,7 @@ const ImageUpload = ({ images, setImages, label, className }) => {
       if (file.type.split("/")[0] !== "image") return;
 
       // Check if the image file already exists by name
-      const isDuplicate = images.some((img) => img.name === file.name);
+      const isDuplicate = images?.some((img) => img.name === file.name);
       if (!isDuplicate) {
         newImages.push(file); // Add new images
         newPreviews.push(URL.createObjectURL(file)); // Generate preview for new images
@@ -232,6 +232,7 @@ const ImageUpload = ({ images, setImages, label, className }) => {
               </div>
             </div>
           ))}
+          {updateImages}
         </div>
       </div>
       {showImageModal && (
