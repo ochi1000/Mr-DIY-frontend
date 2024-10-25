@@ -23,7 +23,7 @@ import ImageUpload from "../../../components/forms/Upload/ImageUpload";
 import toast from "react-hot-toast";
 import ReactSelectOption from "../../../components/forms/Select/react-select-options";
 import { fetchTags } from "../../../Redux/tags/tagsThunk";
-import AsyncSelect from "react-select/async";
+
 import { getData } from "../../../utils/api";
 import AsyncReactSelect from "../../../components/forms/Select/async-react-select";
 
