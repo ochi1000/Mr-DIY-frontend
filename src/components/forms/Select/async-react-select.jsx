@@ -50,6 +50,7 @@ const AsyncReactSelect = ({
         <AsyncSelect
           isClearable={false}
           cacheOptions
+          defaultValue={selectedValue}
           defaultOptions
           isMulti
           styles={styles}
