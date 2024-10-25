@@ -27,6 +27,9 @@ import AdminLogin from "./pages/AdminLogin";
 import UserPrivateRoute from "./Routes/UserPrivateRoute";
 import UserDashboardLayout from "./layout/UserDashboardLayout";
 import UserDashboard from "./pages/User/userDashboard";
+import DeliveryAddress from "./pages/User/DeliveryAddress";
+import ProfileSettings from "./pages/User/ProfileSettings";
+import Overview from "./pages/User/Overview";
 
 function App() {
   return (
@@ -116,9 +119,11 @@ function App() {
           <Route path="user" element={<UserDashboardLayout />}>
             <Route path="dashboard" element={<UserDashboard />}>
               {/* <Route index element={<Navigate replace to="dashboard" />} /> */}
-              {/* <Route path="/dashboard/home-admin" element={<Dashboard />} />
-              <Route path="/dashboard/order-home" element={<Dashboard />} /> */}
+              {/* <Route path="/dashboard/home-admin" element={<Dashboard />} /> */}
             </Route>
+            <Route path="delivery-address" element={<DeliveryAddress />} />
+            <Route path="profile-settings" element={<ProfileSettings />} />
+            <Route path="overview" element={<Overview />} />
             {/* <Route path="orders-management" element={<NotFound />}>
               <Route
                 path="orders-management/orders-list"
