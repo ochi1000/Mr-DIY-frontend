@@ -15,7 +15,7 @@ import { newBaseURL } from "../../utils/api";
 
 const ViewProductModal = ({ setOpenModal, productData, loading }) => {
   const dispatch = useDispatch();
-  // console.log(" product data loaded", productData);
+  console.log(" product data loaded", productData);
 
   const { categories } = useSelector((state) => state.category);
   // console.log(" aall categories", categories);
@@ -199,15 +199,18 @@ const ViewProductModal = ({ setOpenModal, productData, loading }) => {
                       <Label text="Product Image" />
                       {/* <p>no Image</p> */}
                       <div className="flex flex-wrap items-center justify-end gap-4">
-                        {productData?.imgs?.map((item, imageIndex) => (
-                          <div key={imageIndex} className=" rounded-lg">
-                            <img
-                              src={`${newBaseURL}storage/${item}`}
-                              className=" h-40 rounded-md"
-                              alt="product"
-                            />
-                          </div>
-                        ))}
+                        {productData?.imgs?.map((item, imageIndex) => {
+                          console.log("items: ", item);
+                          return (
+                            <div key={imageIndex} className=" rounded-lg">
+                              <img
+                                src={`${newBaseURL}storage/${item}`}
+                                className=" h-40 rounded-md"
+                                alt="product"
+                              />
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                     <div className=" space-y-1 flex items-center justify-between flex-wrap">
