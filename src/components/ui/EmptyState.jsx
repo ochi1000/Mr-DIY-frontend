@@ -13,7 +13,7 @@ const EmptyState = ({ text, className }) => {
       >
         <img
           src={AssignEmpty}
-          alt="Assign Driver Empty Illustration "
+          alt=" Empty Illustration "
           className="w-60 h-60"
         />
         <p className="text-sm text-center text-gray-600 pt-4 ">{text}</p>
