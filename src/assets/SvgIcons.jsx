@@ -1,3 +1,9 @@
+import UploadIcon from "src/assets/images/UploadIcon.svg";
+
+export const UploadIconImage = () => {
+  return <img src={UploadIcon} alt="icon" />;
+};
+
 export const RightArrowIcon = (props) => {
   return (
     <svg
@@ -835,8 +841,8 @@ export const XIcon = (props) => {
     >
       <path
         d="M8.5 3.5L3.5 8.5M3.5 3.5L8.5 8.5"
-        stroke="#344054"
-        strokeWidth="1.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
