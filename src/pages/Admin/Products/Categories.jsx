@@ -1,7 +1,9 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 // import { Link } from "react-router-dom";
 import { Button } from "../../../components/forms/Button";
 import { Badge } from "../../../components/forms/Badge";
+import Pagination from "../../../components/forms/Pagination";
 
 import {
   ArrowDown,
@@ -42,11 +44,11 @@ const Categories = () => {
 
   // console.log("categories", categories);
 
-  const fetchCategorysHandler = () => {
-    dispatch(fetchCategorys());
+  const fetchCategorysHandler = (url) => {
+    dispatch(fetchCategorys(url));
   };
   useEffect(() => {
-    fetchCategorysHandler();
+    fetchCategorysHandler("admin/category");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -61,7 +63,11 @@ const Categories = () => {
   //   dispatch(fetchCategory(cat_id));
   //   setEditCategory(true);
   // };
-
+  const handlePaginate = (url) => {
+    if (url) {
+      fetchCategorysHandler(url);
+    }
+  };
   const deleteCategoryHandler = (cat_id) => {
     dispatch(fetchCategory(cat_id));
     setDeleteCategoryData(true);
@@ -90,13 +96,21 @@ const Categories = () => {
       }
     }
   };
-  const headerDatas = {
+  const Headings = {
     tableHeadings: [
       "S/N",
-      "Category",
-      // "Selling Price",
+      <div className="flex items-center gap-4">
+        <p className=" whitespace-nowrap font-Inter text-sm font-semibold">
+          Categories
+        </p>
+        <div className=" flex gap-1">
+          <ArrowDown className="cursor-pointer" />
+          <ArrowDown className="cursor-pointer rotate-180" />
+        </div>
+      </div>,
+      "Description",
       // "Available QTY",
-      "Created Date ",
+      // "Created Date ",
 
       "Status",
       "Action",
@@ -173,7 +187,7 @@ const Categories = () => {
               />
             ) : (
               <div className="relative overflow-x-auto shadow sm:rounded-lg">
-                <div className="font-Inter  text-gray-700 bg-gray-100">
+                {/* <div className="font-Inter  text-gray-700 bg-gray-100">
                   <div className="px-6 py-4  flex items-center w-full">
                     <div className="flex items-center gap-4 w-[85%]">
                       <p className=" whitespace-nowrap font-Inter text-sm font-semibold">
@@ -230,111 +244,128 @@ const Categories = () => {
                       </div>
                     </div>
                   ))}
+                </div> */}
+
+                <div className="relative overflow-x-auto shadow sm:rounded-lg  ">
+                  <table className="w-full text-sm text-left rtl:text-right text-gray-600 ">
+                    <thead className="text-xs text-gray-700 bg-gray-100 ">
+                      <tr className="font-Inter">
+                        {Headings.tableHeadings.map((heading, headingIndex) => (
+                          <th
+                            key={headingIndex}
+                            scope="col"
+                            className="px-6 py-4 whitespace-nowrap uppercase font-Inter"
+                          >
+                            {heading}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+
+                    {categories?.data?.length === 0 ? (
+                      <tbody>
+                        <tr>
+                          <td colSpan={100} className="">
+                            <div className="flex gap-5 flex-col items-center justify-center py-40">
+                              {/* <img src={AssignEmpty} alt="" /> */}
+
+                              <p className="text-2xl font-medium font-gray-600">
+                                No Categories Found
+                              </p>
+                              <Button
+                                className="w-48 justify-center"
+                                // onClick={() => {
+                                //   setSearchQuery("");
+                                //   fetchFeatureHandler(
+                                //     "bookacrib-api-routes/v1/features/list-features"
+                                //   );
+                                // }}
+                              >
+                                Go Back
+                              </Button>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    ) : (
+                      <tbody>
+                        {categories?.data?.map((item, rowIndex) => (
+                          <tr
+                            key={rowIndex}
+                            className="bg-white border-b text-gray-400  hover:bg-gray-50 [&_tr:last-child]:border-0 font-Inter"
+                          >
+                            <th
+                              scope="row"
+                              className="px-6 py-4 font-medium whitespace-nowrap "
+                            >
+                              {rowIndex + 1}
+                            </th>
+                            <td className="px-6 py-4 whitespace-nowrap text-gray-900">
+                              <div className=" flex items-center gap-2 w-[85%]">
+                                <PlusIcon />
+                                <p className=" capitalize truncate">
+                                  {item?.name}
+                                </p>
+                              </div>
+                            </td>
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              {item?.description}
+                            </td>
+
+                            {/* <td className="px-6 py-4 whitespace-nowrap">
+                             
+                             
+                            </td> */}
+                            <td className="px-6 py-4 whitespace-nowrap">
+                              <div className="text-sm  text-gray-600 ">
+                                <label className="inline-flex items-center cursor-pointer ">
+                                  <input
+                                    type="checkbox"
+                                    className="sr-only peer"
+                                    value=""
+                                    defaultChecked={item?.status === 1}
+                                  />
+                                  <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-primary-700"></div>
+                                </label>
+                              </div>
+                            </td>
+
+                            <td
+                              // onClick={() => checkUserDetail(item)}
+                              className="px-6 py-4 whitespace-nowrap "
+                            >
+                              <div className=" flex items-center gap-6 pr-10">
+                                <div
+                                  className="cursor-pointer "
+                                  onClick={() => checkDetail(item)}
+                                >
+                                  <EditIcon />
+                                </div>
+                                <div
+                                  className="cursor-pointer "
+                                  onClick={() => deleteCategoryHandler(item.id)}
+                                >
+                                  <DeleteIcon className="text-red-600 w-6 h-6" />
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    )}
+                  </table>
                 </div>
               </div>
             )}
-
-            {/* <div className="py-10 px-4">
-          {transactions.length !== 0 && (
+          </>
+        </div>
+        <div className="py-5">
+          {categories.length !== 0 && (
             <Pagination
-              meta={transactions?.data}
+              meta={categories.meta}
               handlePaginate={handlePaginate}
             />
           )}
-        </div> */}
-          </>
-        </div>
-        <div className="flex items-center justify-between py-10">
-          {/* Previous Button */}
-          <a
-            href="#"
-            className="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >
-            <svg
-              className="w-3.5 h-3.5 me-2 rtl:rotate-180"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M13 5H1m0 0 4 4M1 5l4-4"
-              />
-            </svg>
-            Previous
-          </a>
-
-          <nav aria-label="Page navigation example">
-            <ul className="inline-flex -space-x-px text-sm">
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  1
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  2
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  aria-current="page"
-                  className="flex items-center justify-center px-3 h-8 text-primary-700 border border-gray-300 bg-primary-50/50 hover:bg-primary-100 hover:text-primary-800 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-                >
-                  3
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  4
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                >
-                  5
-                </a>
-              </li>
-            </ul>
-          </nav>
-
-          <a
-            href="#"
-            className="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-          >
-            Next
-            <svg
-              className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-          </a>
         </div>
       </div>
 

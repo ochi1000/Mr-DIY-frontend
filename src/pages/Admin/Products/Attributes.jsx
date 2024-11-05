@@ -102,7 +102,7 @@ const Attributes = () => {
       "S/N",
       "Attributes Name",
       "Has Image",
-      "Status",
+      "Attribute ID",
       // "Available QTY",
       "Created Date ",
       "Updated Date ",
@@ -198,76 +198,103 @@ const Attributes = () => {
                       )}
                     </tr>
                   </thead>
-                  <tbody>
-                    {attributes?.data?.map((item, rowIndex) => (
-                      <tr
-                        key={rowIndex}
-                        className="bg-white border-b text-gray-400  hover:bg-gray-50 [&_tr:last-child]:border-0 font-Inter"
-                      >
-                        <th
-                          scope="row"
-                          className="px-6 py-5 font-medium whitespace-nowrap "
-                        >
-                          {rowIndex + 1}
-                        </th>
-                        <td className="px-6 py-5 whitespace-nowrap text-gray-900 font-medium inline-flex items-center gap-2 w-60">
-                          {/* <img src={} alt="product image " /> */}
-                          <p className=" truncate">{item?.name}</p>
-                        </td>
-                        <td className="px-6 py-5 whitespace-nowrap">
-                          <div className="text-sm  text-gray-600 ">
-                            <label className="inline-flex items-center cursor-pointer ">
-                              <input
-                                type="checkbox"
-                                className="sr-only peer"
-                                value=""
-                                defaultChecked={item?.has_images === 1}
-                                disabled
-                              />
-                              <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-primary-700"></div>
-                            </label>
-                          </div>
-                        </td>
-                        <td className="px-6 py-5 whitespace-nowrap">
-                          <Badge
-                            rounded
-                            text={item?.status === 1 ? "Active" : "In-Active"}
-                            color={item?.status === 1 ? "success" : "warning"}
-                            className=" capitalize"
-                          />
-                        </td>
-                        <td className="px-6 py-5 whitespace-nowrap">
-                          {formatDate(item?.created_at)}
-                        </td>
-                        <td className="px-6 py-5 whitespace-nowrap">
-                          {formatDateTime(item?.updated_at)}
-                        </td>
+                  {attributes?.data?.length === 0 ? (
+                    <tbody>
+                      <tr>
+                        <td colSpan={100} className="">
+                          <div className="flex gap-5 flex-col items-center justify-center py-40">
+                            {/* <img src={AssignEmpty} alt="" /> */}
 
-                        <td className="px-6 py-5 whitespace-nowrap">
-                          <div className=" flex items-center gap-4">
-                            <div
-                              className="cursor-pointer "
-                              onClick={() => viewTagDetails(item?.id)}
-                            >
-                              <EyeIconBold />
-                            </div>
-                            <div
-                              className="cursor-pointer "
-                              onClick={() => editAttreibuteData(item?.id)}
-                            >
-                              <EditIcon />
-                            </div>
-                            <div
-                              className="cursor-pointer pl-2"
-                              onClick={() => deletetaHandler(item?.id)}
-                            >
-                              <DeleteIcon className="text-red-600 w-6 h-6 " />
-                            </div>
+                            <p className="text-2xl font-medium font-gray-600">
+                              No Attributes Found
+                            </p>
+                            <Link to="/admin/dashboard">
+                              <Button
+                                className="w-48 justify-center"
+                                // onClick={() => {
+                                //   setSearchQuery("");
+                                //   fetchFeatureHandler(
+                                //     "bookacrib-api-routes/v1/features/list-features"
+                                //   );
+                                // }}
+                              >
+                                Go Back Home
+                              </Button>
+                            </Link>
                           </div>
                         </td>
                       </tr>
-                    ))}
-                  </tbody>
+                    </tbody>
+                  ) : (
+                    attributes?.data?.map((item, rowIndex) => (
+                      <tbody key={rowIndex}>
+                        <tr className="bg-white border-b text-gray-400  hover:bg-gray-50 [&_tr:last-child]:border-0 font-Inter">
+                          <th
+                            scope="row"
+                            className="px-6 py-5 font-medium whitespace-nowrap "
+                          >
+                            {rowIndex + 1}
+                          </th>
+                          <td className="px-6 py-5 whitespace-nowrap text-gray-900 font-medium inline-flex items-center gap-2 w-60">
+                            {/* <img src={} alt="product image " /> */}
+                            <p className=" truncate">{item?.name}</p>
+                          </td>
+                          <td className="px-6 py-5 whitespace-nowrap">
+                            <div className="text-sm  text-gray-600 ">
+                              <label className="inline-flex items-center cursor-pointer ">
+                                <input
+                                  type="checkbox"
+                                  className="sr-only peer"
+                                  value=""
+                                  defaultChecked={item?.has_images === 1}
+                                  disabled
+                                />
+                                <div className="relative w-11 h-6 bg-gray-200 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all  peer-checked:bg-primary-700"></div>
+                              </label>
+                            </div>
+                          </td>
+                          <td className="px-6 py-5 whitespace-nowrap">
+                            {item?.id}
+                            {/* <Badge
+                              rounded
+                              text={item?.status === 1 ? "Active" : "In-Active"}
+                              color={item?.status === 1 ? "success" : "warning"}
+                              className=" capitalize"
+                            /> */}
+                          </td>
+                          <td className="px-6 py-5 whitespace-nowrap">
+                            {formatDate(item?.created_at)}
+                          </td>
+                          <td className="px-6 py-5 whitespace-nowrap">
+                            {formatDateTime(item?.updated_at)}
+                          </td>
+
+                          <td className="px-6 py-5 whitespace-nowrap">
+                            <div className=" flex items-center gap-4">
+                              <div
+                                className="cursor-pointer "
+                                onClick={() => viewTagDetails(item?.id)}
+                              >
+                                <EyeIconBold />
+                              </div>
+                              <div
+                                className="cursor-pointer "
+                                onClick={() => editAttreibuteData(item?.id)}
+                              >
+                                <EditIcon />
+                              </div>
+                              <div
+                                className="cursor-pointer pl-2"
+                                onClick={() => deletetaHandler(item?.id)}
+                              >
+                                <DeleteIcon className="text-red-600 w-6 h-6 " />
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    ))
+                  )}
                 </table>
               </div>
             )}
