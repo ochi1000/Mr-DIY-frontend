@@ -24,6 +24,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 import Notification from "../../../components/forms/Notification";
 import ViewProductModal from "../../../components/Modals/ViewProductModal";
+import Pagination from "../../../components/forms/Pagination";
+import toast from "react-hot-toast";
 
 const Inventory = () => {
   const dispatch = useDispatch();
@@ -35,11 +37,11 @@ const Inventory = () => {
   );
   // console.log("products", products);
 
-  const fetchProductsHandler = () => {
-    dispatch(fetchProducts());
+  const fetchProductsHandler = (url) => {
+    dispatch(fetchProducts(url));
   };
   useEffect(() => {
-    fetchProductsHandler();
+    fetchProductsHandler("admin/product");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -50,7 +52,11 @@ const Inventory = () => {
       console.error("Error navigating to product details:", error);
     }
   };
-
+  const handlePaginate = (url) => {
+    if (url) {
+      fetchProductsHandler(url);
+    }
+  };
   const fetchSingleProduct = (product_id) => {
     dispatch(fetchProduct(product_id));
     setViewProduct(true);
@@ -65,22 +71,50 @@ const Inventory = () => {
     // console.log("coupon is here", coupon);
     if (product) {
       // Handle delete product logic here
-      try {
-        // setLoading(true);
-        dispatch(deleteProduct(product?.id));
-        navigate("/admin/product/inventory");
-      } catch (error) {
-        console.log(error);
 
-        // dispatch(
-        //   openToast({
-        //     type: "error",
-        //     message: ` Error deleting coupon with error details: ${}`,
-        //   })
-        // );
+      try {
+        const result = await dispatch(deleteProduct(product?.id)).unwrap();
+        console.log("Product Delete result: ", result);
+
+        if (result.status >= 200 && result.status <= 300) {
+          toast.success("Product Deleted successfully");
+          navigate("/admin/product/inventory");
+          fetchProductsHandler("admin/product");
+        }
+      } catch (error) {
+        if (
+          (error?.response?.data?.status >= 400 &&
+            error?.response?.data?.status <= 499 &&
+            error?.response?.data?.errors) ||
+          (error?.response?.data?.status_code >= 400 &&
+            error?.response?.data?.status_code <= 499 &&
+            error?.response?.data?.errors)
+        ) {
+          const errorMessages = Object.values(error?.response?.data?.errors)
+            .flat()
+            .join(", ");
+          toast.error(errorMessages, { duration: 6000 });
+        } else {
+          toast.error(error?.response?.data?.message, { duration: 6000 });
+        }
       } finally {
         setDeleteProductData(false);
       }
+
+      //   try {
+      //     // setLoading(true);
+      //     dispatch(deleteProduct(product?.id));
+      //     navigate("/admin/product/inventory");
+      //   } catch (error) {
+      //     console.log(error);
+
+      //     // dispatch(
+      //     //   openToast({
+      //     //     type: "error",
+      //     //     message: ` Error deleting coupon with error details: ${}`,
+      //     //   })
+      //     // );
+      //   }
     }
   };
   const headerDatas = {
@@ -273,107 +307,15 @@ const Inventory = () => {
             </div>
           )}
 
-          {/* <div className="py-10 px-4">
-          {transactions.length !== 0 && (
-            <Pagination
-              meta={transactions?.data}
-              handlePaginate={handlePaginate}
-            />
-          )}
-        </div> */}
+          <div className="py-5">
+            {products.length !== 0 && (
+              <Pagination
+                meta={products.meta}
+                handlePaginate={handlePaginate}
+              />
+            )}
+          </div>
         </>
-      </div>
-      <div className="flex items-center justify-between py-10">
-        {/* Previous Button */}
-        <a
-          href="#"
-          className="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-        >
-          <svg
-            className="w-3.5 h-3.5 me-2 rtl:rotate-180"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 10"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M13 5H1m0 0 4 4M1 5l4-4"
-            />
-          </svg>
-          Previous
-        </a>
-
-        <nav aria-label="Page navigation example">
-          <ul className="inline-flex -space-x-px text-sm">
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                1
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                2
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                aria-current="page"
-                className="flex items-center justify-center px-3 h-8 text-primary-700 border border-gray-300 bg-primary-50/50 hover:bg-primary-100 hover:text-primary-800 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-              >
-                3
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                4
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                5
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <a
-          href="#"
-          className="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-        >
-          Next
-          <svg
-            className="w-3.5 h-3.5 ms-2 rtl:rotate-180"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 14 10"
-          >
-            <path
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M1 5h12m0 0L9 1m4 4L9 9"
-            />
-          </svg>
-        </a>
       </div>
 
       {viewProduct && (
