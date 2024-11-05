@@ -37,7 +37,7 @@ const EditTagModal = ({ setOpenModal, tagData }) => {
       if (result.status >= 200 && result.status <= 300) {
         toast.success("Tag updated successfully!");
         navigate("/admin/product/tags");
-        dispatch(fetchTags());
+        dispatch(fetchTags("admin/tag"));
       }
     } catch (error) {
       if (error?.status >= 400 && error?.status <= 499) {

@@ -6,8 +6,8 @@ import LoadingSpinner from "src/components/Loading/LoadingSpinner.jsx";
 import CloseModal from "./CloseModal";
 import { Button } from "../forms/Button";
 import { Label } from "../forms/Label";
-import { Badge } from "../forms/Badge";
-import { DotIcon } from "../../assets/SvgIcons";
+// import { Badge } from "../forms/Badge";
+// import { DotIcon } from "../../assets/SvgIcons";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { fetchCategorys } from "../../Redux/category/categoriesThunk";
@@ -59,8 +59,10 @@ const ViewAttributeModal = ({ setOpenModal, data, loading }) => {
                     </div>
 
                     <div className=" space-y-1 flex items-center justify-between flex-wrap">
-                      <Label text="  Status" />
-                      <div className=" whitespace-nowrap">
+                      <Label text="  Atrribute Id" />
+
+                      <p className="text-gray-900  font-medium">{data?.id}</p>
+                      {/* <div className=" whitespace-nowrap">
                         {data?.status === 1 ? (
                           <Badge
                             leftIcon={<DotIcon />}
@@ -76,7 +78,7 @@ const ViewAttributeModal = ({ setOpenModal, data, loading }) => {
                             text="In-Active"
                           ></Badge>
                         )}
-                      </div>
+                      </div> */}
                     </div>
                     <div className=" space-y-1 flex items-center justify-between flex-wrap">
                       <Label text=" Has Image" />
