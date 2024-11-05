@@ -16,12 +16,19 @@ export const productSchema = yup
       .required("Short Description is required")
       .min(3, "Must be at least 3 characters."),
 
-    whats_in_the_box: yup
-      .string()
-
-      .required("Whats in the box is required"),
+    whats_in_the_box: yup.string().required("Whats in the box is required"),
     status: yup.boolean(),
     stock_item: yup.boolean(),
+    in_stock: yup.boolean(),
+    on_discount: yup.boolean(),
     // .oneOf([true], "Must Accept Terms and Conditions"),
+  })
+  .required();
+
+export const addressSchema = yup
+  .object({
+    state: yup.string().required("State is required"),
+    city: yup.string().required("City is required"),
+    address: yup.string().required("Address is required"),
   })
   .required();
