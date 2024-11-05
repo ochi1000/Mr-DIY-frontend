@@ -4,7 +4,7 @@
 import { useDispatch, useSelector } from "react-redux";
 // import productData from "../../data/product";
 import ProductCard from "../ui/ProductCard";
-import { addCart } from "../../Redux/shopSlice";
+// import { addCart } from "../../Redux/shopSlice";
 import { addWishlist } from "../../Redux/wishlistSlice";
 import { useEffect } from "react";
 import { getAllProducts } from "../../Redux/products/productsThunk";
@@ -29,9 +29,24 @@ const TopSelling = () => {
     (state) => state.products
   );
   console.log("All products", allProducts?.data);
+
   const addToCart = (id) => {
     const item = allProducts?.data?.find((item) => item.id === id);
-    dispatch(addCart({ product: item }));
+
+    console.log("cart Add to cart:", item);
+    const productTCart = {
+      product_id: item?.id,
+      quantity: 1,
+      selected_attributes: [
+        {
+          attribute_id: item?.attributes[0]?.id,
+          value: item?.attributes[0]?.values[0]?.value,
+        },
+      ],
+    };
+    console.log("product to cart:", productTCart);
+
+    // dispatch(addCart({ product: item }));
   };
   const addToWishlist = (id) => {
     const item = allProducts?.data?.find((item) => item.id === id);

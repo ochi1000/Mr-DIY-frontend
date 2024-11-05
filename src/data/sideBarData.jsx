@@ -144,64 +144,64 @@ export const sidedata = [
   {
     title: "Home",
     icon: <HomeIcon />,
-    href: "/useer/dashboard",
+    href: "/admin/dashboard",
     child: [
       // {
       //   title: "Admin Home",
       //   icon: <SettingsIcon />,
-      //   href: "/useer/dashboard/home-admin",
+      //   href: "/admin/dashboard/home-admin",
       // },
       // {
       //   title: "Order Home",
       //   icon: <HomeIcon />,
-      //   href: "/useer/dashboard/order-home",
+      //   href: "/admin/dashboard/order-home",
       // },
       // {
       //   title: "Sales Home",
       //   icon: <HomeIcon />,
-      //   href: "/useer/dashboard/home-sales",
+      //   href: "/admin/dashboard/home-sales",
       // },
     ],
   },
   {
     title: "Orders Mgt.",
     icon: <CartIcon />,
-    href: "/useer/orders-management",
+    href: "/admin/orders-management",
     child: [
       {
         title: "Orders List",
         // icon: <HomeIcon />,
-        href: "/useer/orders-management/orders-list",
+        href: "/admin/orders-management/orders-list",
       },
       {
         title: "Product Reviews",
         // icon: <HomeIcon />,
-        href: "/useer/orders-management/product-reviews",
+        href: "/admin/orders-management/product-reviews",
       },
       {
         title: "Abandoned Cart",
         // icon: <HomeIcon />,
-        href: "/useer/orders-management/abandoned-cart",
+        href: "/admin/orders-management/abandoned-cart",
       },
       {
         title: "Order Cancellation Requests",
         // icon: <HomeIcon />,
-        href: "/useer/orders-management/order-cancellation-requests",
+        href: "/admin/orders-management/order-cancellation-requests",
       },
       {
         title: "Order Return Requests",
         // icon: <HomeIcon />,
-        href: "/useer/orders-management/order-return-requests",
+        href: "/admin/orders-management/order-return-requests",
       },
       {
         title: "Wishlist Mgt",
         // icon: <HomeIcon />,
-        href: "/useer/orders-management/wishlist-mgt",
+        href: "/admin/orders-management/wishlist-mgt",
       },
       {
         title: "Coupon Management",
         // icon: <HomeIcon />,
-        href: "/useer/orders-management/coupon-managements",
+        href: "/admin/orders-management/coupon-managements",
       },
     ],
   },
@@ -209,35 +209,35 @@ export const sidedata = [
   {
     title: "Product",
     icon: <ShipmentIcon />,
-    href: "/useer/product",
+    href: "/admin/product",
     child: [
       {
         title: "Inventory",
         // icon: <SettingsIcon />,
-        href: "/useer/product/inventory",
-        nested: [{ title: "Create", href: "/useer/product/inventory/create" }],
+        href: "/admin/product/inventory",
+        nested: [{ title: "Create", href: "/admin/product/inventory/create" }],
       },
       {
         title: "Categories",
         // icon: <HomeIcon />,
-        href: "/useer/product/categories",
-        nested: [{ title: "Create", href: "/useer/product/categories/create" }],
+        href: "/admin/product/categories",
+        nested: [{ title: "Create", href: "/admin/product/categories/create" }],
       },
 
       {
         title: "Tags",
         // icon: <HomeIcon />,
-        href: "/useer/product/tags",
+        href: "/admin/product/tags",
       },
       {
         title: "Attributes",
         // icon: <HomeIcon />,
-        href: "/useer/product/attributes",
+        href: "/admin/product/attributes",
       },
       {
         title: "Returned Items",
         // icon: <HomeIcon />,
-        href: "/useer/product/returned-items",
+        href: "/admin/product/returned-items",
       },
     ],
   },
@@ -284,17 +284,17 @@ export const sidedata = [
       {
         title: "Hero Icons",
         icon: <SettingsIcon />,
-        href: "/useer/icons-iconify",
+        href: "/admin/icons-iconify",
       },
       {
         title: "Lucide Icons",
         icon: <SettingsIcon />,
-        href: "/useer/icons-lucide",
+        href: "/admin/icons-lucide",
       },
       {
         title: "Custom Icons",
         icon: <SettingsIcon />,
-        href: "/useer/icons-custom",
+        href: "/admin/icons-custom",
       },
     ],
   },
@@ -347,17 +347,17 @@ export const usersidedata = [
       // {
       //   title: "Admin Home",
       //   icon: <SettingsIcon />,
-      //   href: "/useer/dashboard/home-admin",
+      //   href: "/admin/dashboard/home-admin",
       // },
       // {
       //   title: "Order Home",
       //   icon: <HomeIcon />,
-      //   href: "/useer/dashboard/order-home",
+      //   href: "/admin/dashboard/order-home",
       // },
       // {
       //   title: "Sales Home",
       //   icon: <HomeIcon />,
-      //   href: "/useer/dashboard/home-sales",
+      //   href: "/admin/dashboard/home-sales",
       // },
     ],
   },
