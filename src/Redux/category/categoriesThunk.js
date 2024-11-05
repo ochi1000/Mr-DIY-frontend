@@ -7,9 +7,9 @@ const CATEGORY_URL = "admin/category";
 
 const fetchCategorys = createAsyncThunk(
   "admin/fetchCategory",
-  async (_, { rejectWithValue }) => {
+  async (url, { rejectWithValue }) => {
     try {
-      const response = await getData(CATEGORY_URL);
+      const response = await getData(url);
       return response;
     } catch (error) {
       const errorMessage = error;
@@ -42,7 +42,7 @@ const addNewCategory = createAsyncThunk(
         // );
       }
       console.log("Category create response", response);
-      dispatch(fetchCategorys());
+      dispatch(fetchCategorys("admin/category"));
     } catch (error) {
       const errorMessage = error;
       console.log(errorMessage);
@@ -81,7 +81,7 @@ const updateCategory = createAsyncThunk(
         response?.status_code === 200 ||
         response?.status_code === 201
       ) {
-        dispatch(fetchCategorys());
+        dispatch(fetchCategorys("admin/category"));
         toast.success("Category updated successfully!");
         // dispatch(
         //   openToast({
@@ -114,7 +114,7 @@ const deleteCategory = createAsyncThunk(
         response?.status_code === 200 ||
         response?.status_code === 201
       ) {
-        dispatch(fetchCategorys());
+        dispatch(fetchCategorys("admin/category"));
         toast.success("Category deleted successfully!");
         // dispatch(
         //   openToast({
