@@ -47,6 +47,27 @@ export const SignUpSchema = yup
   })
   .required();
 
+export const UpdateUserSchema = yup
+  .object({
+    first_name: yup
+      .string()
+      .required("Firstname is required")
+      .min(3, "Minimum 3 characters length"),
+    last_name: yup
+      .string()
+      .required("Lastname is required")
+      .min(3, "Minimum 3 characters length"),
+
+    phone: yup
+      .string()
+      .required(" Phone number is required")
+      .matches(
+        /^[0-9]{10,15}$/,
+        "Phone number must be between 10 to 15 digits"
+      ),
+  })
+  .required();
+
 export const ResetPasswordSchema = yup
   .object({
     password: yup
