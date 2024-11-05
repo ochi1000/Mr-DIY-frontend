@@ -7,9 +7,9 @@ const TAGS_URL = "admin/tag";
 
 const fetchTags = createAsyncThunk(
   "admin/fetchTag",
-  async (_, { rejectWithValue }) => {
+  async (url, { rejectWithValue }) => {
     try {
-      const response = await getData(TAGS_URL);
+      const response = await getData(url);
       return response;
     } catch (error) {
       const errorMessage = error;
@@ -52,7 +52,7 @@ const addNewTag = createAsyncThunk(
     //     // );
     //   }
     //   console.log("Tag create response", response);
-    //   dispatch(fetchTags());
+    //   dispatch(fetchTags("admin/tag"));
     // } catch (error) {
     //   const errorMessage = error;
     //   console.log(errorMessage);
@@ -88,7 +88,7 @@ const updateTag = createAsyncThunk(
       //   response?.status_code === 200 ||
       //   response?.status_code === 201
       // ) {
-      //   dispatch(fetchTags());
+      //   dispatch(fetchTags("admin/tag"));
       //   toast.success("Tag updated successfully!");
       //   // dispatch(
       //   //   openToast({
@@ -121,7 +121,7 @@ const deleteTag = createAsyncThunk(
         response?.status_code === 200 ||
         response?.status_code === 201
       ) {
-        dispatch(fetchTags());
+        dispatch(fetchTags("admin/tag"));
         toast.success("Tag deleted successfully!");
         // dispatch(
         //   openToast({
