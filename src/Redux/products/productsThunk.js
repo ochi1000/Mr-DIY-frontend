@@ -14,9 +14,9 @@ const PRODUCT_URL = "admin/product";
 
 const fetchProducts = createAsyncThunk(
   "admin/fetchProduct",
-  async (_, { rejectWithValue }) => {
+  async (url, { rejectWithValue }) => {
     try {
-      const response = await getData(PRODUCT_URL);
+      const response = await getData(url);
       return response;
     } catch (error) {
       const errorMessage = error;
@@ -65,28 +65,11 @@ const fetchProduct = createAsyncThunk(
 const updateProduct = createAsyncThunk(
   "updateProduct",
   async ({ id, formData }, { rejectWithValue, dispatch }) => {
-    // console.log("Edit Id Enter here", id);
-    // console.log("Edit formdata Enter here ", formData);
+    console.log("Edit Id Enter here", id);
+    console.log("Edit formdata Enter here ", formData);
     try {
-      const response = await putData(`${PRODUCT_URL}/${id}`, formData);
-      if (
-        response?.status === 202 ||
-        response?.status === 200 ||
-        response?.status === 201 ||
-        response?.status_code === 202 ||
-        response?.status_code === 200 ||
-        response?.status_code === 201
-      ) {
-        dispatch(fetchProducts());
-        toast.success("Product updated successfully!");
-        // dispatch(
-        //   openToast({
-        //     type: "success",
-        //     message: "Product account updated successfully",
-        //   })
-        // );
-      }
-      // console.log("editing Response", response);
+      const response = await postData(`${PRODUCT_URL}/${id}`, formData);
+
       return response;
     } catch (error) {
       const errorMessage = error;
@@ -102,23 +85,23 @@ const deleteProduct = createAsyncThunk(
     try {
       // console.log(id);
       const response = await removeData(`${PRODUCT_URL}/${id}`);
-      if (
-        response?.status === 202 ||
-        response?.status === 200 ||
-        response?.status === 201 ||
-        response?.status_code === 202 ||
-        response?.status_code === 200 ||
-        response?.status_code === 201
-      ) {
-        dispatch(fetchProducts());
-        toast.success("Product has been deleted successfully");
-        // dispatch(
-        //   openToast({
-        //     type: "success",
-        //     message: "Product has been deleted successfully",
-        //   })
-        // );
-      }
+      // if (
+      //   response?.status === 202 ||
+      //   response?.status === 200 ||
+      //   response?.status === 201 ||
+      //   response?.status_code === 202 ||
+      //   response?.status_code === 200 ||
+      //   response?.status_code === 201
+      // ) {
+      //   dispatch(fetchProducts());
+      //   toast.success("Product has been deleted successfully");
+      //   // dispatch(
+      //   //   openToast({
+      //   //     type: "success",
+      //   //     message: "Product has been deleted successfully",
+      //   //   })
+      //   // );
+      // }
       return response;
     } catch (error) {
       const errorMessage = error;
