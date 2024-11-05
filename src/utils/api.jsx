@@ -6,7 +6,8 @@ import Cookies from "js-cookie";
 const baseURL = `${import.meta.env.VITE_BASE_URL}/api/`;
 
 export const newBaseURL = baseURL.replace("/api/", "/");
-// console.log("getnew base: ", newBaseURL);
+// console.log("newBaseURL: ", newBaseURL);
+
 // Create an Axios instance with default configurations
 const axiosInstance = axios.create({
   baseURL,
@@ -40,9 +41,9 @@ axiosInstance.interceptors.response.use(
 );
 
 // Utility function for GET requests
-export const getData = async (url, params) => {
+export const getData = async (url) => {
   try {
-    const response = await axiosInstance.get(url, { params });
+    const response = await axiosInstance.get(url);
     return response.data;
   } catch (error) {
     // Your error handling logic
@@ -122,12 +123,16 @@ export const patchData = async (url, data) => {
 };
 
 // Utility function for PUT requests
+
 export const putData = async (url, data) => {
   try {
-    const response = await axiosInstance.put(url, data);
+    const response = await axiosInstance.put(url, data, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
     return response.data;
   } catch (error) {
-    // Your error handling logic
     console.log(error.message);
     throw error;
   }
@@ -140,6 +145,18 @@ export const removeData = async (url) => {
     return response.data;
   } catch (error) {
     // Your error handling logic
+    console.log(error.message);
+    throw error;
+  }
+};
+
+export const deleteData = async (url, data) => {
+  try {
+    const response = await axiosInstance.delete(url, {
+      data: data, // Ensure the data is passed as part of the options
+    });
+    return response.data;
+  } catch (error) {
     console.log(error.message);
     throw error;
   }
