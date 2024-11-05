@@ -1,10 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../../components/forms/Button";
 import {
   ArrowDownIcon,
   LeftArrowIcons,
-  PlusIcon,
+  // PlusIcon,
 } from "../../../assets/SvgIcons";
 import { Input } from "../../../components/forms/Input";
 import { TextArea } from "../../../components/forms/TextArea";
@@ -18,22 +17,24 @@ import DefaultToggle from "../../../components/forms/DefaultToggle";
 import { fetchCategorys } from "../../../Redux/category/categoriesThunk";
 import { productSchema } from "../../../schema/productSchema";
 import { Toggle } from "../../../components/forms/Toggle/Toggle";
-import MultipleImageUpload from "../../../components/forms/Upload/MultipleImageUpload";
+// import MultipleImageUpload from "../../../components/forms/Upload/MultipleImageUpload";
 import ImageUpload from "../../../components/forms/Upload/ImageUpload";
 import toast from "react-hot-toast";
-import ReactSelectOption from "../../../components/forms/Select/react-select-options";
-import { fetchTags } from "../../../Redux/tags/tagsThunk";
+// import ReactSelectOption from "../../../components/forms/Select/react-select-options";
+// import { fetchTags } from "../../../Redux/tags/tagsThunk";
 
 import { getData } from "../../../utils/api";
 import AsyncReactSelect from "../../../components/forms/Select/async-react-select";
+import ProductAttributes from "./ProductAttributes";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // const [filesImgs, setFilesImgs] = useState("");
   // const [filesUpload, setFilesUpload] = useState("");
+  const [attributes, setAttributes] = useState([]);
   const [imagesFile, setImagesFile] = useState([]);
-  const [selectedState, setSelectedState] = useState(null);
+  const [selectedBrand, setSelectedBrand] = useState(null);
 
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -82,11 +83,49 @@ const CreateProduct = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  console.log("attributes:", attributes);
   const { loading } = useSelector((state) => state.products);
-  const catgoryData = [
-    { name: "Nike", shipment_type: "nike" },
-    { name: "Samsung", shipment_type: "Samsung" },
-    { name: "Lenovo", shipment_type: "Lenovo" },
+  const brandData = [
+    { id: 1, name: "Nike", brand: "nike", category: "Sports" },
+    { id: 2, name: "Samsung", brand: "samsung", category: "Electronics" },
+    { id: 3, name: "Lenovo", brand: "lenovo", category: "Electronics" },
+    { id: 4, name: "Apple", brand: "apple", category: "Electronics" },
+    { id: 5, name: "Coca-Cola", brand: "coca-cola", category: "Beverages" },
+    { id: 6, name: "Toyota", brand: "toyota", category: "Automotive" },
+    { id: 7, name: "McDonald's", brand: "mcdonalds", category: "Food" },
+    { id: 8, name: "Honda", brand: "honda", category: "Automotive" },
+    { id: 9, name: "Adidas", brand: "adidas", category: "Sports" },
+    { id: 10, name: "Microsoft", brand: "microsoft", category: "Software" },
+    { id: 11, name: "Google", brand: "google", category: "Software" },
+    { id: 12, name: "Amazon", brand: "amazon", category: "E-commerce" },
+    { id: 13, name: "Ford", brand: "ford", category: "Automotive" },
+    { id: 14, name: "Pepsi", brand: "pepsi", category: "Beverages" },
+    { id: 15, name: "Intel", brand: "intel", category: "Electronics" },
+    { id: 16, name: "HP", brand: "hp", category: "Electronics" },
+    { id: 17, name: "Dell", brand: "dell", category: "Electronics" },
+    { id: 18, name: "Canon", brand: "canon", category: "Electronics" },
+    { id: 19, name: "Sony", brand: "sony", category: "Electronics" },
+    { id: 20, name: "Volkswagen", brand: "volkswagen", category: "Automotive" },
+    { id: 21, name: "Levi's", brand: "levis", category: "Clothing" },
+    { id: 22, name: "Gucci", brand: "gucci", category: "Luxury Fashion" },
+    { id: 23, name: "Chanel", brand: "chanel", category: "Luxury Fashion" },
+    { id: 24, name: "H&M", brand: "hm", category: "Clothing" },
+    { id: 25, name: "Zara", brand: "zara", category: "Clothing" },
+    {
+      id: 26,
+      name: "Calvin Klein",
+      brand: "calvin-klein",
+      category: "Clothing",
+    },
+    { id: 27, name: "Lacoste", brand: "lacoste", category: "Clothing" },
+    {
+      id: 28,
+      name: "Ralph Lauren",
+      brand: "ralph-lauren",
+      category: "Clothing",
+    },
+    { id: 29, name: "Armani", brand: "armani", category: "Luxury Fashion" },
+    { id: 30, name: "Prada", brand: "prada", category: "Luxury Fashion" },
   ];
 
   const productWarrantyData = [];
@@ -129,22 +168,25 @@ const CreateProduct = () => {
       name: data.name,
       brand_id: data.brand_id,
       category_id: selectedCategory?.id,
-      listing_price: data?.listing_price,
-      min_selling_price: data.min_selling_price,
       model: data.model,
-      warranty: selectedWarranty?.warranty,
       sku: data.sku,
+      min_selling_price: data.min_selling_price,
+      listing_price: data?.listing_price,
+      discount_price: data?.discount_price,
+      warranty: selectedWarranty?.warranty,
       short_description: data.short_description,
       long_description: data.long_description,
       whats_in_the_box: data?.whats_in_the_box,
-      imgs: imagesFile,
-      attributes: [],
-      tags: selectedTags,
       stock_item: data?.stock_item ? 1 : 0,
+      in_stock: data?.in_stock ? 1 : 0,
+      on_discount: data?.on_discount ? 1 : 0,
       status: data?.status ? 1 : 0,
+      imgs: imagesFile,
+      tags: selectedTags,
+      attributes: attributes,
     };
 
-    console.log("filtered data", filteredFormData);
+    console.log("Product data", filteredFormData);
     try {
       const result = await dispatch(addNewProduct(filteredFormData)).unwrap();
       // console.log("Product result: ", result);
@@ -154,6 +196,22 @@ const CreateProduct = () => {
         navigate("/admin/product/inventory/");
       }
     } catch (error) {
+      if (
+        (error?.response?.data?.status >= 400 &&
+          error?.response?.data?.status <= 499 &&
+          error?.response?.data?.errors) ||
+        (error?.response?.data?.status_code >= 400 &&
+          error?.response?.data?.status_code <= 499 &&
+          error?.response?.data?.errors)
+      ) {
+        const errorMessages = Object.values(error?.response?.data?.errors)
+          .flat()
+          .join(", ");
+        toast.error(errorMessages, { duration: 6000 });
+      } else {
+        toast.error(error?.response?.data?.message, { duration: 6000 });
+      }
+
       console.error("Create Error:", error);
       navigate("/admin/product/inventory/");
       if (error?.errors) {
@@ -196,7 +254,7 @@ const CreateProduct = () => {
         </div>
       </div>
 
-      <div className="relative p-4 w-full  max-h-full">
+      <div className="relative p-4 w-full  max-h-full space-y-6">
         <HookForm
           defaultValues={defaultFormValue}
           onSubmit={onSubmit}
@@ -225,30 +283,24 @@ const CreateProduct = () => {
                       placeholder="Enter product Name"
                     />
 
-                    <div className="pb-6">
+                    {/* <div className="pb-6">
                       <AsyncReactSelect
                         selectedValue={selectedValue}
                         setSelectedValue={setSelectedValue}
                         fetchData={fetchProductTags}
                         placeholder="Select a product tags"
                         label="Product Tags"
+                        isMulti
                       />
-                      {/* <ReactSelectOption
-                        data={fruits}
-                        setSelectedOptions={setSelectedOptions}
-                        selectedOptions={selectedOptions}
-                        placeholder="Select a tag"
-                        name="fruits"
-                      /> */}
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    </div> */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 ">
                       <div>
                         <div className="pb-4">
                           <CustomSelect
                             label="Brand"
-                            selected={selectedState}
-                            setSelected={setSelectedState}
-                            data={catgoryData}
+                            selected={selectedBrand}
+                            setSelected={setSelectedBrand}
+                            data={brandData}
                             withImage={false}
                             placeholder="Select a brand"
                           />
@@ -259,16 +311,14 @@ const CreateProduct = () => {
                           placeholder="Enter a list price"
                           type="number"
                         />
-                        <Input name="model" label="Model #" placeholder="." />
-                        <div className="pb-4">
-                          <CustomSelect
-                            label="Product Warranty"
-                            selected={selectedWarranty}
-                            setSelected={setSelectedWarranty}
-                            data={productWarrantyData}
-                            withImage={false}
-                            placeholder="Select a warranty"
-                          />
+                        <Input
+                          name="discount_price"
+                          label="Discount Price"
+                          placeholder="Enter a discount price"
+                          type="number"
+                        />
+                        <div>
+                          <Input name="model" label="Model #" placeholder="." />
                         </div>
                       </div>
                       <div>
@@ -293,13 +343,23 @@ const CreateProduct = () => {
                           label=" SKU Number"
                           placeholder="Enter sku number"
                         />
-                        <div className=" opacity-0 pointer-events-none">
+                        <div className="pb-4">
+                          <CustomSelect
+                            label="Product Warranty"
+                            selected={selectedWarranty}
+                            setSelected={setSelectedWarranty}
+                            data={productWarrantyData}
+                            withImage={false}
+                            placeholder="Select a warranty"
+                          />
+                        </div>
+                        {/* <div className=" opacity-0 pointer-events-none">
                           <Input
                             name="rep_phone"
                             label="Phone Number"
                             placeholder="+234 (555) 000-0000"
                           />
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     <TextArea
@@ -355,6 +415,10 @@ const CreateProduct = () => {
                   )}
                 </Button>
                 <div className="border rounded-xl mt-2  p-4 w-full flex items-center justify-between ">
+                  <p className=" font-semibold text-gray-700">In Stock</p>
+                  <Toggle name="in_stock" />
+                </div>
+                <div className="border rounded-xl mt-2  p-4 w-full flex items-center justify-between ">
                   <p className=" font-semibold text-gray-700">
                     Activate Product
                   </p>
@@ -363,6 +427,10 @@ const CreateProduct = () => {
                 <div className="border rounded-xl mt-2  p-4 w-full flex items-center justify-between ">
                   <p className=" font-semibold text-gray-700">Stock Item</p>
                   <Toggle name="stock_item" />
+                </div>
+                <div className="border rounded-xl mt-2  p-4 w-full flex items-center justify-between ">
+                  <p className=" font-semibold text-gray-700">On Discount</p>
+                  <Toggle name="on_discount" />
                 </div>
                 <div className="border rounded-xl mt-2  p-4 w-full  ">
                   <div className="flex items-center justify-between">
@@ -402,17 +470,27 @@ const CreateProduct = () => {
                     </p>
                   </div>
                   <div className="px-4">
-                    <Input
+                    <div className="pb-6">
+                      <AsyncReactSelect
+                        selectedValue={selectedValue}
+                        setSelectedValue={setSelectedValue}
+                        fetchData={fetchProductTags}
+                        placeholder="Select a product tags"
+                        label="Product Tags"
+                        isMulti
+                      />
+                    </div>
+                    {/* <Input
                       name="starting_cost"
                       // label="Create New Sub-Category"
                       className="mb-0"
                       placeholder="Type to Search"
-                    />
+                    /> */}
                   </div>
                 </div>
               </div>
             </div>
-            <div className=" flex items-start w-full gap-6">
+            {/* <div className=" flex items-start w-full gap-6">
               <div className="relative bg-white rounded-2xl shadow  w-[70%]">
                 <div className="flex items-center justify-between p-4 md:px-5 border-b rounded-t ">
                   <div>
@@ -455,7 +533,9 @@ const CreateProduct = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
+            {/* <ProductAttributes /> */}
+
             <div className=" flex items-start w-full gap-6">
               <div className="p-4 md:px-5 relative bg-white rounded-2xl shadow  w-[70%]">
                 <div className="flex items-center justify-between pb-4  border-b rounded-t ">
@@ -484,6 +564,10 @@ const CreateProduct = () => {
             </div>
           </div>
         </HookForm>
+        <ProductAttributes
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
       </div>
     </div>
   );
