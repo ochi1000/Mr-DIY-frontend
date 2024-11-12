@@ -8,12 +8,14 @@ import Avatar from "src/assets/images/Avatar.png";
 import classNames from "classnames";
 import { LogOutIcon } from "src/assets/SvgIcons";
 import { Link, useLocation } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { RootState } from "src/functions/Redux/rootReducer";
 // import { logoutThunk } from "src/functions/Redux/auth/authThunk";
 import { getBasePath } from "src/lib/constants";
 import { AnimatePresence, motion } from "framer-motion";
 import { sidedata } from "../data/sideBarData";
+import { logoutThunk } from "../Redux/auth/authThunk";
+import { persistor } from "../Redux/store";
 const MobileSidebar = ({
   openSideMenu,
   openMenu,
@@ -37,10 +39,11 @@ const MobileSidebar = ({
   // console.log("first path: ", currentPath);
   // console.log("get base url: ", getBasePath(currentPath));
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    // dispatch(logoutThunk());
+    dispatch(logoutThunk());
+    persistor.purge();
   };
 
   const [activeSubmenu, setActiveSubmenu] = useState(null);
@@ -255,7 +258,7 @@ const MobileSidebar = ({
               </div>
             </div>
             <div
-              // onClick={handleLogout}
+              onClick={handleLogout}
               className={classNames(" text-secondary cursor-pointer")}
             >
               <LogOutIcon />
