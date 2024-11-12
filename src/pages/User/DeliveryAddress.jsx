@@ -111,7 +111,7 @@ const DeliveryAddress = () => {
               reload
             />
           ) : (
-            <div>
+            <div className=" space-y-4">
               {del_addresses?.data?.map((item, index) => (
                 <div key={index} className="">
                   <div className="border border-gray-200 rounded-xl  ">
