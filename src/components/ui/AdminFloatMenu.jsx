@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 // import Avatar from "src/assets/images/Avatar.png";
 import { getNameInitials } from "../../lib/constants";
 import { logoutThunk } from "../../Redux/auth/authThunk";
+import { persistor } from "../../Redux/store";
 const AdminFloatMenu = () => {
   const { currentUser, loading } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(logoutThunk());
+    persistor.purge();
   };
   // console.log("This menu", currentUser);
   return (
