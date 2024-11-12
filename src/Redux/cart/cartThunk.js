@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import toast from "react-hot-toast";
-import { getData, postData, putData, removeData } from "../../utils/api";
+// import toast from "react-hot-toast";
+// eslint-disable-next-line no-unused-vars
+import { getData, postData, putData, deleteData } from "../../utils/api";
 // import { openToast } from "../Toast/toastSlice";
 
 const CART_URL = "user/cart/";
@@ -21,9 +22,10 @@ const fetchCarts = createAsyncThunk(
 
 const addNewCart = createAsyncThunk(
   "addNewCart",
-  async (CartData, { rejectWithValue }) => {
+  async ({ CartData }, { rejectWithValue }) => {
+    // console.log("I received Data:", Array.isArray(CartData));
     try {
-      const response = await postData(`${CART_URL}add-to-cart`, CartData);
+      const response = await putData(`${CART_URL}add-to-cart`, CartData);
 
       return response;
     } catch (error) {
@@ -51,7 +53,7 @@ const fetchCart = createAsyncThunk(
 
 const updateCart = createAsyncThunk(
   "updateCart",
-  async (formData, { rejectWithValue }) => {
+  async ({ formData }, { rejectWithValue }) => {
     // console.log("Edit Id Enter here", id);
     // console.log("Edit formdata Enter here ", formData);
     try {
@@ -71,27 +73,10 @@ const updateCart = createAsyncThunk(
 
 const deleteCart = createAsyncThunk(
   "deleteCart",
-  async (_, { rejectWithValue }) => {
+  async ({ CartId }, { rejectWithValue }) => {
     try {
       // console.log(id);
-      const response = await removeData(`user/cart/remove-from-cart`);
-      if (
-        response?.status === 202 ||
-        response?.status === 200 ||
-        response?.status === 201 ||
-        response?.status_code === 202 ||
-        response?.status_code === 200 ||
-        response?.status_code === 201
-      ) {
-        // dispatch(fetchCarts("admin/Cart"));
-        toast.success("Cart deleted successfully!");
-        // dispatch(
-        //   openToast({
-        //     type: "success",
-        //     message: "Cart has been deleted successfully",
-        //   })
-        // );
-      }
+      const response = await deleteData(`user/cart/remove-from-cart`, CartId);
       return response;
     } catch (error) {
       const errorMessage = error;
