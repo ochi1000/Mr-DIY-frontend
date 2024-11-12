@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 // import Avatar from "src/assets/images/Avatar.png";
 import { getNameInitials } from "../../lib/constants";
 import { userLogoutThunk } from "../../Redux/userAuth/userAuthThunk";
+import { persistor } from "../../Redux/store";
 const UserFloatMenu = () => {
   // const { currentUser } = useSelector((state) => state.auth);
   const { currentauthUser, loading } = useSelector((state) => state.userauth);
@@ -10,6 +11,7 @@ const UserFloatMenu = () => {
   // console.log("This menu", currentauthUser?.data?.user);
   const handleLogout = () => {
     dispatch(userLogoutThunk());
+    persistor.purge();
   };
   return (
     <div className="absolute z-10 w-screen max-w-[260px] px-4 mt-1.5 -right-10 sm:right-0 sm:px-0">
