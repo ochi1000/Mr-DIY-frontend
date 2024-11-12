@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Link } from "react-router-dom";
 import { NAVIGATION } from "../../data/menu";
 import Logo from "../shared/Logo/Logo";
@@ -10,6 +11,7 @@ import UserFloatMenu from "./UserFloatMenu";
 import AdminFloatMenu from "./AdminFloatMenu";
 import { useDispatch, useSelector } from "react-redux";
 import { reloadCart } from "../../Redux/shopSlice";
+import { fetchCarts } from "../../Redux/cart/cartThunk";
 // import SearchBar from "./SearchBar";
 
 const Header = () => {
@@ -43,12 +45,25 @@ const Header = () => {
 
   // console.log("isAdmin", isAdmin);
   // console.log("user isAuthenticated", userIsAuthenticated);
-  const { cart } = useSelector((state) => state.shop) || {};
+
+  // const { cart } = useSelector((state) => state.shop) || {};
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(reloadCart());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, reloadCart]);
+
+  const { carts, cart, loading, error } = useSelector((state) => state.carts);
+  // console.log(" carts loaded: ", carts);
+
+  const fetchCartHandler = (url) => {
+    dispatch(fetchCarts(url));
+  };
+  useEffect(() => {
+    fetchCartHandler("user/cart/view-cart");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
   return (
     <div>
       <nav className="fixed top-0 z-40 w-full border-b border-gray-100/20 bg-white/80 shadow backdrop-blur transition-colors lg:border-transparent">
@@ -148,30 +163,53 @@ const Header = () => {
                 </div>
               </div>
               <div className="relative">
-                <button
-                  onClick={handleCartMenu}
-                  // onMouseEnter={() => setOpenCartMenu(false)}
-                  // onMouseLeave={() => setOpenCartMenu(true)}
-                  className="
-          text-opacity-90
-           group w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-100  rounded-full inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative"
-                  type="button"
-                  aria-expanded="false"
-                  data-headlessui-state=""
-                  id="headlessui-popover-button-:r3h:"
-                >
-                  <div className="w-3.5 h-3.5 flex items-center justify-center bg-primary-500 absolute top-1.5 right-1.5 rounded-full text-[10px] leading-none text-white font-medium">
-                    <span className="mt-[1px]">{cart?.length}</span>
-                  </div>
-                  <CartsIcon />
-                  <a
+                <Link className="lg:hidden" to="/cart">
+                  <button
+                    className="text-opacity-90 group w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-100  rounded-full inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative"
+                    type="button"
+                    aria-expanded="false"
+                  >
+                    <div className="w-3.5 h-3.5 flex items-center justify-center bg-primary-500 absolute top-1.5 right-1.5 rounded-full text-[10px] leading-none text-white font-medium">
+                      <span className="mt-[1px]">
+                        {carts?.data?.cart_items?.length || 0}
+                      </span>
+                    </div>
+                    <CartsIcon />
+                    {/* <a
                     className="block md:hidden absolute inset-0"
                     href="/cart"
-                  />
-                </button>
+                  /> */}
+                  </button>
+                </Link>
+                <div className="hidden lg:flex">
+                  <button
+                    onClick={handleCartMenu}
+                    // onMouseEnter={() => setOpenCartMenu(false)}
+                    // onMouseLeave={() => setOpenCartMenu(true)}
+                    className="text-opacity-90 group w-10 h-10 sm:w-12 sm:h-12 hover:bg-slate-100  rounded-full inline-flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 relative"
+                    type="button"
+                    aria-expanded="false"
+                  >
+                    <div className="w-3.5 h-3.5 flex items-center justify-center bg-primary-500 absolute top-1.5 right-1.5 rounded-full text-[10px] leading-none text-white font-medium">
+                      <span className="mt-[1px]">
+                        {carts?.data?.cart_items?.length || 0}
+                      </span>
+                    </div>
+                    <CartsIcon />
+                    {/* <a
+                    className="block md:hidden absolute inset-0"
+                    href="/cart"
+                  /> */}
+                  </button>
+                </div>
                 {openCartMenu && (
-                  <div className=" absolute top-14 right-0">
-                    <CartMenu />
+                  <div className=" absolute top-14 right-0 ">
+                    <CartMenu
+                      cartData={carts?.data}
+                      loading={loading}
+                      setOpenCartMenu={setOpenCartMenu}
+                      openCartMenu={openCartMenu}
+                    />
                   </div>
                 )}
               </div>
