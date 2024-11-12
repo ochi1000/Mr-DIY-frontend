@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getNameInitials } from "../lib/constants";
 
 import { userLogoutThunk } from "../Redux/userAuth/userAuthThunk";
+import { persistor } from "../Redux/store";
 const UserDashboardSidebar = ({
   openSideMenu,
   openMenu,
@@ -47,6 +48,7 @@ const UserDashboardSidebar = ({
 
   const handleLogout = () => {
     dispatch(userLogoutThunk());
+    persistor.purge();
   };
 
   const [activeSubmenu, setActiveSubmenu] = useState(null);
