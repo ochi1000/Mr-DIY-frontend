@@ -30,6 +30,7 @@ import UserDashboard from "./pages/User/userDashboard";
 import DeliveryAddress from "./pages/User/DeliveryAddress";
 import ProfileSettings from "./pages/User/ProfileSettings";
 import Overview from "./pages/User/Overview";
+import PaymentCallback from "./pages/PaymentCallback";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/product-details" element={<ProductDetails />} />
+          <Route path="/payment/callback" element={<PaymentCallback />} />
 
           {/* <Route path="/check-email" element={<CheckEmail />} />  
             <Route path="/password-reset" element={<PasswordReset />} />
