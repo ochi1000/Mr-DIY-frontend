@@ -8,6 +8,7 @@ import attributesReducer from "./attributes/attributesSlice";
 import shopSlice from "./shopSlice";
 import wishlistSlice from "./wishlistSlice";
 import deliveryAddressReducer from "./DeliveryAddress/deliveryAddressSlice";
+import cartReducer from "./cart/cartSlice";
 
 // Combine the slice reducers into a root reducer
 const rootReducer = combineReducers({
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   shop: shopSlice,
   wishlist: wishlistSlice,
   delivery_address: deliveryAddressReducer,
+  carts: cartReducer,
 });
 
 // No need to define RootState type in JavaScript
