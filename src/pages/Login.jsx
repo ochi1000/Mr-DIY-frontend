@@ -10,10 +10,10 @@ import HookForm from "../components/forms/Form";
 import { GoogleIcon } from "../assets/SvgIcons";
 // import toast from "react-hot-toast";
 
-import { googleLoginThunk } from "../Redux/auth/authThunk";
+// import { googleLoginThunk } from "../Redux/auth/authThunk";
 import LoadingSpinner from "../components/Loading/LoadingSpinner";
 import { useEffect, useState } from "react";
-import { GoogleLogin } from "@react-oauth/google";
+// import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 
 import axios from "axios";
@@ -126,11 +126,11 @@ const Login = () => {
     // navigate("/admin/dashboard");
   };
 
-  const handleGoogleLogin = () => {
-    // alert(JSON.stringify(data));
-    dispatch(googleLoginThunk());
-    // navigate("/admin/dashboard");
-  };
+  // const handleGoogleLogin = () => {
+  //   // alert(JSON.stringify(data));
+  //   dispatch(googleLoginThunk());
+  //   // navigate("/admin/dashboard");
+  // };
 
   // const [loadingTest, setLoadingTest] = useState(false);
 
@@ -229,7 +229,7 @@ const Login = () => {
               </div>
               <div className="mt-4 flex flex-wrap sm:grid gap-4 grid-cols-1">
                 <button
-                  onClick={handleGoogleLogin}
+                  // onClick={handleGoogleLogin}
                   disabled={loading}
                   className="w-full h-12 rounded-lg border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700"
                 >
@@ -241,7 +241,7 @@ const Login = () => {
                     </span>
                   </div>
                 </button>
-                <GoogleLogin
+                {/* <GoogleLogin
                   onSuccess={(credentialResponse) => {
                     console.log("google response", credentialResponse);
                     const credentialResponseDecoded = jwtDecode(
@@ -252,7 +252,7 @@ const Login = () => {
                   onError={() => {
                     console.log("Login Failed");
                   }}
-                />
+                /> */}
 
                 {/* <button className="w-full h-12 rounded-lg border border-gray-300/75 bg-white px-6 transition active:bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:border-gray-700">
                   <div className="w-max mx-auto flex items-center justify-center space-x-2">
