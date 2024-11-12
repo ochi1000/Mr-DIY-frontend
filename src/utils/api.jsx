@@ -126,17 +126,27 @@ export const patchData = async (url, data) => {
 
 export const putData = async (url, data) => {
   try {
-    const response = await axiosInstance.put(url, data, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await axiosInstance.put(url, data);
     return response.data;
   } catch (error) {
     console.log(error.message);
     throw error;
   }
 };
+
+// export const putData = async (url, data) => {
+//   try {
+//     const response = await axiosInstance.put(url, data, {
+//       headers: {
+//         "Content-Type": "multipart/form-data",
+//       },
+//     });
+//     return response.data;
+//   } catch (error) {
+//     console.log(error.message);
+//     throw error;
+//   }
+// };
 
 // Utility function for DELETE requests
 export const removeData = async (url) => {
