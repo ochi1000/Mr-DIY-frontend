@@ -18,6 +18,7 @@ import { sidedata } from "../data/sideBarData";
 import { useDispatch, useSelector } from "react-redux";
 import { getNameInitials } from "../lib/constants";
 import { logoutThunk } from "../Redux/auth/authThunk";
+import { persistor } from "../Redux/store";
 const Sidebar = ({
   openSideMenu,
   openMenu,
@@ -47,6 +48,7 @@ const Sidebar = ({
 
   const handleLogout = () => {
     dispatch(logoutThunk());
+    persistor.purge();
   };
 
   const [activeSubmenu, setActiveSubmenu] = useState(null);
