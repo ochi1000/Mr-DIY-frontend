@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../ui/ProductCard";
 // import { addCart } from "../../Redux/shopSlice";
 import { addWishlist } from "../../Redux/wishlistSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getAllProducts } from "../../Redux/products/productsThunk";
 import {
   // fetchCategory,
   fetchCategorys,
 } from "../../Redux/category/categoriesThunk";
+import toast from "react-hot-toast";
+import { addNewCart, fetchCarts } from "../../Redux/cart/cartThunk";
 const TopSelling = () => {
   // const [favorite, setFavorite] = useState(0);
 
@@ -23,31 +25,76 @@ const TopSelling = () => {
   //     setFavorite(0);
   //   }
   // };
+
   const dispatch = useDispatch();
+  const [loadingCart, setLoadingCart] = useState(false);
 
   const { allProducts, loadingProduct } = useSelector(
     (state) => state.products
   );
-  console.log("All products", allProducts?.data);
+  // console.log("All products", allProducts?.data);
 
-  const addToCart = (id) => {
-    const item = allProducts?.data?.find((item) => item.id === id);
+  const addToCart = (productId) => {
+    const item = allProducts?.data?.find((product) => product.id === productId);
 
-    console.log("cart Add to cart:", item);
-    const productTCart = {
+    const defaultAttributes = item?.attributes?.[0]
+      ? [
+          {
+            attribute_id: item.attributes[0].id,
+            value: item.attributes[0].values[0]?.value,
+          },
+        ]
+      : [];
+
+    // console.log("first attribute", defaultAttributes);
+
+    const productToCart = {
       product_id: item?.id,
       quantity: 1,
-      selected_attributes: [
-        {
-          attribute_id: item?.attributes[0]?.id,
-          value: item?.attributes[0]?.values[0]?.value,
-        },
-      ],
+      selected_attributes: defaultAttributes,
     };
-    console.log("product to cart:", productTCart);
 
-    // dispatch(addCart({ product: item }));
+    // console.log(
+    //   "product data:",
+    //   Array.isArray(productToCart),
+    //   "data:",
+    //   productToCart
+    // );
+    // Call `handleSubmitCart` with the product object
+    handleSubmitCart(productToCart);
   };
+
+  const handleSubmitCart = async (productToCart) => {
+    setLoadingCart(true);
+    try {
+      const result = await dispatch(
+        addNewCart({ CartData: productToCart })
+      ).unwrap();
+      if (result.status >= 200 && result.status <= 300) {
+        // console.log("res:", result);
+        dispatch(fetchCarts("user/cart/view-cart"));
+        toast.success(result.message);
+      }
+    } catch (error) {
+      if (
+        // (error?.response?.data?.status >= 400 &&
+        //   error?.response?.data?.status <= 499 &&
+        //   error?.response?.data?.errors) ||
+        // (error?.response?.data?.status_code >= 400 &&
+        //   error?.response?.data?.status_code <= 499 &&
+        //   error?.response?.data?.errors) ||
+        error?.errors
+      ) {
+        const errorMessages = Object.values(error?.errors).flat().join(", ");
+        toast.error(errorMessages, { duration: 6000 });
+      } else {
+        toast.error(error?.message, { duration: 6000 });
+      }
+    } finally {
+      setLoadingCart(false);
+    }
+  };
+
   const addToWishlist = (id) => {
     const item = allProducts?.data?.find((item) => item.id === id);
     dispatch(addWishlist({ product: item }));
@@ -122,7 +169,28 @@ const TopSelling = () => {
           <p>Loading....</p>
         ) : (
           <div className=" grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3 xl:grid-cols-4 ">
-            {allProducts?.data
+            {allProducts?.data?.slice(0, 10)?.map((product) => {
+              const { id, imgs, name, discount, category_id, listing_price } =
+                product;
+              const image = imgs[0];
+              const productCat = getProductCategory(category_id);
+
+              return (
+                <ProductCard
+                  key={id}
+                  image={image}
+                  name={name}
+                  discount={discount}
+                  category={productCat?.name}
+                  price={listing_price}
+                  onLoadingCart={loadingCart}
+                  id={id}
+                  onAddToCart={() => addToCart(id)} // Passing the `addToCart` function
+                  onAddToWishlist={() => addToWishlist(id)}
+                />
+              );
+            })}
+            {/* {allProducts?.data
               ?.slice(0, 10)
               ?.map(
                 (
@@ -146,7 +214,7 @@ const TopSelling = () => {
                     />
                   );
                 }
-              )}
+              )} */}
           </div>
         )}
       </div>
