@@ -1,8 +1,43 @@
+/* eslint-disable no-unused-vars */
+
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 import Cloth from "src/assets/images/product/cloth.png";
 import Headphone from "src/assets/images/product/headphone.png";
 import Laptop from "src/assets/images/product/laptop.png";
+import {
+  fetchDeliveryAddress,
+  fetchDeliveryAddresss,
+} from "../Redux/DeliveryAddress/deliveryAddressThunk";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const [openCreateAddress, setOpenCreateAddress] = useState(false);
+  //   const [viewTag, setViewTag] = useState(false);
+  const [editAddress, setEditAddress] = useState(false);
+
+  const { del_addresses, del_address, loading, error } = useSelector(
+    (state) => state.delivery_address
+  );
+
+  const editTagData = (add_id) => {
+    dispatch(fetchDeliveryAddress(add_id));
+    setEditAddress(true);
+  };
+
+  console.log(" all deliver", del_addresses);
+
+  const fetchDelAddresssHandler = () => {
+    dispatch(fetchDeliveryAddresss());
+  };
+  useEffect(() => {
+    fetchDelAddresssHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
   return (
     <div>
       <div className="px-4 lg:px-20 xl:px-40">
