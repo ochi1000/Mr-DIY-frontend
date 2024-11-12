@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutThunk } from "src/Redux/auth/authThunk";
 import { userLogoutThunk } from "../Redux/userAuth/userAuthThunk";
+import { persistor } from "../Redux/store";
 
 const UserMenu = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,11 @@ const UserMenu = () => {
   const handleLogout = () => {
     if (currentUser) {
       dispatch(logoutThunk());
-    } else dispatch(userLogoutThunk());
+      persistor.purge();
+    } else {
+      dispatch(userLogoutThunk());
+      persistor.purge();
+    }
   };
 
   // console.log("first login", currentUser);
