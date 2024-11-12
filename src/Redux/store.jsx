@@ -3,6 +3,7 @@ import rootReducer from "./rootReducer";
 import storage from "redux-persist/lib/storage";
 // import { persistReducer } from "redux-persist";
 import {
+  persistStore,
   persistReducer,
   FLUSH,
   REHYDRATE,
@@ -39,4 +40,5 @@ const store = configureStore({
 //   reducer: rootReducer,
 // });
 
+export const persistor = persistStore(store);
 export default store;
