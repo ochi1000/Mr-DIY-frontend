@@ -86,8 +86,8 @@ const UpdateProduct = () => {
       // return rejectWithValue(errorMessage?.response?.data);
     }
   };
-  const fetchCategorysHandler = () => {
-    dispatch(fetchCategorys());
+  const fetchCategorysHandler = (data) => {
+    dispatch(fetchCategorys(data));
   };
   useEffect(() => {
     fetchCategorysHandler("admin/category");
