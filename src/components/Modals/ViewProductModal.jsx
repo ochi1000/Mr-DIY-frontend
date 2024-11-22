@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { ScrollArea } from "src/components/forms/scroll-area.jsx";
 import { formatDate, formatNumber } from "src/utils/constant";
@@ -17,7 +18,7 @@ const ViewProductModal = ({ setOpenModal, productData, loading }) => {
   const dispatch = useDispatch();
   console.log(" product data loaded", productData);
 
-  const { categories } = useSelector((state) => state.category);
+  // const { categories } = useSelector((state) => state.category);
   // console.log(" aall categories", categories);
 
   const fetchCategorysHandler = () => {
@@ -28,9 +29,9 @@ const ViewProductModal = ({ setOpenModal, productData, loading }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
-  const getCategory = categories?.data?.find(
-    (cat) => cat?.id === productData?.category_id
-  );
+  // const getCategory = categories?.data?.find(
+  //   (cat) => cat?.id === productData?.category_id
+  // );
 
   // console.log("get cateeee", getCategory);
   return (
@@ -114,7 +115,7 @@ const ViewProductModal = ({ setOpenModal, productData, loading }) => {
                     <div className=" space-y-1 flex items-center justify-between flex-wrap">
                       <Label text="Category" />
                       <p className="text-gray-900 font-medium capitalize">
-                        {getCategory?.name}
+                        {productData?.category?.name}
                       </p>
                     </div>
                     <div className=" space-y-1 flex items-center justify-between flex-wrap">
@@ -175,25 +176,24 @@ const ViewProductModal = ({ setOpenModal, productData, loading }) => {
 
                     <div className=" space-y-1 flex items-center justify-between flex-wrap">
                       <Label text="Tags" />
-                      <p className="text-gray-900  font-medium capitalize">
+                      <div className="text-gray-900  font-medium capitalize">
                         {productData?.tags.length === 0 ? (
                           "No tags"
                         ) : (
-                          <div>
+                          <div className=" flex items-center gap-2 flex-wrap max-w-md">
                             {productData?.tags?.map((tagItem, tagIndex) => (
-                              <a
+                              <span
                                 key={tagIndex}
-                                href=""
                                 className="group overflow-hidden flex justify-center items-center relative text-sm border border-purple/10 rounded-md py-1.5 before:inline-block before:absolute before:z-0 before:w-full before:h-full before:bg-primary-600 before:scale-x-0 group hover:before:scale-x-100 before:origin-right hover:before:origin-left before:transition-transform before:ease-out before:duration-300"
                               >
                                 <span className="px-[18px] relative text-gray-700 text-xs font-medium z-20 transition-colors ease-in-out duration-300 group-hover:text-white">
-                                  {tagItem}
+                                  {tagItem?.name}
                                 </span>
-                              </a>
+                              </span>
                             ))}
                           </div>
                         )}
-                      </p>
+                      </div>
                     </div>
                     <div className=" space-y-1 flex items-start justify-between flex-wrap">
                       <Label text="Product Image" />
