@@ -10,6 +10,7 @@ import toast from "react-hot-toast";
 import { deleteCart, fetchCarts, updateCart } from "../../Redux/cart/cartThunk";
 import { LoaderWithCheck } from "../Loading/LoaderWithCheck";
 import { useState } from "react";
+import { productPlaceholder } from "../../utils/placeholders";
 // import Cloth from "src/assets/images/product/cloth.png";
 // import Headphone from "src/assets/images/product/headphone.png";
 // import Laptop from "src/assets/images/product/laptop.png";
@@ -165,9 +166,14 @@ const CartMenu = ({ cartData, setOpenCartMenu, loading }) => {
                 <div className="flex py-5 last:pb-0">
                   <div className="relative h-24 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
                     <img
-                      alt="cloth"
-                      className="h-full w-full object-contain object-center"
-                      src={`${newBaseURL}storage/${cartitem?.product?.imgs[0]}`}
+                      alt={`${cartitem?.product?.name?.toLowerCase()} image`}
+                      className="h-full w-full object-cover object-center"
+                      // src={`${newBaseURL}storage/${cartitem?.product?.imgs[0]}`}
+                      src={
+                        cartitem?.product?.imgs[0]
+                          ? `${newBaseURL}storage/${cartitem?.product?.imgs[0]}`
+                          : productPlaceholder
+                      }
                     />
                     <a className="absolute inset-0" href="/product-detail" />
                   </div>
