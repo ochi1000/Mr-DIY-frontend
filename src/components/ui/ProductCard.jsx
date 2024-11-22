@@ -2,6 +2,8 @@
 import classNames from "classnames";
 import { useState } from "react";
 import { newBaseURL } from "../../utils/api";
+import { productPlaceholder } from "../../utils/placeholders";
+import { Link } from "react-router-dom";
 // import SmallSpinner from "../Loading/SmallSpinner";
 
 const ProductCard = ({
@@ -32,18 +34,19 @@ const ProductCard = ({
     <div className=" relative flex flex-col bg-transparent  border border-gray-100 rounded-lg ">
       <a className="absolute inset-0" href="/product-detail" />
       <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
-        <a className="block relative" href="#">
+        <Link className="block relative" to={`product-details/${id}`}>
           <div className="flex overflow-hidden w-full h-80">
             <img
               alt="product"
               className="object-cover w-full h-full drop-shadow-xl transition-transform duration-[1600ms]  group-hover:scale-110 scale-100"
               sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 40vw"
               // src={image}
-              src={`${newBaseURL}storage/${image}`}
+              // src={`${newBaseURL}storage/${image}`}
+              src={image ? `${newBaseURL}storage/${image}` : productPlaceholder}
             />
           </div>
           <div className=" absolute w-full h-full inset-0  bg-black/20"></div>
-        </a>
+        </Link>
         {discount && (
           <div className="nc-shadow-lg rounded-full flex items-center justify-center absolute top-3 start-3 px-2.5 py-1.5 text-xs bg-gray-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300">
             <svg
