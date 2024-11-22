@@ -10,6 +10,8 @@ import { formatNumber } from "../lib/constants";
 import toast from "react-hot-toast";
 import { CartsIcon, DeleteIcon } from "../assets/SvgIcons";
 import { LoaderWithCheck } from "../components/Loading/LoaderWithCheck";
+import { Link } from "react-router-dom";
+import { productPlaceholder } from "../utils/placeholders";
 const Cart = () => {
   const dispatch = useDispatch();
   const { carts, cart, loading, error } = useSelector((state) => state.carts);
@@ -131,6 +133,7 @@ const Cart = () => {
       // }
     }
   };
+
   return (
     <div>
       <>
@@ -154,24 +157,33 @@ const Cart = () => {
             </div>
             <hr className="border-slate-200 dark:border-slate-700 my-10 xl:my-12" />
             <div className="flex flex-col lg:flex-row">
-              <div className="w-full lg:w-[60%] xl:w-[55%] divide-y divide-slate-200 dark:divide-slate-700 ">
+              <div className="w-full lg:w-[60%] xl:w-[55%]  ">
                 {data.length === 0 ? (
                   <div className=""></div>
                 ) : (
                   <div className="">
                     {data?.map((item, itemIndex) => {
+                      const imageUrl = item?.product?.imgs[0]
+                        ? `${newBaseURL}storage/${item?.product?.imgs[0]}`
+                        : productPlaceholder;
                       return (
                         <div
                           key={itemIndex}
-                          className="relative flex py-8 sm:py-10 xl:py-12 first:pt-0 last:pb-0"
+                          className="relative flex py-8  border-b last:border-none first:pt-0 last:pb-0"
                         >
-                          <div className="relative h-36 w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
+                          <div className="border relative h-36 w-24 sm:w-32 flex-shrink-0 overflow-hidden rounded-xl bg-slate-100">
                             <img
-                              alt="Rey Nylon Backpack"
+                              alt={`${item?.product?.name?.toLowerCase()} image`}
+                              className="h-full w-full object-cover object-center"
+                              sizes="300px"
+                              src={imageUrl}
+                            />
+                            {/* <img
+                              alt={`${item?.product?.name?.toLowerCase()} image`}
                               className="h-full w-full object-contain object-center"
                               sizes="300px"
-                              src={`${newBaseURL}storage/${item?.product?.imgs[0]}`}
-                            />
+                              src={`${newBaseURL}storage/${item?.product?.imgs[0]} `}
+                            /> */}
                             <a
                               className="absolute inset-0"
                               href="/product-detail"
@@ -195,7 +207,7 @@ const Cart = () => {
                                     {/* <span className="mx-2 border-l border-slate-200 dark:border-slate-700 h-4" />
                           <span>XL</span> */}
                                   </p>
-                                  <div className="hidden sm:block text-center relative pt-2">
+                                  <div className="block text-center relative pt-2">
                                     <div className="nc-NcInputNumber flex items-center justify-between space-x-5 relative z-10">
                                       <div className="nc-NcInputNumber__content flex items-center justify-between w-[104px] sm:w-28">
                                         <button
@@ -250,96 +262,7 @@ const Cart = () => {
                                     </div>
                                   </div>
 
-                                  {/* <div className="mt-1.5 sm:mt-2.5 flex text-sm text-slate-600 dark:text-slate-300">
-                                    <div className="flex items-center space-x-1.5">
-                                      <svg
-                                        className="w-4 h-4"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                      >
-                                        <path
-                                          d="M7.01 18.0001L3 13.9901C1.66 12.6501 1.66 11.32 3 9.98004L9.68 3.30005L17.03 10.6501C17.4 11.0201 17.4 11.6201 17.03 11.9901L11.01 18.0101C9.69 19.3301 8.35 19.3301 7.01 18.0001Z"
-                                          stroke="currentColor"
-                                          strokeWidth="1.5"
-                                          strokeMiterlimit={10}
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                        <path
-                                          d="M8.35 1.94995L9.69 3.28992"
-                                          stroke="currentColor"
-                                          strokeWidth="1.5"
-                                          strokeMiterlimit={10}
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                        <path
-                                          d="M2.07 11.92L17.19 11.26"
-                                          stroke="currentColor"
-                                          strokeWidth="1.5"
-                                          strokeMiterlimit={10}
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                        <path
-                                          d="M3 22H16"
-                                          stroke="currentColor"
-                                          strokeWidth="1.5"
-                                          strokeMiterlimit={10}
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                        <path
-                                          d="M18.85 15C18.85 15 17 17.01 17 18.24C17 19.26 17.83 20.09 18.85 20.09C19.87 20.09 20.7 19.26 20.7 18.24C20.7 17.01 18.85 15 18.85 15Z"
-                                          stroke="currentColor"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                      </svg>
-                                      <span>Black</span>
-                                    </div>
-                                    <span className="mx-4 border-l border-slate-200 dark:border-slate-700 " />
-                                    <div className="flex items-center space-x-1.5">
-                                      <svg
-                                        className="w-4 h-4"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                      >
-                                        <path
-                                          d="M21 9V3H15"
-                                          stroke="currentColor"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                        <path
-                                          d="M3 15V21H9"
-                                          stroke="currentColor"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                        <path
-                                          d="M21 3L13.5 10.5"
-                                          stroke="currentColor"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                        <path
-                                          d="M10.5 13.5L3 21"
-                                          stroke="currentColor"
-                                          strokeWidth="1.5"
-                                          strokeLinecap="round"
-                                          strokeLinejoin="round"
-                                        />
-                                      </svg>
-                                      <span>2XL</span>
-                                    </div>
-                                  </div> */}
-
-                                  <div className="mt-3 flex justify-between w-full sm:hidden relative">
+                                  {/* <div className="mt-3 flex justify-between w-full sm:hidden relative">
                                     <select
                                       name="qty"
                                       id="qty"
@@ -360,7 +283,7 @@ const Cart = () => {
                                         </span>
                                       </div>
                                     </div>
-                                  </div>
+                                  </div> */}
                                 </div>
 
                                 <div className="hidden flex-1 sm:flex justify-end">
@@ -473,7 +396,7 @@ const Cart = () => {
               <div className="border-t lg:border-t-0 lg:border-l border-slate-200 dark:border-slate-700 my-10 lg:my-0 lg:mx-10 xl:mx-16 2xl:mx-20 flex-shrink-0" />
               <div className="flex-1">
                 <div className="sticky top-28">
-                  <h3 className="text-lg font-semibold ">Order Summary</h3>
+                  <h3 className="text-lg font-semibold ">Cart Summary</h3>
                   <div className="mt-7 text-sm text-slate-500 dark:text-slate-400 divide-y divide-slate-200/70 dark:divide-slate-700/80">
                     <div className="flex justify-between pb-4">
                       <span>Subtotal</span>
@@ -505,12 +428,11 @@ const Cart = () => {
                       </span>
                     </div>
                   </div>
-                  <a
-                    className="nc-Button relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium py-3 px-4 sm:py-3.5 sm:px-6  ttnc-ButtonPrimary disabled:bg-opacity-90 bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 text-slate-50 dark:text-slate-800 shadow-xl mt-8 w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 dark:focus:ring-offset-0 "
-                    href="/checkout"
-                  >
-                    Checkout
-                  </a>
+                  <Link to="/checkout">
+                    <div className=" relative h-auto inline-flex items-center justify-center rounded-full transition-colors text-sm sm:text-base font-medium py-3 px-4 sm:py-3.5 sm:px-6  ttnc-ButtonPrimary disabled:bg-opacity-90 bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 text-slate-50 dark:text-slate-800 shadow-xl mt-8 w-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 dark:focus:ring-offset-0 ">
+                      Checkout
+                    </div>
+                  </Link>
                   <div className="mt-5 text-sm text-slate-500 dark:text-slate-400 flex items-center justify-center">
                     <p className="block relative pl-5">
                       <svg
