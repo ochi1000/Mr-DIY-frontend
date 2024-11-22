@@ -332,7 +332,7 @@ const CartMenu = ({ cartData, setOpenCartMenu, loading }) => {
               </span>
             </span>
             <span className="">
-              {data.length !== 0
+              {data?.length !== 0
                 ? `₦${formatNumber(cartData?.total)}`
                 : "₦0.00"}
             </span>
