@@ -6,6 +6,7 @@ import {
   updateProduct,
   deleteProduct,
   getAllProducts,
+  viewProduct,
 } from "./productsThunk";
 // / Import the new thunk action creators
 
@@ -16,6 +17,7 @@ const initialState = {
   error: null,
   addproducts: [],
   allProducts: [],
+  singleProduct: [],
   loadingProduct: false,
   errorProduct: null,
 };
@@ -83,6 +85,19 @@ const productsSlice = createSlice({
       .addCase(fetchProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload ?? "Failed to fetch product";
+      })
+
+      .addCase(viewProduct.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(viewProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        state.singleProduct = action.payload;
+      })
+      .addCase(viewProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload ?? "Failed to view product";
       })
 
       // updatecoupon
