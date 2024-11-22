@@ -75,11 +75,11 @@ const CreateProduct = () => {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [dispatch]);
 
-  const fetchCategorysHandler = () => {
-    dispatch(fetchCategorys());
+  const fetchCategorysHandler = (data) => {
+    dispatch(fetchCategorys(data));
   };
   useEffect(() => {
-    fetchCategorysHandler();
+    fetchCategorysHandler("admin/category");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
