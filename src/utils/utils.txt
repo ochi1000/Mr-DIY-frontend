@@ -1,0 +1,41 @@
+ {/* {attribute?.values?.map((val, valueIndex) => {
+                            return (
+                              <div
+                                key={valueIndex}
+                                onClick={() =>
+                                  setGetAttributes(
+                                    (prevAttributes) =>
+                                      prevAttributes.includes(val)
+                                        ? prevAttributes // Do nothing if the value is already in the array
+                                        : [...prevAttributes, val] // Add the new value
+                                  )
+                                }
+                                className="relative h-10 sm:h-11 rounded-2xl border flex items-center justify-center 
+        text-sm sm:text-base uppercase font-semibold select-none overflow-hidden z-0 cursor-pointer bg-slate-100/50 border-gray-200 text-gray-600 hover:bg-primary-800 hover:text-white"
+                              >
+                                {val?.value}
+                              </div>
+                            );
+                          })} */}
+                          {attribute?.values?.map((val, valueIndex) => {
+                            return (
+                              <div
+                                key={valueIndex}
+                                onClick={() =>
+                                  setGetAttributes(
+                                    (prevAttributes) =>
+                                      prevAttributes.some(
+                                        (attr) =>
+                                          attr.attribute_id === val.attribute_id
+                                      )
+                                        ? prevAttributes // Do nothing if an item with the same id exists
+                                        : [...prevAttributes, val] // Add the new item otherwise
+                                  )
+                                }
+                                className="relative h-10 sm:h-11 rounded-2xl border flex items-center justify-center 
+        text-sm sm:text-base uppercase font-semibold select-none overflow-hidden z-0 cursor-pointer bg-slate-100/50 border-gray-200 text-gray-600 hover:bg-primary-800 hover:text-white"
+                              >
+                                {val?.value}
+                              </div>
+                            );
+                          })}
