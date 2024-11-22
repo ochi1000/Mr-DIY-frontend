@@ -124,6 +124,20 @@ const getAllProducts = createAsyncThunk(
   }
 );
 
+const viewProduct = createAsyncThunk(
+  "viewProduct",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await getData(`product/view-product/${id}`);
+      return response;
+    } catch (error) {
+      const errorMessage = error;
+      console.log(errorMessage);
+      return rejectWithValue(errorMessage?.response?.data);
+    }
+  }
+);
+
 export {
   fetchProducts,
   addNewProduct,
@@ -131,4 +145,5 @@ export {
   updateProduct,
   deleteProduct,
   getAllProducts,
+  viewProduct,
 };
