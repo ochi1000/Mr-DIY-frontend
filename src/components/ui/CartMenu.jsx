@@ -22,7 +22,7 @@ const CartMenu = ({ cartData, setOpenCartMenu, loading }) => {
   const [loadingItemId, setLoadingItemId] = useState(null);
 
   // console.log("cart data rev:", cartData?.cart_items);
-  const data = cartData?.cart_items || [];
+  const data = cartData ? cartData?.cart_items : [];
 
   // delete cart item
   const deleteCartHandler = (id) => {
