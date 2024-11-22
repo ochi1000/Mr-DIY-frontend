@@ -31,6 +31,9 @@ import DeliveryAddress from "./pages/User/DeliveryAddress";
 import ProfileSettings from "./pages/User/ProfileSettings";
 import Overview from "./pages/User/Overview";
 import PaymentCallback from "./pages/PaymentCallback";
+import AdminCreateOrder from "./pages/Admin/Orders/AdminCreateOrder";
+import ListOrders from "./pages/Admin/Orders/ListOrders";
+import OrderManagement from "./pages/Admin/Orders/OrderManagement";
 
 function App() {
   return (
@@ -49,7 +52,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/product-details" element={<ProductDetails />} />
+          <Route path="/product-details/:id" element={<ProductDetails />} />
           <Route path="/payment/callback" element={<PaymentCallback />} />
 
           {/* <Route path="/check-email" element={<CheckEmail />} />  
@@ -65,35 +68,20 @@ function App() {
               {/* <Route path="/dashboard/home-admin" element={<Dashboard />} />
               <Route path="/dashboard/order-home" element={<Dashboard />} /> */}
             </Route>
-            <Route path="orders-management" element={<NotFound />}>
+            <Route path="orders-management" element={<OrderManagement />}>
+              <Route index element={<Navigate replace to="orders-list" />} />
+              <Route path="orders-list" element={<ListOrders />} />
+              <Route path="create-orders" element={<AdminCreateOrder />} />
+
+              <Route path="product-reviews" element={<NotFound />} />
+              <Route path="abandoned-cart" element={<NotFound />} />
               <Route
-                path="orders-management/orders-list"
+                path="order-cancellation-requests"
                 element={<NotFound />}
               />
-              <Route
-                path="orders-management/product-reviews"
-                element={<NotFound />}
-              />
-              <Route
-                path="orders-management/abandoned-cart"
-                element={<NotFound />}
-              />
-              <Route
-                path="orders-management/order-cancellation-requests"
-                element={<NotFound />}
-              />
-              <Route
-                path="orders-management/order-return-requests"
-                element={<NotFound />}
-              />
-              <Route
-                path="orders-management/wishlist-mgt"
-                element={<NotFound />}
-              />
-              <Route
-                path="orders-management/coupon-managements"
-                element={<NotFound />}
-              />
+              <Route path="order-return-requests" element={<NotFound />} />
+              <Route path="wishlist-mgt" element={<NotFound />} />
+              <Route path="coupon-managements" element={<NotFound />} />
             </Route>
 
             <Route path="product" element={<Products />}>
