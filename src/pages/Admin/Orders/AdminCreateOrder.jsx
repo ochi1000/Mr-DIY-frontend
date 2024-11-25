@@ -51,6 +51,7 @@ const AdminCreateOrder = () => {
 
   const [searchCount, setSearchCount] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [loadingCreateOrder, setLoadingCreateOrder] = useState(false);
 
   // console.log(
   //   // ":errorSearch:",
@@ -151,7 +152,7 @@ const AdminCreateOrder = () => {
     error,
   } = useSelector((state) => state.carts);
 
-  // console.log(" carts loaded: ", carts);
+  console.log(" carts loaded: ", carts);
 
   const new_carts = carts?.data?.cart_items?.map((item) => {
     return {
@@ -248,6 +249,7 @@ const AdminCreateOrder = () => {
     };
 
     console.log("Product data", filteredFormData);
+    setLoadingCreateOrder(true);
     try {
       const result = await postData(
         "admin/order/create-order",
@@ -257,7 +259,8 @@ const AdminCreateOrder = () => {
 
       if (result.status >= 200 && result.status <= 300) {
         toast.success("Order created successfully");
-        navigate("/admin/product/inventory/");
+        fetchCartHandler("user/cart/view-cart");
+        navigate("/admin/orders-management/orders-list");
       }
     } catch (error) {
       if (
@@ -277,12 +280,13 @@ const AdminCreateOrder = () => {
       }
 
       console.error("Create Error:", error);
-      navigate("/admin/product/inventory/");
+      // navigate("/admin/product/inventory/");
       if (error?.errors) {
         const errorMessages = Object.values(error?.errors).flat().join(", ");
         toast.error(errorMessages, { duration: 6000 });
       }
     }
+    setLoadingCreateOrder(false);
     // alert(JSON.stringify(filteredFormData));
     // dispatch(addNewProduct(filteredFormData));
     // navigate("/admin/product/inventory/");
@@ -313,10 +317,10 @@ const AdminCreateOrder = () => {
               <div className="flex items-center justify-between p-4 md:px-5 border-b rounded-t ">
                 <div>
                   <h1 className="text-lg font-semibold text-gray-900 ">
-                    Basic Details
+                    Create Order
                   </h1>
                   <p className="text-gray-600 text-sm font-light">
-                    Manage the product’s basic information
+                    Create an order has an administrator
                   </p>
                 </div>
               </div>
@@ -475,17 +479,17 @@ const AdminCreateOrder = () => {
                   {/* </ScrollArea> */}
                   <Button
                     type="submit"
-                    disabled={loading}
+                    disabled={loadingCreateOrder}
                     className="w-full justify-center"
                     size="lg"
                   >
-                    {loading ? (
+                    {loadingCreateOrder ? (
                       <div className="inline-flex items-center gap-3">
                         <SmallSpinner />
-                        <span>Creating Product...</span>
+                        <span>Creating Order...</span>
                       </div>
                     ) : (
-                      "Continue"
+                      "Create Order"
                     )}
                   </Button>
                 </div>
@@ -548,7 +552,7 @@ const AdminCreateOrder = () => {
                     <div className="bg-neutral-50 dark:bg-slate-900 p-5">
                       <p className="flex justify-between text-base font-semibold text-slate-900 dark:text-slate-100">
                         <span>
-                          <span>Attension!</span>
+                          <span>Attention!</span>
                           <span className="block text-sm text-slate-500 dark:text-slate-400 font-normal">
                             Prices, Shipping fee and taxes calculated at
                             checkout.
