@@ -14,7 +14,7 @@ import CloseModal from "./CloseModal";
 import { useDispatch } from "react-redux";
 
 import toast from "react-hot-toast";
-import { addressSchema } from "../../schema/productSchema";
+import { AddressSchema } from "../../schema/ProductSchema";
 import {
   fetchDeliveryAddresss,
   updateDeliveryAddress,
@@ -77,7 +77,7 @@ const EditAddressModal = ({ setOpenModal, addressData }) => {
           <HookForm
             defaultValues={defaultFormValue}
             onSubmit={onSubmit}
-            schema={addressSchema}
+            schema={AddressSchema}
           >
             <div className="relative bg-white h-[96vh] rounded-xl shadow ">
               <div className="flex items-center justify-between p-4 md:px-5 border-b rounded-t ">
