@@ -22,7 +22,8 @@ const CartMenu = ({ cartData, setOpenCartMenu, loading }) => {
   const [loadingItemId, setLoadingItemId] = useState(null);
 
   // console.log("cart data rev:", cartData?.cart_items);
-  const data = cartData ? cartData?.cart_items : [];
+  // const data = cartData ? cartData?.cart_items : [];
+  const data = Array.isArray(cartData?.cart_items) ? cartData?.cart_items : [];
 
   // delete cart item
   const deleteCartHandler = (id) => {
@@ -182,9 +183,11 @@ const CartMenu = ({ cartData, setOpenCartMenu, loading }) => {
                       <div className="flex justify-between ">
                         <div>
                           <h3 className="text-base font-medium  max-w-48 truncate capitalize ">
-                            <a href="/product-detail">
+                            <Link
+                              to={`/product-details/${cartitem?.product?.id}`}
+                            >
                               {cartitem?.product?.name}
-                            </a>
+                            </Link>
                           </h3>
                           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400 capitalize max-w-48 truncate">
                             <span>{cartitem?.product?.category?.name}</span>
