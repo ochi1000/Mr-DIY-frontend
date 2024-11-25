@@ -194,9 +194,11 @@ const Cart = () => {
                               <div className="flex justify-between ">
                                 <div className="flex-[1.5] ">
                                   <h3 className="text-base font-semibold capitalize max-w-64 truncate">
-                                    <a href="/product-detail">
+                                    <Link
+                                      to={`/product-details/${item?.product?.id}`}
+                                    >
                                       {item?.product?.name}
-                                    </a>
+                                    </Link>
                                   </h3>
                                   <p className="my-1 text-sm text-slate-600 dark:text-slate-400 capitalize max-w-48 truncate">
                                     Category:{" "}
