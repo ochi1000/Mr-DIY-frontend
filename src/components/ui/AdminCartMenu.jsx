@@ -134,27 +134,27 @@ const AdminCartMenu = ({ cartData, setOpenCartMenu, loading }) => {
         // fetchProductsHandler("admin/product");
       }
     } catch (error) {
-      if (error?.errors) {
-        const errorMessages = Object.values(error?.errors).flat().join(", ");
-        toast.error(errorMessages, { duration: 6000 });
-      } else {
-        toast.error(error?.message, { duration: 6000 });
-      }
-      // if (
-      //   (error?.response?.data?.status >= 400 &&
-      //     error?.response?.data?.status <= 499 &&
-      //     error?.response?.data?.errors) ||
-      //   (error?.response?.data?.status_code >= 400 &&
-      //     error?.response?.data?.status_code <= 499 &&
-      //     error?.response?.data?.errors)
-      // ) {
-      //   const errorMessages = Object.values(error?.response?.data?.errors)
-      //     .flat()
-      //     .join(", ");
+      // if (error?.errors) {
+      //   const errorMessages = Object.values(error?.errors).flat().join(", ");
       //   toast.error(errorMessages, { duration: 6000 });
       // } else {
-      //   toast.error(error?.response?.data?.message, { duration: 6000 });
+      //   toast.error(error?.message, { duration: 6000 });
       // }
+      if (
+        (error?.response?.data?.status >= 400 &&
+          error?.response?.data?.status <= 499 &&
+          error?.response?.data?.errors) ||
+        (error?.response?.data?.status_code >= 400 &&
+          error?.response?.data?.status_code <= 499 &&
+          error?.response?.data?.errors)
+      ) {
+        const errorMessages = Object.values(error?.response?.data?.errors)
+          .flat()
+          .join(", ");
+        toast.error(errorMessages, { duration: 6000 });
+      } else {
+        toast.error(error?.response?.data?.message, { duration: 6000 });
+      }
     }
   };
   return (
