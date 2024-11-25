@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const productSchema = yup
+export const ProductSchema = yup
   .object({
     name: yup
       .string()
@@ -25,10 +25,12 @@ export const productSchema = yup
   })
   .required();
 
-export const addressSchema = yup
+export const AddressSchema = yup
   .object({
     state: yup.string().required("State is required"),
     city: yup.string().required("City is required"),
     address: yup.string().required("Address is required"),
   })
   .required();
+
+export const EmptySchema = yup.object({}).required();
