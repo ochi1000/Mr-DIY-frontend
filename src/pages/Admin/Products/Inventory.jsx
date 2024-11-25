@@ -150,7 +150,8 @@ const Inventory = () => {
       <div className="border border-gray-200 rounded-xl ">
         <div className="flex items-center justify-between p-4 rounded-t-xl border-b bg-white">
           <div className="font-normal text-gray-600 text-xs">
-            Showing 1 to 10 of 990 Products
+            Showing {products?.meta?.from} to {products?.meta?.to} out of{" "}
+            {products?.meta?.total} Products
           </div>
           <div className="flex items-center gap-2">
             <form className="max-w-[430px] w-full">

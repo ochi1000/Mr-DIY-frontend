@@ -30,7 +30,7 @@ const AdminProductDetails = ({ productId }) => {
   }, [productId, dispatch]);
 
   const product = singleProduct?.data;
-  console.log("Admin  single Product:", product);
+  // console.log("Admin  single Product:", product);
   const productImages = Array.isArray(product?.imgs) ? product?.imgs : [];
 
   const imagesData = productImages?.map((img, index) => ({
