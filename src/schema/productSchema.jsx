@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const ProductSchema = yup
+export const ProductsSchema = yup
   .object({
     name: yup
       .string()
