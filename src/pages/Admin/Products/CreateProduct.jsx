@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addNewProduct } from "../../../Redux/products/productsThunk";
 import DefaultToggle from "../../../components/forms/DefaultToggle";
 import { fetchCategorys } from "../../../Redux/category/categoriesThunk";
-import { EmptySchema } from "../../../schema/ProductSchema";
+// import { EmptySchema } from "../../../schema/ProductSchema";
 import { Toggle } from "../../../components/forms/Toggle/Toggle";
 // import MultipleImageUpload from "../../../components/forms/Upload/MultipleImageUpload";
 import ImageUpload from "../../../components/forms/Upload/ImageUpload";
@@ -26,6 +26,7 @@ import toast from "react-hot-toast";
 import { getData } from "../../../utils/api";
 import AsyncReactSelect from "../../../components/forms/Select/async-react-select";
 import ProductAttributes from "./ProductAttributes";
+import { ProductsSchema } from "../../../schema/ProductSchema";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
@@ -258,7 +259,7 @@ const CreateProduct = () => {
         <HookForm
           defaultValues={defaultFormValue}
           onSubmit={onSubmit}
-          schema={EmptySchema}
+          schema={ProductsSchema}
         >
           <div className=" space-y-6">
             <div className=" flex items-start w-full gap-6">

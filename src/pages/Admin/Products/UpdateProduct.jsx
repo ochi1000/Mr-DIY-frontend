@@ -21,7 +21,7 @@ import {
 } from "../../../Redux/products/productsThunk";
 import DefaultToggle from "../../../components/forms/DefaultToggle";
 import { fetchCategorys } from "../../../Redux/category/categoriesThunk";
-import { EmptySchema } from "../../../schema/ProductSchema";
+import { ProductsSchema } from "../../../schema/ProductSchema";
 import { Toggle } from "../../../components/forms/Toggle/Toggle";
 import LoadingSpinner from "../../../components/Loading/LoadingSpinner";
 import ErrorStatus from "src/components/ui/ErrorStatus";
@@ -459,7 +459,7 @@ const UpdateProduct = () => {
           <HookForm
             defaultValues={defaultFormValue}
             onSubmit={onSubmit}
-            schema={EmptySchema}
+            schema={ProductsSchema}
           >
             <div className="space-y-6">
               <div className="flex items-start w-full gap-6">
