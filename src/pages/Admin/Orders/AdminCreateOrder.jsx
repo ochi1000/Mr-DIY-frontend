@@ -168,7 +168,7 @@ const AdminCreateOrder = () => {
     dispatch(fetchCarts(url));
   };
   useEffect(() => {
-    fetchCartHandler("user/cart/view-cart");
+    fetchCartHandler("cart/view-cart");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -259,7 +259,7 @@ const AdminCreateOrder = () => {
 
       if (result.status >= 200 && result.status <= 300) {
         toast.success("Order created successfully");
-        fetchCartHandler("user/cart/view-cart");
+        fetchCartHandler("cart/view-cart");
         navigate("/admin/orders-management/orders-list");
       }
     } catch (error) {
@@ -281,10 +281,10 @@ const AdminCreateOrder = () => {
 
       console.error("Create Error:", error);
       // navigate("/admin/product/inventory/");
-      if (error?.errors) {
-        const errorMessages = Object.values(error?.errors).flat().join(", ");
-        toast.error(errorMessages, { duration: 6000 });
-      }
+      // if (error?.errors) {
+      //   const errorMessages = Object.values(error?.errors).flat().join(", ");
+      //   toast.error(errorMessages, { duration: 6000 });
+      // }
     }
     setLoadingCreateOrder(false);
     // alert(JSON.stringify(filteredFormData));
