@@ -18,7 +18,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addNewProduct } from "../../../Redux/products/productsThunk";
 import DefaultToggle from "../../../components/forms/DefaultToggle";
 import { fetchCategorys } from "../../../Redux/category/categoriesThunk";
-import { EmptySchema } from "../../../schema/ProductSchema";
+import { EmptySchema } from "../../../schema/NewProductsSchema";
 import { Toggle } from "../../../components/forms/Toggle/Toggle";
 // import MultipleImageUpload from "../../../components/forms/Upload/MultipleImageUpload";
 import ImageUpload from "../../../components/forms/Upload/ImageUpload";

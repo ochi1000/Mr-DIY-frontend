@@ -13,11 +13,11 @@ import CloseModal from "./CloseModal";
 import { useDispatch } from "react-redux";
 
 import toast from "react-hot-toast";
-import { AddressSchema } from "../../schema/ProductSchema";
 import {
   addNewDeliveryAddress,
   fetchDeliveryAddresss,
 } from "../../Redux/DeliveryAddress/deliveryAddressThunk";
+import { AddressSchema } from "../../schema/NewProductsSchema";
 
 // eslint-disable-next-line react/prop-types
 const CreateAddressModal = ({ setOpenModal }) => {

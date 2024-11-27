@@ -14,7 +14,7 @@ import CloseModal from "./CloseModal";
 import { useDispatch } from "react-redux";
 
 import toast from "react-hot-toast";
-import { AddressSchema } from "../../schema/ProductSchema";
+import { AddressSchema } from "../../schema/NewProductsSchema";
 import {
   fetchDeliveryAddresss,
   updateDeliveryAddress,

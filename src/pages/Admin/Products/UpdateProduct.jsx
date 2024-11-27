@@ -21,7 +21,6 @@ import {
 } from "../../../Redux/products/productsThunk";
 import DefaultToggle from "../../../components/forms/DefaultToggle";
 import { fetchCategorys } from "../../../Redux/category/categoriesThunk";
-import { ProductsSchema } from "../../../schema/ProductSchema";
 import { Toggle } from "../../../components/forms/Toggle/Toggle";
 import LoadingSpinner from "../../../components/Loading/LoadingSpinner";
 import ErrorStatus from "src/components/ui/ErrorStatus";
@@ -32,6 +31,7 @@ import toast from "react-hot-toast";
 import { Badge } from "../../../components/forms/Badge";
 import ProductAttributes from "./ProductAttributes";
 import { Tooltip } from "flowbite-react";
+import { ProductsSchema } from "../../../schema/NewProductsSchema";
 
 const UpdateProduct = () => {
   const dispatch = useDispatch();
