@@ -24,7 +24,7 @@ const Cart = () => {
     dispatch(fetchCarts(url));
   };
   useEffect(() => {
-    fetchCartHandler("user/cart/view-cart");
+    fetchCartHandler("cart/view-cart");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
@@ -48,7 +48,7 @@ const Cart = () => {
 
         if (result.status >= 200 && result.status <= 300) {
           // toast.success(result?.message);
-          dispatch(fetchCarts("user/cart/view-cart"));
+          dispatch(fetchCarts("cart/view-cart"));
           // navigate("/admin/product/inventory");
           // fetchProductsHandler("admin/product");
         }
@@ -83,7 +83,7 @@ const Cart = () => {
 
         if (result.status >= 200 && result.status <= 300) {
           toast.success(result?.message);
-          dispatch(fetchCarts("user/cart/view-cart"));
+          dispatch(fetchCarts("cart/view-cart"));
           // navigate("/admin/product/inventory");
           // fetchProductsHandler("admin/product");
         }
@@ -100,12 +100,12 @@ const Cart = () => {
 
   const handleEmptyCart = async () => {
     try {
-      const result = await removeData(`user/cart/clear-cart`);
+      const result = await removeData(`cart/clear-cart`);
       // console.log("cart Delete result: ", result);
 
       if (result.status >= 200 && result.status <= 300) {
         toast.success(result?.message);
-        dispatch(fetchCarts("user/cart/view-cart"));
+        dispatch(fetchCarts("cart/view-cart"));
         // navigate("/admin/product/inventory");
         // fetchProductsHandler("admin/product");
       }

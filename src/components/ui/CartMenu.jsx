@@ -57,7 +57,7 @@ const CartMenu = ({ cartData, setOpenCartMenu, loading }) => {
 
         if (result.status >= 200 && result.status <= 300) {
           // toast.success(result?.message);
-          dispatch(fetchCarts("user/cart/view-cart"));
+          dispatch(fetchCarts("cart/view-cart"));
           // navigate("/admin/product/inventory");
           // fetchProductsHandler("admin/product");
         }
@@ -106,7 +106,7 @@ const CartMenu = ({ cartData, setOpenCartMenu, loading }) => {
 
         if (result.status >= 200 && result.status <= 300) {
           toast.success(result?.message);
-          dispatch(fetchCarts("user/cart/view-cart"));
+          dispatch(fetchCarts("cart/view-cart"));
           // navigate("/admin/product/inventory");
           // fetchProductsHandler("admin/product");
         }
@@ -123,12 +123,12 @@ const CartMenu = ({ cartData, setOpenCartMenu, loading }) => {
 
   const handleEmptyCart = async () => {
     try {
-      const result = await removeData(`user/cart/clear-cart`);
+      const result = await removeData(`cart/clear-cart`);
       // console.log("cart Delete result: ", result);
 
       if (result.status >= 200 && result.status <= 300) {
         toast.success(result?.message);
-        dispatch(fetchCarts("user/cart/view-cart"));
+        dispatch(fetchCarts("cart/view-cart"));
         // navigate("/admin/product/inventory");
         // fetchProductsHandler("admin/product");
       }

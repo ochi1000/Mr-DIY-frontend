@@ -4,8 +4,8 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getData, postData, putData, deleteData } from "../../utils/api";
 // import { openToast } from "../Toast/toastSlice";
 
-const CART_URL = "user/cart/";
-// "user/cart/view-cart";
+const CART_URL = "cart/";
+// "cart/view-cart";
 const fetchCarts = createAsyncThunk(
   "admin/fetchCarts",
   async (url, { rejectWithValue }) => {
@@ -58,7 +58,7 @@ const updateCart = createAsyncThunk(
     // console.log("Edit formdata Enter here ", formData);
     try {
       const response = await putData(
-        `user/cart/update-cart-item-quantity`,
+        `cart/update-cart-item-quantity`,
         formData
       );
 
@@ -76,7 +76,7 @@ const deleteCart = createAsyncThunk(
   async ({ CartId }, { rejectWithValue }) => {
     try {
       // console.log(id);
-      const response = await deleteData(`user/cart/remove-from-cart`, CartId);
+      const response = await deleteData(`cart/remove-from-cart`, CartId);
       return response;
     } catch (error) {
       const errorMessage = error;

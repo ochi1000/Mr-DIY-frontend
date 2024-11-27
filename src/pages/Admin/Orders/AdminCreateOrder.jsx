@@ -168,7 +168,7 @@ const AdminCreateOrder = () => {
     dispatch(fetchCarts(url));
   };
   useEffect(() => {
-    fetchCartHandler("user/cart/view-cart");
+    fetchCartHandler("cart/view-cart");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 

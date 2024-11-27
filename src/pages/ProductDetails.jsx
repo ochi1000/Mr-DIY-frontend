@@ -57,7 +57,7 @@ const ProductDetails = () => {
 
   //       if (result.status >= 200 && result.status <= 300) {
   //         toast.success(result?.message);
-  //         dispatch(fetchCarts("user/cart/view-cart"));
+  //         dispatch(fetchCarts("cart/view-cart"));
   //         // navigate("/admin/product/inventory");
   //         // fetchProductsHandler("admin/product");
   //       }
@@ -156,7 +156,7 @@ const ProductDetails = () => {
         // console.log("res:", result);
         setGetAttributes([]);
         setCountQuantity(1);
-        dispatch(fetchCarts("user/cart/view-cart"));
+        dispatch(fetchCarts("cart/view-cart"));
         toast.success(result.message);
       }
     } catch (error) {

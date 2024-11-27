@@ -64,7 +64,7 @@ const Checkout = () => {
         toast.success(result?.message);
         window.open(result?.data?.payment_url);
 
-        // dispatch(fetchCarts("user/cart/view-cart"));
+        // dispatch(fetchCarts("cart/view-cart"));
         // navigate("/admin/product/inventory");
         // fetchProductsHandler("admin/product");
       }
