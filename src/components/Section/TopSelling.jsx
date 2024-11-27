@@ -72,7 +72,7 @@ const TopSelling = () => {
       ).unwrap();
       if (result.status >= 200 && result.status <= 300) {
         // console.log("res:", result);
-        dispatch(fetchCarts("user/cart/view-cart"));
+        dispatch(fetchCarts("cart/view-cart"));
         toast.success(result.message);
       }
     } catch (error) {
