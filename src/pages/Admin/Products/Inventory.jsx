@@ -122,9 +122,9 @@ const Inventory = () => {
       "S/N",
       "Product",
       "Selling Price",
-      "Available QTY",
+      "Stock Item",
       "Date Uploaded",
-      "Contains",
+      "Available",
       "Status",
       "Action",
     ],
@@ -249,7 +249,13 @@ const Inventory = () => {
                         </div>
                       </td>
                       <td className="px-6 py-5 whitespace-nowrap">
-                        {item?.stock_item}
+                        {/* {item?.stock_item === 1 ? "True" : "False"} */}
+                        <Badge
+                          rounded
+                          text={item?.stock_item === 1 ? "True" : "False"}
+                          color={item?.stock_item === 1 ? "success" : "error"}
+                          className=" capitalize"
+                        />
                       </td>
                       <td className="px-6 py-5 whitespace-nowrap">
                         {formatDate(item?.created_at)}
