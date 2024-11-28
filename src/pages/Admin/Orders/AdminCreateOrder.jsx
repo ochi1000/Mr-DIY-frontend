@@ -330,16 +330,11 @@ const AdminCreateOrder = () => {
                 defaultValues={defaultFormValue}
                 onSubmit={onSubmit}
                 schema={EmptySchema}
+                resetAfterSubmit={false}
               >
                 <div className=" h-full ">
                   {/* <ScrollArea className="h-full"> */}
                   <div className="p-5">
-                    <Input
-                      name="name"
-                      label="Customer Name"
-                      placeholder="Enter customer name"
-                    />
-
                     <div className="pb-6">
                       <AsyncReactSelect
                         selectedValue={selectedChannels}
@@ -350,6 +345,12 @@ const AdminCreateOrder = () => {
                         // isMulti
                       />
                     </div>
+                    <Input
+                      name="name"
+                      label="Customer Name"
+                      placeholder="Enter customer name"
+                    />
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 ">
                       <div>
                         <Input
