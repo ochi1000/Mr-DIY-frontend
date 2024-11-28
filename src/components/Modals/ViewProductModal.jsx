@@ -89,9 +89,9 @@ const ViewProductModal = ({ setOpenModal, productData, loading }) => {
                       </p>
                     </div>
                     <div className=" space-y-1 flex items-center justify-between flex-wrap">
-                      <Label text="Stock  Status" />
+                      <Label text="Available" />
                       <div className=" whitespace-nowrap">
-                        {productData?.stock_item === 1 ? (
+                        {productData?.in_stock === 1 ? (
                           <Badge
                             rounded
                             color="success"
@@ -103,6 +103,16 @@ const ViewProductModal = ({ setOpenModal, productData, loading }) => {
                             color="error"
                             text="Out of Stock"
                           ></Badge>
+                        )}
+                      </div>
+                    </div>
+                    <div className=" space-y-1 flex items-center justify-between flex-wrap">
+                      <Label text="Stock  Item" />
+                      <div className=" whitespace-nowrap">
+                        {productData?.stock_item === 1 ? (
+                          <Badge rounded color="success" text="True"></Badge>
+                        ) : (
+                          <Badge rounded color="error" text="False"></Badge>
                         )}
                       </div>
                     </div>
