@@ -195,7 +195,9 @@ const AdminCreateOrder = () => {
   const [newPrices, setNewPrices] = useState({});
 
   const updatedCartData = useMemo(() => {
-    return new_carts.map((item) => {
+    const newCarts = Array.isArray(new_carts) ? new_carts : [];
+
+    return newCarts?.map((item) => {
       return {
         ...item,
         price: newPrices[item.cart_item_id] || item.price,
