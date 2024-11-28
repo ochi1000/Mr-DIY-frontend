@@ -260,6 +260,7 @@ const CreateProduct = () => {
           defaultValues={defaultFormValue}
           onSubmit={onSubmit}
           schema={ProductsSchema}
+          resetAfterSubmit={false}
         >
           <div className=" space-y-6">
             <div className=" flex items-start w-full gap-6">
