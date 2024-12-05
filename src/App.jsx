@@ -34,6 +34,7 @@ import PaymentCallback from "./pages/PaymentCallback";
 import AdminCreateOrder from "./pages/Admin/Orders/AdminCreateOrder";
 import ListOrders from "./pages/Admin/Orders/ListOrders";
 import OrderManagement from "./pages/Admin/Orders/OrderManagement";
+import ProductListings from "./pages/ProductListings";
 
 function App() {
   return (
@@ -53,6 +54,7 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/product-details/:id" element={<ProductDetails />} />
+          <Route path="/product-listings" element={<ProductListings />} />
           <Route path="/payment/callback" element={<PaymentCallback />} />
 
           {/* <Route path="/check-email" element={<CheckEmail />} />  

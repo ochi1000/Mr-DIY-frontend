@@ -14,6 +14,8 @@ const ProductCard = ({
   price,
   addToWishlist,
   id,
+
+  devImages = false,
   // addToCart,
   onAddToCart,
   onLoadingCart,
@@ -32,23 +34,29 @@ const ProductCard = ({
   };
   return (
     <div className=" relative flex flex-col bg-transparent  border border-gray-100 rounded-lg ">
-      <a className="absolute inset-0" href="/product-detail" />
+      {/* <a className="absolute inset-0" href="/product-detail" /> */}
       <div className="relative flex-shrink-0 bg-slate-50 dark:bg-slate-300 rounded-3xl overflow-hidden z-1 group">
-        <Link className="block relative" to={`product-details/${id}`}>
-          <div className="flex overflow-hidden w-full h-80">
+        <Link className="block relative" to={`/product-details/${id}`}>
+          <div className="flex overflow-hidden w-full h-44 lg:h-80">
             <img
               alt="product"
-              className="object-cover w-full h-full drop-shadow-xl transition-transform duration-[1600ms]  group-hover:scale-110 scale-100"
-              sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 40vw"
+              className="object-cover w-full h-44 lg:h-full drop-shadow-xl transition-transform duration-[1600ms]  group-hover:scale-110 scale-100"
+              // sizes="(max-width: 640px) 100vw, (max-width: 1200px) 50vw, 40vw"
               // src={image}
               // src={`${newBaseURL}storage/${image}`}
-              src={image ? `${newBaseURL}storage/${image}` : productPlaceholder}
+              src={
+                image && devImages === true
+                  ? image
+                  : devImages === false
+                  ? `${newBaseURL}storage/${image}`
+                  : productPlaceholder
+              }
             />
           </div>
           <div className=" absolute w-full h-full inset-0  bg-black/20"></div>
         </Link>
         {discount && (
-          <div className="nc-shadow-lg rounded-full flex items-center justify-center absolute top-3 start-3 px-2.5 py-1.5 text-xs bg-gray-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300">
+          <div className="nc-shadow-lg rounded-full hidden lg:flex items-center justify-center absolute top-3 start-3 px-2.5 py-1.5 text-xs bg-gray-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300">
             <svg
               className="w-3.5 h-3.5"
               viewBox="0 0 24 24"
@@ -145,39 +153,45 @@ const ProductCard = ({
             )}
             <span className="ms-1">Add to cart</span>
           </button>
-          <button className="nc-Button relative h-auto inline-flex items-center justify-center rounded-full  text-xs py-2 px-4  text-slate-700 dark:bg-slate-900 dark:text-slate-300  ms-1.5 bg-white hover:!bg-gray-100 hover:text-slate-900 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 ">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="currentColor"
-              aria-hidden="true"
-              data-slot="icon"
-              className="w-3.5 h-3.5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
-              />
-            </svg>
-            <span className="ms-1">Quick view</span>
-          </button>
+          <div className=" hidden lg:block">
+            <Link className="block relative" to={`/product-details/${id}`}>
+              <button className="nc-Button relative h-auto inline-flex items-center justify-center rounded-full  text-xs py-2 px-4  text-slate-700 dark:bg-slate-900 dark:text-slate-300  ms-1.5 bg-white hover:!bg-gray-100 hover:text-slate-900 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-6000 ">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                  data-slot="icon"
+                  className="w-3.5 h-3.5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"
+                  />
+                </svg>
+                <span className="ms-1">Quick view</span>
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
       <div className="space-y-4 px-2.5 pt-5 pb-2.5">
         <div>
-          <h2 className="nc-ProductCard__title text-base font-semibold transition-colors">
-            {name}
-          </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-1 ">
+          <Link className="block relative" to={`/product-details/${id}`}>
+            <h2 className=" text-gray-800 text-xs lg:text-sm 2xl:text-base font-semibold transition-colors">
+              {name}
+            </h2>
+          </Link>
+          <p className=" text-xs lg:text-sm text-slate-500 dark:text-slate-400 mt-1 ">
             {category}
           </p>
         </div>
         <div className="flex justify-between items-end ">
           <div className="">
-            <div className="flex items-center border-2 border-green-500 rounded-lg py-1 px-2 md:py-1.5 md:px-2.5 text-sm font-medium">
+            <div className="flex items-center border lgs:border-2 border-green-500 rounded-lg py-1 px-2 md:py-1.5 md:px-2.5 text-xs md:text-sm font-medium">
               <span className="text-green-500 !leading-none">₦{price}</span>
             </div>
           </div>

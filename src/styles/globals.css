@@ -456,3 +456,18 @@ input:-webkit-autofill:active {
 /* .react-select .select__menu {
   @apply bg-primary-600;
 } */
+
+/* RC SLIDER CSS */
+
+.custom-slider .rc-slider-track {
+  @apply bg-primary-800;
+  /* background-color: #ff69b4;  */
+}
+
+.custom-slider .rc-slider-handle {
+  border: solid 2px #c61a1a;
+}
+/*  .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
+  border-color: #57c5f7;
+  box-shadow: 0 0 0 5px #96dbfa;
+} */
