@@ -1,5 +1,3 @@
-"use client";
-
 import PropTypes from "prop-types";
 import twFocusClass from "../../../utils/twFocusClass";
 import { Link } from "react-router-dom";
