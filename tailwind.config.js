@@ -1,10 +1,17 @@
-/* eslint-disable no-undef */
-const flowbite = require("flowbite-react/tailwind");
+// const flowbite = require("flowbite-react/tailwind");
+// const colors = require("./src/tokens/color.tokens");
+
+import flowbite from "flowbite-react/tailwind";
 /** @type {import('tailwindcss').Config} */
 
-const colors = require("./src/tokens/color.tokens");
+import colors from "./src/tokens/color.tokens";
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", flowbite.content()],
+  // content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}", flowbite.content()],
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    ...flowbite.content(),
+  ],
   safelist: ["hover:bg-primary-800", "text-neutral-white"],
   theme: {
     extend: {
